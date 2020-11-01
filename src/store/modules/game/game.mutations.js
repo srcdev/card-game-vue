@@ -8,6 +8,11 @@ export const mutations = {
   updateInfoText: (state, payload) => {
     console.log("updateInfoText mutations");
     state.infoText = payload;
+  },
+  setAppReady: (state) => {
+    setTimeout(() => {
+      state.appReady = true;
+    }, 500);
   }
 };
 export default mutations;

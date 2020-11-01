@@ -1,0 +1,10 @@
+// global.scss
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600');
+@import './partials/_theme_colours';
+@import './partials/_theme_typography';
+
+html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+// @import "widgets/_card"
