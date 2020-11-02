@@ -33,6 +33,7 @@ describe('AppEntryPage', () => {
                 },
             })
             expect(wrapper.find('.message').text().trim()).toEqual(message);
+            wrapper.destroy()
         })
         it('renders a values from getters', async () => {
             const wrapper = shallowMount(AppEntryPage, {
@@ -40,6 +41,7 @@ describe('AppEntryPage', () => {
                 localVue
             })
             expect(wrapper.get('[data-test="h1-text"]').exists()).toBe(true);
+            wrapper.destroy()
         })
         it('renders a values from getters', async () => {
             const wrapper = shallowMount(AppEntryPage, {
@@ -49,6 +51,7 @@ describe('AppEntryPage', () => {
             expect(wrapper.get('[data-test="h1-text"]').text()).toBe(
                 "Fill in the blanks game"
             );
+            wrapper.destroy()
         })
 
     })

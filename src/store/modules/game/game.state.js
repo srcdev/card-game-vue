@@ -4,6 +4,7 @@
 export const state = {
   infoText: 'Welcome message text from store',
   appReady: false,
-  userData: null
+  userData: null,
+  gameId: null,
 };
 export default state;
