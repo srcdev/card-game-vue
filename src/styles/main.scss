@@ -7,4 +7,85 @@ html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-// @import "widgets/_card"
+
+body {
+    margin: 0 auto;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    width: 100%;
+}
+
+.wrapper {
+  display: flex;  
+  flex-flow: row wrap;
+}
+
+.wrapper > * {
+  padding: 10px;
+  flex: 1 100%;
+}
+
+.header {
+  box-shadow: 0 0 0 1px #000;
+}
+
+.footer {
+  box-shadow: 0 0 0 1px #000;
+}
+
+.main {
+  box-shadow: 0 0 0 1px #000;
+  text-align: left;
+}
+
+.aside-1 {
+  box-shadow: 0 0 0 1px #000;
+}
+
+.aside-2 {
+  box-shadow: 0 0 0 1px #000;
+}
+
+.main    { flex: 3 0px; }
+.aside-1 { 
+    flex: 1 0 0;
+    order: 1; 
+} 
+.aside-2 { 
+    flex: 1 0 0;
+    order: 2; 
+}
+.main    { order: 3; }
+.footer  { order: 4; }
+
+/* We rely on source order for mobile-first approach
+ * in this case:
+ * 1. header
+ * 2. article
+ * 3. aside 1
+ * 4. aside 2
+ * 5. footer
+ */
+
+ /* Medium screens */
+@media all and (min-width: 600px) {
+
+  /* We tell both sidebars to share a row */
+
+  .aside { flex: 1 0 0; }
+}
+
+/* Large screens */
+@media all and (min-width: 800px) {
+
+  /* We invert order of first sidebar and main
+   * And tell the main element to take twice as much width as the other two sidebars 
+   */
+
+  .main    { flex: 3 0px; }
+  .aside-1 { order: 1; } 
+  .main    { order: 2; }
+  .aside-2 { order: 3; }
+  .footer  { order: 4; }
+}
