@@ -1,24 +1,55 @@
-import Vue from 'vue'
 import Vuex from 'vuex'
-import { shallowMount } from '@vue/test-utils'
-import AppEntryPage from '../App'
-Vue.use(Vuex);
-describe("AppEntryPage > /App.vue", () => {
+import { shallowMount, createLocalVue } from '@vue/test-utils'
+import AppEntryPage from '../App.vue'
 
-    const wrapper = shallowMount(AppEntryPage);
+const localVue = createLocalVue()
+localVue.use(Vuex)
 
-    test("AppEntryPage is a Vue instance", () => {
-        expect(wrapper.isVueInstance).toBeTruthy();
-    });
+describe('AppEntryPage', () => {
+    describe('with a store', () => {
+        let store
+        let getters
+        const message = 'Welcome message text from store';
+        beforeEach(() => {
+            getters = {
+                getInfoText: () => message,
+            }
+            store = new Vuex.Store({ 
+                modules: {
+                    game: {
+                        namespaced: true,
+                        getters,
+                    },
+                },
+            })
+        })
+        it('renders a values from getters', async () => {
+            const wrapper = shallowMount(AppEntryPage, {
+                store,
+                localVue,
+                computed: {
+                    //error: () => 'test error',
+                    infoText: getters.getInfoText,
+                },
+            })
+            expect(wrapper.find('.message').text().trim()).toEqual(message);
+        })
+        it('renders a values from getters', async () => {
+            const wrapper = shallowMount(AppEntryPage, {
+                store,
+                localVue
+            })
+            expect(wrapper.get('[data-test="h1-text"]').exists()).toBe(true);
+        })
+        it('renders a values from getters', async () => {
+            const wrapper = shallowMount(AppEntryPage, {
+                store,
+                localVue
+            })
+            expect(wrapper.get('[data-test="h1-text"]').text()).toBe(
+                "Fill in the blanks game"
+            );
+        })
 
-    test("AppEntryPage has an H1 tag", () => {
-        expect(wrapper.get('[data-test="h1-text"]').exists()).toBe(true);
-    });
-
-    test("AppEntryPage has an H1 content", () => {
-        expect(wrapper.get('[data-test="h1-text"]').text()).toBe(
-            "Fill in the blanks game"
-        );
-    });
-
-});
+    })
+})

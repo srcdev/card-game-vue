@@ -13,12 +13,13 @@
     <p class="header5 header5__light">&lt;p class="header5 header5__light"&gt;Header 5 text.&lt;/p&gt;</p>
     <h6 class="header6">&lt;h6 class="header1"&gt;Header 6 text.&lt;/h6&gt;</h6>
     <p class="header6 header6__light">&lt;p class="header6 header6__light"&gt;Header 6 text.&lt;/p&gt;</p>
-    <p>Loaded</p>
+    <p data-test="message" class="message">{{ infoText }}</p>
   </div>
 </template>
 
 <script>
   // import { mapGetters, mapMutations, mapState } from 'vuex';
+  import { mapGetters } from 'vuex';
   export default {
     name: 'App',
     components: {},
@@ -27,14 +28,14 @@
         info: 'Data from data()'
       }
     },
-    // computed: {
-    //   ...mapGetters('game', [
-    //     'infoText',
-    //   ]),
-    //   ...mapState('game', [
-    //       'appReady',
-    //   ])
-    // },
+    computed: {
+      ...mapGetters('game', {
+          infoText: 'getInfoText',
+      }),
+      // ...mapState('game', [
+      //     'appReady',
+      // ])
+    },
     // mounted() {
     //   this.setAppReady();
     // },
@@ -58,25 +59,26 @@
   @import "./styles/imports";
   @import "./styles/main";
 
-  body {
-      margin: 0 auto;
-      max-width: 768px;
-      padding: 0;
-      overflow-x: hidden;
-      width: 100%;
-  }
+  // body {
+  //     margin: 0 auto;
+  //     max-width: 768px;
+  //     padding: 0;
+  //     overflow-x: hidden;
+  //     width: 100%;
+  // }
 
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  li {
-    display: inline-block;
-    margin: 0 10px;
-  }
+  // ul {
+  //   list-style-type: none;
+  //   padding: 0;
+  // }
 
-  @media all and (min-width: 768px) {
+  // li {
+  //   display: inline-block;
+  //   margin: 0 10px;
+  // }
 
-  }
+  // @media all and (min-width: 768px) {
+
+  // }
 
 </style>
