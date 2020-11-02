@@ -1,6 +1,7 @@
 <template>
-  <div id="app" v-if="appReady">
-    <h1 class="header1">&lt;h1 class="header1"&gt;Header 1 text.&lt;/h1&gt;</h1>
+  <div id="app">
+    <h1 class="header1" data-test="h1-text">Fill in the blanks game</h1>
+    <h1 class="header1" data-test="h1-text">&lt;h1 class="header1"&gt;Header 1 text.&lt;/h1&gt;</h1>
     <p class="header1 header1__light">&lt;p class="header1 header1__light"&gt;Header 1 text.&lt;/p&gt;</p>
     <h2 class="header2">&lt;h2 class="header2"&gt;Header 2 text.&lt;/h2&gt;</h2>
     <p class="header2 header2__light">&lt;p class="header2 header2__light"&gt;Header 2 text.&lt;/p&gt;</p>
@@ -12,17 +13,12 @@
     <p class="header5 header5__light">&lt;p class="header5 header5__light"&gt;Header 5 text.&lt;/p&gt;</p>
     <h6 class="header6">&lt;h6 class="header1"&gt;Header 6 text.&lt;/h6&gt;</h6>
     <p class="header6 header6__light">&lt;p class="header6 header6__light"&gt;Header 6 text.&lt;/p&gt;</p>
-    <p>Loaded --> {{ infoText }}</p>
-    <p>Loaded --> {{ infoText }}</p>
-    <p>Loaded --> {{ infoText }}</p>
-  </div>
-  <div v-else>
-    <h1 class="header1">App loading&hellip;</h1>
+    <p>Loaded</p>
   </div>
 </template>
 
 <script>
-  import { mapGetters, mapMutations, mapState } from 'vuex';
+  // import { mapGetters, mapMutations, mapState } from 'vuex';
   export default {
     name: 'App',
     components: {},
@@ -31,30 +27,30 @@
         info: 'Data from data()'
       }
     },
-    computed: {
-      ...mapGetters('game', [
-        'infoText',
-      ]),
-      ...mapState('game', [
-          'appReady',
-      ])
-    },
-    mounted() {
-      this.setAppReady();
-    },
-    methods: {
-      // ...mapActions('game', [
-      //     'updateInfoText',
-      // ]),
-      ...mapMutations('game', [
-        'setAppReady',
-        'updateInfoText',
-      ]),
-      updateText() {
-        const updatedText = 'This is updated state text';
-        this.updateInfoText(updatedText);
-      },
-    }
+    // computed: {
+    //   ...mapGetters('game', [
+    //     'infoText',
+    //   ]),
+    //   ...mapState('game', [
+    //       'appReady',
+    //   ])
+    // },
+    // mounted() {
+    //   this.setAppReady();
+    // },
+    // methods: {
+    //   // ...mapActions('game', [
+    //   //     'updateInfoText',
+    //   // ]),
+    //   ...mapMutations('game', [
+    //     'setAppReady',
+    //     'updateInfoText',
+    //   ]),
+    //   updateText() {
+    //     const updatedText = 'This is updated state text';
+    //     this.updateInfoText(updatedText);
+    //   },
+    // }
   }
 </script>
 
