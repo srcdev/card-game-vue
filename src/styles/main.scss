@@ -30,26 +30,6 @@ body {
     box-shadow: 0 0 0 1px #000;
 }
 
-// .footer {
-//     box-shadow: 0 0 0 1px #000;
-// }
-
-// .answer-cards {
-//     box-shadow: 0 0 0 1px #000;
-//     text-align: left;
-// }
-
-// .questions-card-deck {
-//     box-shadow: 0 0 0 1px #000;
-// }
-
-// .game-status-deck {
-//     box-shadow: 0 0 0 1px #000;
-// }
-
-.answer-cards-deck { 
-    flex: 3 0px;
-}
 .questions-card-deck { 
     flex: 1 0 0;
     order: 1; 
@@ -66,7 +46,9 @@ body {
 }
 
 @media all and (min-width: 600px) {
-  .aside { flex: 1 0 0; }
+    .aside { 
+        flex: 1.25 0 0;
+    }
 }
 
 @media all and (min-width: 800px) {
@@ -74,6 +56,7 @@ body {
         order: 1; 
     } 
     .answer-cards-deck { 
+        flex: 3 0px;
         order: 2;
     }
     .game-status-deck { 
