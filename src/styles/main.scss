@@ -30,15 +30,16 @@ body {
     box-shadow: 0 0 0 1px #000;
 }
 
-.questions-card-deck { 
+.game-deck-question { 
     flex: 1 0 0;
     order: 1; 
 } 
-.game-status-deck { 
+.game-deck-status { 
     flex: 1 0 0;
     order: 2; 
 }
-.answer-cards-deck { 
+.game-deck-answers,
+.game-deck-start { 
     order: 3;
 }
 .footer { 
@@ -52,14 +53,15 @@ body {
 }
 
 @media all and (min-width: 800px) {
-    .questions-card-deck { 
+    .game-deck-question { 
         order: 1; 
     } 
-    .answer-cards-deck { 
+    .game-deck-answers,
+    .game-deck-start { 
         flex: 3 0px;
         order: 2;
     }
-    .game-status-deck { 
+    .game-deck-status { 
         order: 3;
     }
     .footer  { 

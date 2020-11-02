@@ -23,18 +23,18 @@ describe('AppEntryPage', () => {
                 },
             })
         })
-        it('renders a values from getters', async () => {
-            const wrapper = shallowMount(AppEntryPage, {
-                store,
-                localVue,
-                computed: {
-                    //error: () => 'test error',
-                    infoText: getters.getInfoText,
-                },
-            })
-            expect(wrapper.find('.message').text().trim()).toEqual(message);
-            wrapper.destroy()
-        })
+        // it('renders a values from getters', async () => {
+        //     const wrapper = shallowMount(AppEntryPage, {
+        //         store,
+        //         localVue,
+        //         computed: {
+        //             //error: () => 'test error',
+        //             infoText: getters.getInfoText,
+        //         },
+        //     })
+        //     expect(wrapper.find('.message').text().trim()).toEqual(message);
+        //     wrapper.destroy()
+        // })
         it('renders a values from getters', async () => {
             const wrapper = shallowMount(AppEntryPage, {
                 store,
