@@ -1,8 +1,8 @@
 <template>
   <div class="wrapper">
     <header class="header"><p>Fill in the blanks game</p></header>
-    <aside class="aside aside-1"><p>Question card displayed here</p></aside>
-    <div class="main">
+    <aside class="aside questions-card-deck"><p>Question card displayed here</p></aside>
+    <div class="answer-cards-deck">
       <h1 class="header1" data-test="h1-text">Fill in the blanks game</h1>
       <h1 class="header1" data-test="h1-text">&lt;h1 class="header1"&gt;Header 1 text.&lt;/h1&gt;</h1>
       <p class="header1 header1__light">&lt;p class="header1 header1__light"&gt;Header 1 text.&lt;/p&gt;</p>
@@ -18,7 +18,7 @@
       <p class="header6 header6__light">&lt;p class="header6 header6__light"&gt;Header 6 text.&lt;/p&gt;</p>
       <p data-test="message" class="message">{{ infoText }}</p>
     </div>
-    <aside class="aside aside-2"><p>Game status here</p></aside>
+    <aside class="aside game-status-deck"><p>Game status here</p></aside>
     <footer class="footer"><p>Footer</p></footer>
   </div>
 </template>
