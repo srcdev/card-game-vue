@@ -5,7 +5,7 @@
       <h1 class="header3" data-test="h1-text">Fill in the blanks game</h1>
     </header>
   </div>
-  <game-deck-start v-if="gameState === 0" />
+  <game-deck-start v-if="gameState <= 1" />
   <game-deck-player v-else />
   <div class="wrapper">
     <footer class="footer">

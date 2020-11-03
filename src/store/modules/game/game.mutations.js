@@ -13,6 +13,10 @@ export const mutations = {
     setTimeout(() => {
       state.appReady = true;
     }, 500);
+  },
+  SET_GAME_ID: (state, payload) => {
+    state.gameId = payload;
+    state.gameState = 1;
   }
 };
 export default mutations;

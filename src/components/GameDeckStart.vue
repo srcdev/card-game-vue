@@ -1,50 +1,38 @@
 <template>
   <div class="wrapper">
-    <div class="game-deck-answers">
-      <p>Start the game deck</p>
-    </div>
+    <game-deck-start-create v-if="gameState === 0" />
+    <game-deck-start-join v-else />
   </div>
 </template>
 
 <script>
-  // import { mapGetters, mapMutations, mapState } from 'vuex';
-//   import { mapGetters } from 'vuex';
+  import { mapState, mapMutations } from 'vuex';
+  import GameDeckStartCreate from "./GameDeckStartCreate.vue";
+  import GameDeckStartJoin from "./GameDeckStartJoin.vue";
   export default {
     name: "GameDeckStart",
-    components: {},
-    // data () {
-    //   return {
-    //     info: 'Data from data()'
-    //   }
-    // },
-    computed: {
-    //   ...mapGetters('game', {
-    //       infoText: 'getInfoText',
-    //   }),
-      // ...mapState('game', [
-      //     'appReady',
-      // ])
+    components: {
+      'game-deck-start-create': GameDeckStartCreate,
+      'game-deck-start-join': GameDeckStartJoin,
     },
-    // mounted() {
-    //   this.setAppReady();
-    // },
-    // methods: {
-    //   // ...mapActions('game', [
-    //   //     'updateInfoText',
-    //   // ]),
-    //   ...mapMutations('game', [
-    //     'setAppReady',
-    //     'updateInfoText',
-    //   ]),
-    //   updateText() {
-    //     const updatedText = 'This is updated state text';
-    //     this.updateInfoText(updatedText);
-    //   },
-    // }
+    computed: {
+      ...mapState('game', [
+          'gameState',
+      ])
+    },
+    created() {
+      this.doesGameIdExist();
+    },
+    methods: {
+      ...mapMutations('game', [
+          'SET_GAME_ID',
+      ]),
+      doesGameIdExist() {
+        console.log(this.$route);
+        if (this.$route.query.gameId !== undefined) {
+          this.SET_GAME_ID(this.$route.query.gameId);
+        }
+      }
+    }
   }
 </script>
-
-<style lang="scss">
-  @import "../styles/imports";
-
-</style>
