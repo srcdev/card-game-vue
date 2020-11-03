@@ -28,7 +28,6 @@
           'SET_GAME_ID',
       ]),
       doesGameIdExist() {
-        console.log(this.$route);
         if (this.$route.query.gameId !== undefined) {
           this.SET_GAME_ID(this.$route.query.gameId);
         }
