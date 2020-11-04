@@ -5,5 +5,6 @@ export const state = {
   userData: null,
   gameId: null,
   playerIsDealer: false,
+  playerId: null,
 };
 export default state;

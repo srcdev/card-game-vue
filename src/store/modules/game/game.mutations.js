@@ -13,11 +13,8 @@ export const mutations = {
     state.gameState = 1;
   },
   START_GAME(state, payload) {
-    console.log(`Mutation --> START_GAME()`);
-    console.log(payload);
-    state.gameId = '212121-21-21-2-121-4343-2';
-    state.gameState = 1;
-    state.playerIsDealer = true;
+    state.gameId = payload.gameid;
+    state.gameState = payload.gameState;
   }
 };
 export default mutations;

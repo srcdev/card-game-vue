@@ -1,22 +1,38 @@
+import GameDataService from "../../../services/GameDataService";
+
+function uniqueID(){
+  function chr4(){
+    return Math.random().toString(16).slice(-4);
+  }
+  return chr4() + chr4() +
+    '-' + chr4() +
+    '-' + chr4() +
+    '-' + chr4() +
+    '-' + chr4() + chr4() + chr4();
+}
+
 export const actions = {
   updateInfoText({commit}, payload) {
     console.log("updateInfoText action");
     commit('updateInfoText', payload);
   },
   START_GAME({commit}, payload) {
-    console.log(`Action --> START_GAME()`);
-    console.log(payload);
-    /*
-    * Do Axios call to API to get game data
-    **/
-    const gameId = '212121-21-21-2-121-4343-2';
-    commit('START_GAME', payload);
-    return new Promise(resolve => {
-      //setTimeout(() => {
-        resolve(gameId);
-      //}, 0);
+    const gameData = payload;
+    const gameId = uniqueID()
+    const playerId = uniqueID()
+    gameData['gameId'] = gameId;
+    gameData['playerId'] = playerId;
+
+    return new Promise((resolve, reject) => {
+      GameDataService.createNewGame(gameData)
+        .then((response) => {
+          commit('START_GAME', response.data);
+          resolve(response.data.gameid);
+        })
+        .catch((err) => {
+          reject(err);
+        });
     });
   }
 };
 export default actions;
-
