@@ -10,11 +10,11 @@ const vuexStorage = new VuexPersist({
   key: 'persistedGameData',
   storage: localForage,
   asyncStorage: true,
-  reducer: state => ({
-    gameId: state.game.gameId,
-    gameState: state.game.gameState,
-    playerIsDealer: state.game.playerIsDealer,
-  })    
+  // reducer: state => ({
+  //   gameId: state.game.gameId,
+  //   gameState: state.game.gameState,
+  //   playerIsDealer: state.game.playerIsDealer,
+  // })    
 })
 
 export default new Vuex.Store({

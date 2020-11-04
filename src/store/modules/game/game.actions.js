@@ -1,15 +1,5 @@
 import GameDataService from "../../../services/GameDataService";
-
-function uniqueID(){
-  function chr4(){
-    return Math.random().toString(16).slice(-4);
-  }
-  return chr4() + chr4() +
-    '-' + chr4() +
-    '-' + chr4() +
-    '-' + chr4() +
-    '-' + chr4() + chr4() + chr4();
-}
+import uniqueID from "../../../helpers/uniqueID";
 
 export const actions = {
   updateInfoText({commit}, payload) {

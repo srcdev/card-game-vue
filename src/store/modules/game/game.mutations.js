@@ -8,13 +8,15 @@ export const mutations = {
       state.appReady = true;
     }, 500);
   },
-  SET_GAME_ID: (state, payload) => {
+  SET_GAME_STATE: (state, payload) => {
     state.gameId = payload;
     state.gameState = 1;
+    state.gameCreated = true;
   },
   START_GAME(state, payload) {
     state.gameId = payload.gameid;
-    state.gameState = payload.gameState;
+    state.gameState = 1;
+    state.gameCreated = true;
   }
 };
 export default mutations;

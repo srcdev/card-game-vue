@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
-    <game-deck-start-create v-if="gameState === 0" />
-    <game-deck-start-join v-else />
+    <game-deck-start-join v-if="gameCreated" />
+    <game-deck-start-create v-else />
   </div>
 </template>
 
@@ -18,21 +18,21 @@
     computed: {
       ...mapState('game', [
           'gameId',
-          'gameState',
+          'gameCreated',
       ])
     },
     created() {
-      if (this.gameId !== null) {
+      if (this.gameId === null) {
         this.doesGameIdExist();
       }
     },
     methods: {
       ...mapMutations('game', [
-          'SET_GAME_ID',
+          'SET_GAME_STATE',
       ]),
       doesGameIdExist() {
         if (this.$route.query.gameId !== undefined) {
-          this.SET_GAME_ID(this.$route.query.gameId);
+          this.SET_GAME_STATE(this.$route.query.gameId);
         }
       }
     }
