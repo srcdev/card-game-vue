@@ -78,6 +78,10 @@
             //     box-shadow: 0 0 0 1px #f00;
             // }
         }
+        &:checked + .form_label .form-input_radio-icon {
+            background-color: $input-radio-light;
+            box-shadow: 0 0 0 1px $border-light;
+        }
     }
 }
 
@@ -127,7 +131,7 @@
             }
 
             &:checked + .form_label .form-input_radio-icon {
-                background-color: $white;
+                background-color: $input-radio-dark;
                 box-shadow: 0 0 0 1px $border-dark;
             }
 
