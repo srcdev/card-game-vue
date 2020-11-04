@@ -5,13 +5,13 @@
           <div class="form-row">
             <div class="form-row-inner form-row-inner_text">
               <label class="form_label" for="username">Player Name</label>
-              <input class="form-input_text" placeholder="eg: Joe Bloggs" type="text" id="username" v-model="formFieldValues.username" />
+              <input class="form-input_text" placeholder="eg: Joe Bloggs" type="text" id="username" maxlength="50" v-model="formFieldValues.username" />
             </div>
           </div>
           <div class="form-row">
             <div class="form-row-inner form-row-inner_text">
               <label class="form_label" for="gamename">Game Name</label>
-              <input class="form-input_text" placeholder="eg: Joe's game" type="text" id="gamename" v-model="formFieldValues.gamename" />
+              <input class="form-input_text" placeholder="eg: Joe's game" type="text" id="gamename" maxlength="50" v-model="formFieldValues.gamename" />
             </div>
           </div>
           <div class="form-row">
@@ -43,11 +43,7 @@
     name: "GameDeckStartCreate",
     data() {
       return {
-        formFieldValues: {
-          username: null,
-          gamename: null,
-          gamerating: null,
-        },
+        formFieldValues: {},
       }
     },
     methods: {
@@ -55,7 +51,14 @@
         'START_GAME',
       ]),
       formSubmit() {
-        this.START_GAME(this.formFieldValues);
+        this.START_GAME(this.formFieldValues)
+          .then((response) => {
+            const currentGameId = this.$route.query.gameId;
+            if (currentGameId === undefined) {
+              const gameQuery = {gameId: response};
+              this.$router.replace({ query: gameQuery })
+            }
+          });
       }
     }
   }  

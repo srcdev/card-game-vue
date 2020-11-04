@@ -9,7 +9,13 @@ export const actions = {
     /*
     * Do Axios call to API to get game data
     **/
+    const gameId = '212121-21-21-2-121-4343-2';
     commit('START_GAME', payload);
+    return new Promise(resolve => {
+      //setTimeout(() => {
+        resolve(gameId);
+      //}, 0);
+    });
   }
 };
 export default actions;

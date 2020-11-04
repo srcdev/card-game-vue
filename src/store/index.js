@@ -9,10 +9,11 @@ Vue.use(Vuex);
 const vuexStorage = new VuexPersist({
   key: 'persistedGameData',
   storage: localForage,
-//  storage: window.sessionStorage,
   asyncStorage: true,
   reducer: state => ({
     gameId: state.game.gameId,
+    gameState: state.game.gameState,
+    playerIsDealer: state.game.playerIsDealer,
   })    
 })
 
