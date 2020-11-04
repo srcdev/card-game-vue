@@ -1,9 +1,3 @@
-/*
-  Mutations is also an object that contains methods that affect the state and only care to control the states, to manipulate it.
-  A mutation may have two arguments as state and payload:
-  - State has the current state of an application.
-  - Payload is an optional one, which will give the data to mutate.
-**/
 export const mutations = {
   updateInfoText: (state, payload) => {
     console.log("updateInfoText mutations");
@@ -17,6 +11,13 @@ export const mutations = {
   SET_GAME_ID: (state, payload) => {
     state.gameId = payload;
     state.gameState = 1;
+  },
+  START_GAME(state, payload) {
+    console.log(`Mutation --> START_GAME()`);
+    console.log(payload);
+    state.gameId = '212121-21-21-2-121-4343-2';
+    state.gameState = 1;
+    state.playerIsDealer = true;
   }
 };
 export default mutations;

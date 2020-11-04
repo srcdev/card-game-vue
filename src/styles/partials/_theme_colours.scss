@@ -5,7 +5,9 @@ body {
     background-color: $page-bg-light;
 }
 h1, h2, h3, h4, h5, h6,
-p, a, li, input, select, textarea {
+p, a, li, input, select, textarea,
+.form_label,
+.form-input_text {
     color: $base-font-light;
 }
 
@@ -14,7 +16,9 @@ p, a, li, input, select, textarea {
         background-color: $page-bg-dark;
     }
     h1, h2, h3, h4, h5, h6,
-    p, a, li, input, select, textarea {
+    p, a, li, input, select, textarea,
+    .form_label,
+    .form-input_text {
         color: $base-font-dark;
     }
 }

@@ -17,11 +17,14 @@
     },
     computed: {
       ...mapState('game', [
+          'gameId',
           'gameState',
       ])
     },
     created() {
-      this.doesGameIdExist();
+      if (this.gameId !== null) {
+        this.doesGameIdExist();
+      }
     },
     methods: {
       ...mapMutations('game', [
