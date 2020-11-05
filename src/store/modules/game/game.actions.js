@@ -1,21 +1,36 @@
 import GameDataService from "../../../services/GameDataService";
 import uniqueID from "../../../helpers/uniqueID";
 
+let playerObj = {
+  playerId: null,
+  playerName: null,
+  hand: null,
+  gameId: null,
+  gameName: null,
+  gameRating: null,
+  playerIsDealer: false,
+  roundPlayed: false,
+  winCount: 0,
+  userCreatedGame: false  
+};
+
 export const actions = {
   updateInfoText({commit}, payload) {
     console.log("updateInfoText action");
     commit('updateInfoText', payload);
   },
   START_GAME({commit}, payload) {
-    const gameData = payload;
-    const gameId = uniqueID()
-    const playerId = uniqueID()
-    gameData['gameId'] = gameId;
-    gameData['playerId'] = playerId;
+
+    playerObj.playerId = uniqueID();
+    playerObj.playerName = payload.playerName;
+    playerObj.gameId = uniqueID();
+    playerObj.gameName = payload.gameName;
+    playerObj.gameRating = payload.gameRating;
 
     return new Promise((resolve, reject) => {
-      GameDataService.createNewGame(gameData)
+      GameDataService.createNewGame(playerObj)
         .then((response) => {
+          commit('SET_PLAYER_DATA', playerObj);
           commit('START_GAME', response.data);
           resolve(response.data.gameid);
         })

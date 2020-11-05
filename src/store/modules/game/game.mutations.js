@@ -13,8 +13,12 @@ export const mutations = {
     state.gameState = 1;
     state.gameCreated = true;
   },
+  SET_PLAYER_DATA: (state, payload) => {
+    state.playerData = payload;
+  },
   START_GAME(state, payload) {
     state.gameId = payload.gameid;
+    state.playerId = payload.playerid;
     state.gameState = 1;
     state.gameCreated = true;
   }

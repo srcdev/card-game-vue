@@ -7,6 +7,7 @@ export const state = {
   userData: null,
   gameId: null,
   playerIsDealer: false,
-  playerId: null,
+  playerData: null,
+  playerInGame: false,
 };
 export default state;
