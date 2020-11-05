@@ -30,6 +30,11 @@
         info: 'Data from data()'
       }
     },
+    sockets: {
+      socketReconnect() {
+          console.log(`socketReconnect()`);
+      },
+    },
     computed: {
       // ...mapGetters('game', {
       //     infoText: 'getInfoText',

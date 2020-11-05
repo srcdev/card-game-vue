@@ -11,8 +11,9 @@ function httpPort() {
 }
 
 const IPADDRESS = ipAddress();
+const WEBSOCKETS_IP = "192.168.1.145";
 const WEBSOCKETS_PORT = 3434;
 const HTTP_PORT = httpPort();
 const NUXT_PORT = 3000;
 
-export { IPADDRESS, WEBSOCKETS_PORT, HTTP_PORT, NUXT_PORT };
+export { IPADDRESS, WEBSOCKETS_IP, WEBSOCKETS_PORT, HTTP_PORT, NUXT_PORT };
