@@ -27,17 +27,37 @@ export const actions = {
     playerObj.gameName = payload.gameName;
     playerObj.gameRating = payload.gameRating;
 
+    commit('SET_PLAYER_ID', playerObj.playerId);
+
     return new Promise((resolve, reject) => {
       GameDataService.createNewGame(playerObj)
         .then((response) => {
-          commit('SET_PLAYER_DATA', response.data.players[playerObj.playerId]);
-          commit('START_GAME', response.data);
+          commit('SET_PLAYER_DATA', response.data);
           resolve(response.data.gameid);
         })
         .catch((err) => {
           reject(err);
         });
     });
+  },
+  JOIN_GAME({commit, state}, payload) {
+    playerObj.playerId = uniqueID();
+    playerObj.playerName = payload.playerName;
+    playerObj.gameId = state.gameId;
+
+    commit('SET_PLAYER_ID', playerObj.playerId);
+
+    return new Promise((resolve, reject) => {
+      GameDataService.joinCurrentGame(playerObj)
+        .then((response) => {
+          commit('SET_PLAYER_DATA', response.data);
+          resolve(response.data.gameid);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+
   }
 };
 export default actions;

@@ -10,6 +10,7 @@ export const state = {
   userData: null,
   gameId: null,
   gameData: null,
+  gameName: null,
   playerIsDealer: false,
   playerData: null,
   playerInGame: false,
