@@ -4,7 +4,7 @@ import uniqueID from "../../../helpers/uniqueID";
 let playerObj = {
   playerId: null,
   playerName: null,
-  hand: null,
+  hand: {},
   gameId: null,
   gameName: null,
   gameRating: null,
@@ -30,7 +30,7 @@ export const actions = {
     return new Promise((resolve, reject) => {
       GameDataService.createNewGame(playerObj)
         .then((response) => {
-          commit('SET_PLAYER_DATA', playerObj);
+          commit('SET_PLAYER_DATA', response.data.players[playerObj.playerId]);
           commit('START_GAME', response.data);
           resolve(response.data.gameid);
         })
