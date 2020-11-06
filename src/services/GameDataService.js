@@ -10,6 +10,10 @@ class GameDataService {
         return http.post("/games/joinCurrentGame", data);
     }
 
+    getLatestGameData(data) {
+        return http.post("/games/getLatestGameData", data);
+    }
+
 }
 
 export default new GameDataService();

@@ -29,6 +29,11 @@ export const mutations = {
     state.playerState = 1;
     state.playerHand = payload.players[state.playerId].hand;
   },
+  UPDATE_GAME_DATA: (state, payload) => {
+    state.gameData = payload;
+    state.playerData = payload.players[state.playerId];
+    state.playerHand = payload.players[state.playerId].hand;
+  },
   // START_GAME(state, payload) {
   // }
 };

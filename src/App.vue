@@ -17,7 +17,7 @@
 
 <script>
   // import { mapGetters, mapMutations, mapState } from 'vuex';
-  import { mapState } from 'vuex';
+  import { mapActions, mapState } from 'vuex';
   import GameDeckPlaying from "./components/GameDeckPlaying.vue";
   import GameDeckStart from "./components/GameDeckStart.vue";
   export default {      
@@ -34,50 +34,24 @@
       socketReconnect() {
           console.log(`socketReconnect()`);
       },
+      SOCKET_GET_LATEST_GAME_DATA() {
+        this.GET_LATEST_GAME_DATA();
+      }
     },
     computed: {
-      // ...mapGetters('game', {
-      //     infoText: 'getInfoText',
-      // }),
       ...mapState('game', [
           'gameState',
       ])
     },
-    // mounted() {
-    //   this.setAppReady();
-    // },
-    // methods: {
-    //   // ...mapActions('game', [
-    //   //     'updateInfoText',
-    //   // ]),
-    //   ...mapMutations('game', [
-    //     'setAppReady',
-    //     'updateInfoText',
-    //   ]),
-    //   updateText() {
-    //     const updatedText = 'This is updated state text';
-    //     this.updateInfoText(updatedText);
-    //   },
-    // }
+    methods: {
+      ...mapActions('game', [
+          'GET_LATEST_GAME_DATA',
+      ]),
+    }
   }
 </script>
 
 <style lang="scss">
   @import "./styles/imports";
   @import "./styles/main";
-
-  // ul {
-  //   list-style-type: none;
-  //   padding: 0;
-  // }
-
-  // li {
-  //   display: inline-block;
-  //   margin: 0 10px;
-  // }
-
-  // @media all and (min-width: 768px) {
-
-  // }
-
 </style>
