@@ -3,16 +3,34 @@
         <h2 class="header2">Create a new game</h2>
         <form @submit.prevent="formSubmit" class="form">
           <div class="form-row">
-            <div class="form-row-inner form-row-inner_text">
-              <label class="form_label" for="playerName">Player Name</label>
-              <input class="form-input_text" placeholder="eg: Joe Bloggs" type="text" id="playerName" maxlength="50" v-model="formValues.playerName" />
-            </div>
+            <form-input-text
+                v-model="formValues.playerName"
+                autocomplete="off"
+                input-name="playerName"
+                input-label="Player name"
+                input-pattern="username"
+                input-pattern-error-message="Bad characters"
+                input-placeholder="eg. Simon"
+                :input-min-length=2
+                :input-max-length=50
+                :input-required=true
+                :input-has-counter=false
+            />
           </div>
           <div class="form-row">
-            <div class="form-row-inner form-row-inner_text">
-              <label class="form_label" for="gameName">Game Name</label>
-              <input class="form-input_text" placeholder="eg: Joe's game" type="text" id="gameName" maxlength="50" v-model="formValues.gameName" />
-            </div>
+            <form-input-text
+                v-model="formValues.gameName"
+                autocomplete="off"
+                input-name="gameName"
+                input-label="Game name"
+                input-pattern="gameName"
+                input-pattern-error-message="Bad characters"
+                input-placeholder="eg. Simon's Game"
+                :input-min-length=2
+                :input-max-length=50
+                :input-required=true
+                :input-has-counter=false
+            />
           </div>
           <div class="form-row">
             <div class="form-row-inner form-row-inner_radio">
@@ -39,8 +57,12 @@
 
 <script>
   import { mapActions } from 'vuex';
+  import FormInputText from './forms/FormInputText';
   export default {
     name: "GameDeckStartCreate",
+        components: {
+            'form-input-text': FormInputText,
+        },
     data() {
       return {
         formValues: {},
@@ -61,5 +83,5 @@
           });
       }
     }
-  }  
+  }
 </script>
