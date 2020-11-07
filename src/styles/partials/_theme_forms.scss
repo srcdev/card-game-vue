@@ -54,6 +54,14 @@
   background-color: $input-bg-light;
   box-shadow: 0 0 0 1px $input-border-light;
   display: block;
+
+  &.link {
+    background-color: transparent;
+    box-shadow: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 .form-input_text {

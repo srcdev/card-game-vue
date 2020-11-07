@@ -1,6 +1,7 @@
 <template>
   <div v-if="hrefBuilt" class="body__section__inner">
     <h3 class="header-3">Scan QR or share link</h3>
+    <p><a :href="whatsAppHref" class="icon-whatsapp" data-action="share/whatsapp/share">Share via Whatsapp</a></p>
     <p><a :href="gameHref" class="sharelink">{{ gameHref }}</a></p>
     <div
       class="sharepanel"
@@ -21,6 +22,7 @@
     data () {
       return {
         hrefBuilt: false,
+        whatsAppHref: null,
       }
     },
     created() {
@@ -29,16 +31,26 @@
     methods: {
       setGameHref() {
         this.gameHref = `${document.location.href}`;
+        this.whatsAppHref = `whatsapp://send?text=Share this game link ${this.gameHref}`
         this.hrefBuilt = true;
       }
     }
   };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   @import "../styles/imports";
 
   .body__section__inner {
+
+    .icon-whatsapp {
+      @include icon-whatsapp;
+      background-size: 32px;
+      display: inline-block;
+      line-height: 32px;
+      padding-left: 36px;
+    }
+
     .sharelink {
       color: $white;
       font-size: 10px;
