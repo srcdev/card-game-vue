@@ -1,7 +1,7 @@
 <template>
     <div class="game-deck-start">
         <h2 class="header2">Create a new game</h2>
-        <form @submit.prevent="formSubmit" class="form">
+        <form @submit.prevent="formSubmit" class="form" :id="formId" novalidate>
           <div class="form-row">
             <form-input-text
                 v-model="formValues.playerName"
@@ -9,12 +9,12 @@
                 input-name="playerName"
                 input-label="Player name"
                 input-pattern="username"
-                input-pattern-error-message="Bad characters"
+                input-pattern-error-message="Player name has bad characters"
                 input-placeholder="eg. Simon"
                 :input-min-length=2
                 :input-max-length=50
                 :input-required=true
-                :input-has-counter=false
+                :input-in-error="formErrors.playerName"
             />
           </div>
           <div class="form-row">
@@ -24,12 +24,12 @@
                 input-name="gameName"
                 input-label="Game name"
                 input-pattern="gameName"
-                input-pattern-error-message="Bad characters"
+                input-pattern-error-message="Game name has bad characters"
                 input-placeholder="eg. Simon's Game"
                 :input-min-length=2
                 :input-max-length=50
                 :input-required=true
-                :input-has-counter=false
+                :input-in-error="formErrors.gameName"
             />
           </div>
           <div class="form-row">
@@ -58,14 +58,26 @@
 <script>
   import { mapActions } from 'vuex';
   import FormInputText from './forms/FormInputText';
+  import FormValidate from './forms/FormValidate';
   export default {
     name: "GameDeckStartCreate",
-        components: {
-            'form-input-text': FormInputText,
-        },
+    components: {
+      'form-input-text': FormInputText,
+    },
+    mixins: [
+      FormValidate
+    ],
     data() {
       return {
+        formId: 'gameCreate',
+        formErrors: {},
         formValues: {},
+      }
+    },
+    watch: {
+      formErrors() {
+        console.log(`formErrors changed`);
+        console.log(this.formErrors);
       }
     },
     methods: {
@@ -73,6 +85,11 @@
         'START_GAME',
       ]),
       formSubmit() {
+
+        if (!this.$_isFormValid(this.formId)) {
+          return
+        }
+
         this.START_GAME(this.formValues)
           .then((response) => {
             const currentGameId = this.$route.query.gameId;

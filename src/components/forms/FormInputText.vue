@@ -1,14 +1,17 @@
 <template>
   <div class="form-row-inner form-row-inner_text">
     <div class="form-row-inner-col">
-      <label class="form_label" for="gameName">{{ this.inputLabel }}</label>
+      <label v-if="requiredIsRequiredError" class="form_label error" :for="inputName">{{ this.inputLabel }} is required</label>
+      <label v-else-if="inputHasErrors && !inputValueShort" class="form_label error" :for="inputName">{{ this.inputPatternErrorMessage }}</label>
+      <label v-else-if="inputHasErrors && inputValueShort" class="form_label error" :for="inputName">{{ this.inputLabel }} too short</label>
+      <label v-else class="form_label" :for="inputName">{{ this.inputLabel }}</label>
     </div>
     <div class="form-row-inner-col">
       <input
         class="form-input_text"
         :class="[
           {'active': this.inputIsActive},
-          {'error': this.inputHasErrors},
+          {'error': this.inputHasErrors || this.requiredIsRequiredError},
           {'dirty': this.inputIsDirty}
         ]"
         @focus="[
@@ -43,7 +46,9 @@
         validationPattern: null,
         inputHasErrors: false,
 				inputIsDirty: false,
-				inputIsActive: false,
+        inputIsActive: false,
+        inputValueShort: false,
+        requiredIsRequiredError: false
       }
     },
 		props: {
@@ -67,6 +72,10 @@
 				type: String,
 				default: null
       },
+      inputInError: {
+				type: Boolean,
+				default: false
+      },
       inputPatternErrorMessage: {
         type: String,
         default: "Error"
@@ -88,6 +97,13 @@
           default: ''
       },
     },
+    watch: {
+      inputInError(newVal) {
+        if (newVal) {
+          this.requiredIsRequiredError = true;
+        }
+      }
+    },
     methods: {
       setValidationPattern() {
         return validationPatterns[this.inputName];
@@ -105,13 +121,17 @@
 					this.inputIsDirty = true;
         }
       },
-      updateValue: function (value) {
-        this.testInputValidity(value);
+      updateValue(value) {
         this.$emit('input', value);
+        setTimeout(() => {
+          this.testInputValidity(value);
+        }, 0);
       },
-      testInputValidity(value) {
+      testInputValidity() {
         const regex = new RegExp(this.setValidationPattern());
-        this.inputHasErrors = !regex.test(value) && value.length > 0;
+        this.requiredIsRequiredError = this.value.length === 0;
+        this.inputValueShort = (this.value.length > 0 && this.value.length < this.inputMinLength);
+        this.inputHasErrors = !regex.test(this.value) && this.value.length > 0;
       }
     }
   }

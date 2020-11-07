@@ -38,6 +38,10 @@
                     font-size: 18px;
                     font-weight: bold;
                     margin-bottom: 8px;
+
+                    &.error {
+                      color: $input-label-error-light;
+                    }
                 }
             }
         }
@@ -108,6 +112,10 @@
                 #{ $form } {
                     &_label {
                         color: $input-label-dark;
+
+                      &.error {
+                        color: $input-label-error-dark;
+                      }
                     }
                 }
             }
