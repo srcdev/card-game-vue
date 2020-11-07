@@ -8,9 +8,7 @@
       </ul>
     </nav>
     <section v-if="showTab('tab1')">
-      <ul>
-        <li v-for="(player, index) in gameData.players" :key="`user-${index}`">{{ player.playerName }}</li>
-      </ul>
+      <game-deck-start-choose-dealer />
     </section>
     <section v-if="showTab('tab2')">
       <game-deck-share />
@@ -21,10 +19,12 @@
 <script>
   import { mapState } from 'vuex';
   import GameDeckShare from './GameDeckShare'
+  import GameDeckStartChooseDealer from './GameDeckStartChooseDealer'
   export default {
     name: "GameDeckStartWaiting",
     components: {
       'game-deck-share': GameDeckShare,
+      'game-deck-start-choose-dealer': GameDeckStartChooseDealer,
     },
     data() {
       return {
@@ -33,10 +33,8 @@
     },
     computed: {
       ...mapState('game', [
-        'gameData',
         'gameId',
         'gameName',
-        'playerIsDealer',
       ])
     },
     created() {

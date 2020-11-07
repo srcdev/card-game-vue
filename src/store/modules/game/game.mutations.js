@@ -12,7 +12,6 @@ export const mutations = {
     state.playerId = payload;
   },
   SET_GAME_STATE: (state, gameId) => {
-    console.log(`MUTATION: SET_GAME_STATE --> ${gameId}`);
     state.gameId = gameId;
     state.gameState = 1;
     state.gameCreated = true;
@@ -28,6 +27,7 @@ export const mutations = {
     state.playerData = payload.players[state.playerId];
     state.playerState = 1;
     state.playerHand = payload.players[state.playerId].hand;
+    state.playerIsAdmin = state.playerId === state.gameCreatedById;
   },
   UPDATE_GAME_DATA: (state, payload) => {
     state.gameData = payload;
