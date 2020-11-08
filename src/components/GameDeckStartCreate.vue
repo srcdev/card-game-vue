@@ -74,12 +74,12 @@
         formValues: {},
       }
     },
-    watch: {
-      formErrors() {
-        console.log(`formErrors changed`);
-        console.log(this.formErrors);
-      }
-    },
+    // watch: {
+    //   formErrors() {
+    //     console.log(`formErrors changed`);
+    //     console.log(this.formErrors);
+    //   }
+    // },
     methods: {
       ...mapActions('game', [
         'START_GAME',
@@ -92,11 +92,16 @@
 
         this.START_GAME(this.formValues)
           .then((response) => {
-            const currentGameId = this.$route.query.gameId;
-            if (currentGameId === undefined) {
-              const gameQuery = {gameId: response};
-              this.$router.replace({ query: gameQuery })
+            if (typeof this.$route !== 'undefined') {
+              const currentGameId = this.$route.query.gameId;
+              if (currentGameId === undefined) {
+                const gameQuery = {gameId: response};
+                this.$router.replace({ query: gameQuery })
+              }
             }
+          })
+          .catch((err) => {
+            console.log(err);
           });
       }
     }

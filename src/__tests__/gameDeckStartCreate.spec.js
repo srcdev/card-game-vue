@@ -1,8 +1,11 @@
 import { mount, createLocalVue } from '@vue/test-utils'
+import VueRouter from 'vue-router'
 import Vuex from 'vuex'
 import GameDeckStartCreate from '../components/GameDeckStartCreate.vue'
 
 const localVue = createLocalVue()
+localVue.use(VueRouter)
+const router = new VueRouter()
 
 localVue.use(Vuex)
 
@@ -26,6 +29,7 @@ describe('GameDeckStartCreate.vue', () => {
 
   it('correctly sets value of playerName', async () => {
     const wrapper = mount(GameDeckStartCreate, {
+      router,
       store,
       localVue,
       data () {
@@ -37,7 +41,10 @@ describe('GameDeckStartCreate.vue', () => {
     // playerName too short
     wrapper.get('[name="playerName"]').setValue(`S`)
     await wrapper.trigger('keyup')
+    await localVue.nextTick()
     expect(wrapper.find('[name="playerName"].error')).toBeTruthy()
+    await localVue.nextTick()
+    // expect(wrapper.find('[data-test="playerNameErrorShortLabel"]').text()).toBe("Player name too short")
 
     // playerName constains bad characters
     wrapper.get('[name="playerName"]').setValue(`~`)

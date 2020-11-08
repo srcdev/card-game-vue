@@ -63,9 +63,9 @@
         }
 
         this.JOIN_GAME(this.formValues)
-          .then((response) => {
-            console.log(response);
-          });
+          // .then((response) => {
+          //   console.log(response);
+          // });
       }
     }
   }

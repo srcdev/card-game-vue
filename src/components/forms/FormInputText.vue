@@ -1,9 +1,9 @@
 <template>
   <div class="form-row-inner form-row-inner_text">
     <div class="form-row-inner-col">
-      <label v-if="requiredIsRequiredError" :data-test="inputName" class="form_label error" :for="inputName">{{ this.inputLabel }} is required</label>
-      <label v-else-if="inputHasErrors && !inputValueShort" :data-test="inputName" class="form_label error" :for="inputName">{{ this.inputPatternErrorMessage }}</label>
-      <label v-else-if="inputHasErrors && inputValueShort" :data-test="inputName" class="form_label error" :for="inputName">{{ this.inputLabel }} too short</label>
+      <label v-if="requiredIsRequiredError" :data-test="`${inputName}ErrorRequiredLabel`" class="form_label error" :for="inputName">{{ this.inputLabel }} is required</label>
+      <label v-else-if="inputHasErrors && !inputValueShort" :data-test="`${inputName}ErrorBadCharsLabel`"  class="form_label error" :for="inputName">{{ this.inputPatternErrorMessage }}</label>
+      <label v-else-if="inputHasErrors && inputValueShort" :data-test="`${inputName}ErrorShortLabel`"  class="form_label error" :for="inputName">{{ this.inputLabel }} too short</label>
       <label v-else :data-test="`${inputName}Label`" class="form_label" :for="inputName">{{ this.inputLabel }}</label>
     </div>
     <div class="form-row-inner-col">
