@@ -92,13 +92,8 @@
 
         this.START_GAME(this.formValues)
           .then((response) => {
-            if (typeof this.$route !== 'undefined') {
-              const currentGameId = this.$route.query.gameId;
-              if (currentGameId === undefined) {
-                const gameQuery = {gameId: response};
-                this.$router.replace({ query: gameQuery })
-              }
-            }
+            const gameQuery = {gameId: response};
+            this.$router.replace({ query: gameQuery })
           })
           .catch((err) => {
             console.log(err);

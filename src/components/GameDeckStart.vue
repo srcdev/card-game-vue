@@ -35,12 +35,9 @@
           'SET_GAME_STATE',
       ]),
       doesGameIdExist() {
-
-        if (typeof this.$route !== 'undefined') {
-          const currentGameId = this.$route.query.gameId;
-          this.SET_GAME_STATE(currentGameId);
+        if (this.$route.query.gameId !== undefined) {
+          this.SET_GAME_STATE(this.$route.query.gameId);
         }
-
       }
     }
   }
