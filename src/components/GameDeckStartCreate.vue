@@ -34,21 +34,21 @@
           </div>
           <div class="form-row">
             <div class="form-row-inner form-row-inner_radio">
-              <input class="form-input_radio" type="radio" id="gameRating0" value="1" v-model="formValues.gameRating" />
+              <input class="form-input_radio" type="radio" name="gameRating" id="gameRating0" value="1" v-model="formValues.gameRating" />
               <label class="form_label" for="gameRating0"><span class="form-input_radio-icon"></span>Child friendly</label>
             </div>
             <div class="form-row-inner form-row-inner_radio">
-              <input class="form-input_radio" type="radio" id="gameRating1" value="2" v-model="formValues.gameRating" />
+              <input class="form-input_radio" type="radio" name="gameRating" id="gameRating1" value="2" v-model="formValues.gameRating" />
               <label class="form_label" for="gameRating1"><span class="form-input_radio-icon"></span>Office friendly</label>
             </div>
             <div class="form-row-inner form-row-inner_radio">
-              <input class="form-input_radio" type="radio" id="gameRating2" value="3" v-model="formValues.gameRating" />
+              <input class="form-input_radio" type="radio" name="gameRating" id="gameRating2" value="3" v-model="formValues.gameRating" />
               <label class="form_label" for="gameRating2"><span class="form-input_radio-icon"></span>Full on!</label>
             </div>
           </div>
           <div class="form-row">
             <div class="form-row-inner form-row-inner_actions">
-              <input type="submit" class="btn" value="Submit" />
+              <input type="submit" class="btn" value="Submit" id="formSubmit" @click.prevent="formSubmit" />
             </div>
           </div>
         </form>

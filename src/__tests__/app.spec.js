@@ -14,7 +14,7 @@ describe('AppEntryPage', () => {
             getters = {
                 getInfoText: () => message,
             }
-            store = new Vuex.Store({ 
+            store = new Vuex.Store({
                 modules: {
                     game: {
                         namespaced: true,

@@ -1,10 +1,10 @@
 <template>
   <div class="form-row-inner form-row-inner_text">
     <div class="form-row-inner-col">
-      <label v-if="requiredIsRequiredError" class="form_label error" :for="inputName">{{ this.inputLabel }} is required</label>
-      <label v-else-if="inputHasErrors && !inputValueShort" class="form_label error" :for="inputName">{{ this.inputPatternErrorMessage }}</label>
-      <label v-else-if="inputHasErrors && inputValueShort" class="form_label error" :for="inputName">{{ this.inputLabel }} too short</label>
-      <label v-else class="form_label" :for="inputName">{{ this.inputLabel }}</label>
+      <label v-if="requiredIsRequiredError" :data-test="inputName" class="form_label error" :for="inputName">{{ this.inputLabel }} is required</label>
+      <label v-else-if="inputHasErrors && !inputValueShort" :data-test="inputName" class="form_label error" :for="inputName">{{ this.inputPatternErrorMessage }}</label>
+      <label v-else-if="inputHasErrors && inputValueShort" :data-test="inputName" class="form_label error" :for="inputName">{{ this.inputLabel }} too short</label>
+      <label v-else :data-test="`${inputName}Label`" class="form_label" :for="inputName">{{ this.inputLabel }}</label>
     </div>
     <div class="form-row-inner-col">
       <input
@@ -12,7 +12,8 @@
         :class="[
           {'active': this.inputIsActive},
           {'error': this.inputHasErrors || this.requiredIsRequiredError},
-          {'dirty': this.inputIsDirty}
+          {'dirty': this.inputIsDirty},
+          {'valid': this.inputIsValid}
         ]"
         @focus="[
           setActiveFieldState(),
@@ -23,6 +24,7 @@
         type="text"
         :id="inputName"
         :name="inputName"
+        :ref="inputName"
         :placeholder="this.inputPlaceholder"
         :minlength="this.inputMinLength"
         :maxlength="this.inputMaxLength"
@@ -48,6 +50,7 @@
 				inputIsDirty: false,
         inputIsActive: false,
         inputValueShort: false,
+        inputIsValid: false,
         requiredIsRequiredError: false
       }
     },
@@ -110,16 +113,14 @@
       },
       setActiveFieldState() {
 				this.inputIsActive = true;
-			},
+      },
+      setInputIsDirty(value) {
+        return value.length > 0;
+      },
 			setBlurFieldState(event) {
 				this.inputIsActive = false;
-				this.inputIsDirty = false;
-        const currentLength = event.target.value.length;
-        if (currentLength === 0) {
-					this.inputIsDirty = false;
-        } else {
-					this.inputIsDirty = true;
-        }
+				//this.inputIsDirty = false;
+        this.inputIsDirty = this.setInputIsDirty(event.target.value)
       },
       updateValue(value) {
         this.$emit('input', value);
@@ -129,9 +130,11 @@
       },
       testInputValidity() {
         const regex = new RegExp(this.setValidationPattern());
+        this.inputIsDirty = this.setInputIsDirty(this.value);
         this.requiredIsRequiredError = this.value.length === 0;
         this.inputValueShort = (this.value.length > 0 && this.value.length < this.inputMinLength);
         this.inputHasErrors = !regex.test(this.value) && this.value.length > 0;
+        this.inputIsValid = this.inputIsDirty && !this.inputHasErrors && !this.inputValueShort && !this.inputHasErrors;
       }
     }
   }
