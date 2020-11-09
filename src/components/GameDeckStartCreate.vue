@@ -33,18 +33,14 @@
             />
           </div>
           <div class="form-row">
-            <div class="form-row-inner form-row-inner_radio">
-              <input class="form-input_radio" type="radio" name="gameRating" id="gameRating0" value="1" v-model="formValues.gameRating" />
-              <label class="form_label" for="gameRating0"><span class="form-input_radio-icon"></span>Child friendly</label>
-            </div>
-            <div class="form-row-inner form-row-inner_radio">
-              <input class="form-input_radio" type="radio" name="gameRating" id="gameRating1" value="2" v-model="formValues.gameRating" />
-              <label class="form_label" for="gameRating1"><span class="form-input_radio-icon"></span>Office friendly</label>
-            </div>
-            <div class="form-row-inner form-row-inner_radio">
-              <input class="form-input_radio" type="radio" name="gameRating" id="gameRating2" value="3" v-model="formValues.gameRating" />
-              <label class="form_label" for="gameRating2"><span class="form-input_radio-icon"></span>Full on!</label>
-            </div>
+            <form-input-radio
+                v-model="formValues.gameRating"
+                input-name="gameRating"
+                input-placeholder="Select a game rating"
+                :input-required=true
+                :input-in-error="formErrors.gameRating"
+                :input-options="gameRatings"
+            />
           </div>
           <div class="form-row">
             <div class="form-row-inner form-row-inner_actions">
@@ -56,12 +52,14 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex';
+  import { mapActions, mapState } from 'vuex';
+  import FormInputRadio from './forms/FormInputRadio';
   import FormInputText from './forms/FormInputText';
   import FormValidate from './forms/FormValidate';
   export default {
     name: "GameDeckStartCreate",
     components: {
+      'form-input-radio': FormInputRadio,
       'form-input-text': FormInputText,
     },
     mixins: [
@@ -74,12 +72,21 @@
         formValues: {},
       }
     },
-    // watch: {
-    //   formErrors() {
-    //     console.log(`formErrors changed`);
-    //     console.log(this.formErrors);
-    //   }
-    // },
+    watch: {
+      formErrors() {
+        console.log(`formErrors changed`);
+        console.log(this.formErrors);
+      },
+      formValues() {
+        console.log(`formErrors changed`);
+        this.$_formHasError(this.formId)
+      }
+    },
+    computed: {
+      ...mapState('game', [
+        'gameRatings',
+      ]),
+    },
     methods: {
       ...mapActions('game', [
         'START_GAME',

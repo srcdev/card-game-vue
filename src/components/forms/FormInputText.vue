@@ -59,10 +59,6 @@
 				type: String,
 				default: "off"
 			},
-			inputType: {
-				type: String,
-				default: "text"
-			},
 			inputName: {
 				type: String,
 				default: null

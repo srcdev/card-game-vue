@@ -9,7 +9,7 @@ export default {
       );
       this.formErrors = {};
       invalidFormFields.forEach(element => {
-        this.formErrors[element.id] = true;
+        this.formErrors[element.name] = true;
       });
       return invalidFormFields.length > 0;
     }
