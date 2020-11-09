@@ -78,6 +78,9 @@
     background-color: $input-bg-error-light;
     box-shadow: 0 0 0 1px $input-border-error-light;
   }
+  &.valid {
+    box-shadow: 0 0 0 1px $input-border-valid-light;
+  }
 }
 
 .form-row-inner_radio {
@@ -147,6 +150,9 @@
     &.error {
       background-color: $input-bg-error-dark;
       box-shadow: 0 0 0 1px $input-border-error-dark;
+    }
+    &.valid {
+      box-shadow: 0 0 0 1px $input-border-valid-dark;
     }
   }
 
