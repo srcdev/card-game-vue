@@ -16,7 +16,7 @@
         :value="value"
         :checked="isChecked(item.value, value)"
         :required="inputRequired"
-        @click="updateValue(item.value)"
+        v-on:input="updateValue(item.value)"
       />
       <label v-if="inputInError" class="form_label error" :for="item.id"><span class="form-input_radio-icon"></span>{{ item.text }}</label>
       <label v-else class="form_label" :for="item.id"><span class="form-input_radio-icon"></span>{{ item.text }}</label>
@@ -75,7 +75,6 @@
     },
     methods: {
       updateValue: function (value) {
-          this.inputHasErrors = false;
           this.$emit('input', value)
       },
       isChecked: function (savedValue, value) {
