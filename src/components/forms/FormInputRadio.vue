@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p v-if="inputInError" class="form_label error">{{ this.inputPlaceholder }} is required</p>
+    <p v-if="inputHasErrors" class="form_label error">{{ this.inputPlaceholder }} is required</p>
     <p v-else class="form_label">{{ this.inputPlaceholder }}</p>
     <div
       v-for="(item,index) in inputOptions"
@@ -18,7 +18,7 @@
         :required="inputRequired"
         v-on:input="updateValue(item.value)"
       />
-      <label v-if="inputInError" class="form_label error" :for="item.id"><span class="form-input_radio-icon"></span>{{ item.text }}</label>
+      <label v-if="inputHasErrors" class="form_label error" :for="item.id"><span class="form-input_radio-icon"></span>{{ item.text }}</label>
       <label v-else class="form_label" :for="item.id"><span class="form-input_radio-icon"></span>{{ item.text }}</label>
     </div>
 
@@ -31,10 +31,6 @@
     data() {
       return {
         inputHasErrors: false,
-				inputIsDirty: false,
-        inputIsActive: false,
-        inputIsValid: false,
-        requiredIsRequiredError: false
       }
     },
 		props: {
@@ -69,16 +65,17 @@
     watch: {
       inputInError(newVal) {
         if (newVal) {
-          this.requiredIsRequiredError = true;
+          this.inputHasErrors = true;
         }
       }
     },
     methods: {
-      updateValue: function (value) {
-          this.$emit('input', value)
+      updateValue(value) {
+        this.inputHasErrors = false;
+        this.$emit('input', value)
       },
-      isChecked: function (savedValue, value) {
-          return savedValue == value;
+      isChecked(savedValue, value) {
+        return savedValue == value;
       }
     }
   }

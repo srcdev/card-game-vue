@@ -3,7 +3,7 @@
 **/
 export default {
   methods: {
-    $_formHasError: function(formId) {
+    $_formHasErrors: function(formId) {
       const invalidFormFields = document.querySelectorAll(
           `#${formId} :not(fieldset) :invalid`
       );

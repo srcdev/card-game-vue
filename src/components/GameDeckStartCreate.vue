@@ -77,9 +77,9 @@
         console.log(`formErrors changed`);
         console.log(this.formErrors);
       },
-      formValues() {
-        console.log(`formErrors changed`);
-        this.$_formHasError(this.formId)
+      formValues(newVal) {
+        console.log(`formValues changed`);
+        console.log(newVal);
       }
     },
     computed: {
@@ -93,7 +93,7 @@
       ]),
       formSubmit() {
 
-        if (this.$_formHasError(this.formId)) {
+        if (this.$_formHasErrors(this.formId)) {
           return
         }
 
