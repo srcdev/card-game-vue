@@ -85,6 +85,25 @@ describe('GameDeckStartCreate.vue', () => {
     wrapper.destroy()
   })
 
+  // it('correctly sets value of gameRating', async () => {
+  //   const wrapper = mount(GameDeckStartCreate, {
+  //     store,
+  //     localVue,
+  //     data () {
+  //       return {
+  //         formValues: {}
+  //       }
+  //     }
+  //   })
+  //   wrapper.get('#formSubmit').trigger('click')
+  //   await localVue.nextTick()
+  //   expect(wrapper.find('[name="gameRating"].error')).toBeTruthy()
+  //   wrapper.get('[name="gameRating"][value="3"]').setChecked(true)
+  //   await localVue.nextTick()
+  //   expect(wrapper.find('[name="gameRating"].valid')).toBeTruthy()
+  //   wrapper.destroy()
+  // })
+
   it('dispatches "formSubmit" when form is submitted', async () => {
     const spyOnFormSubmit = jest.spyOn(GameDeckStartCreate.methods, 'formSubmit')
     const wrapper = mount(GameDeckStartCreate, {
@@ -96,14 +115,19 @@ describe('GameDeckStartCreate.vue', () => {
         }
       }
     })
+    await localVue.nextTick()
     wrapper.get('[name="playerName"]').setValue(`Simon`)
     await wrapper.trigger('keyup')
+    await localVue.nextTick()
     wrapper.get('[name="gameName"]').setValue(`Simon's Game`)
     await wrapper.trigger('keyup')
-    wrapper.get('[name="gameRating"][value="3"]').setChecked(true)
+    await localVue.nextTick()
+    wrapper.get('[name="gameRating"][id="rating2"]').setChecked(true)
     await wrapper.trigger('keyup')
+    await localVue.nextTick()
     wrapper.get('#formSubmit').trigger('click')
     await wrapper.trigger('keyup')
+    await localVue.nextTick()
     expect(spyOnFormSubmit).toHaveBeenCalled();
     expect(actions.START_GAME).toHaveBeenCalled()
     wrapper.destroy()

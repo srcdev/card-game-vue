@@ -9,7 +9,10 @@
     >
       <input
         class="form-input_radio"
-        :class="{'error': inputHasErrors}"
+        :class="[
+          {'error': inputHasErrors},
+          {'valid': !inputHasErrors}
+        ]"
         type="radio"
         :name="inputName"
         :id="item.id"

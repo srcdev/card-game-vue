@@ -58,7 +58,7 @@
       ]),
       formSubmit() {
 
-        if (this.$_formHasError(this.formId)) {
+        if (this.$_formHasErrors(this.formId)) {
           return
         }
 

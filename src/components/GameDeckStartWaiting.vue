@@ -45,7 +45,14 @@
     methods: {
       setRoute() {
         const gameQuery = {gameId: this.gameId};
-        this.$router.replace({ query: gameQuery })
+        //this.$router.replace({ query: gameQuery })
+        const currentPath = this.$route.path;
+        const currentFullPath = decodeURI(this.$route.fullPath);
+        const newFullPath = `${currentPath}?${gameQuery}`;
+        if (currentFullPath !== newFullPath) {
+          this.$router.replace({ path: newFullPath });
+        }
+
       },
       selectTab(tab) {
         this.activeTabId = tab;
