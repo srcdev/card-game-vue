@@ -8,9 +8,9 @@
 
 <script>
   import { mapState, mapMutations } from 'vuex';
-  import GameDeckStartCreate from "./GameDeckStartCreate.vue";
-  import GameDeckStartJoin from "./GameDeckStartJoin.vue";
-  import GameDeckStartWaiting from "./GameDeckStartWaiting.vue";
+  import GameDeckStartCreate from "./GameDeckStartCreate";
+  import GameDeckStartJoin from "./GameDeckStartJoin";
+  import GameDeckStartWaiting from "./GameDeckStartWaiting";
   export default {
     name: "GameDeckStart",
     components: {

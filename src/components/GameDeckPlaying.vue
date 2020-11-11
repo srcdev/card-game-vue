@@ -1,52 +1,35 @@
 <template>
-    <div class="wrapper">
-        <div class="game-deck-question aside">
-            <p>Question card displayed here</p>
-        </div>
-        <div class="game-deck-answers">
-            <p>Answers cards here</p>
-        </div>
-        <div class="game-deck-status aside">
-            <p>Game status here</p>
-        </div>
+  <div class="wrapper">
+    <div class="game-deck-question aside">
+      <p>Question card displayed here</p>
     </div>
+    <div class="game-deck-answers">
+      <p>Answers cards here</p>
+    </div>
+    <div class="game-deck-status aside">
+      <p>Game status here</p>
+      <game-deck-playing-dealer v-if="playerIsDealer" />
+      <game-deck-playing-player v-else />
+    </div>
+  </div>
 </template>
 
 <script>
-  // import { mapGetters, mapMutations, mapState } from 'vuex';
-//   import { mapGetters } from 'vuex';
+  import { mapState } from 'vuex';
+  import GameDeckPlayingDealer from "./GameDeckPlayingDealer";
+  import GameDeckPlayingPlayer from "./GameDeckPlayingPlayer";
+
   export default {
-    name: "GameDeckStart",
-    components: {},
-    // data () {
-    //   return {
-    //     info: 'Data from data()'
-    //   }
-    // },
-    computed: {
-    //   ...mapGetters('game', {
-    //       infoText: 'getInfoText',
-    //   }),
-      // ...mapState('game', [
-      //     'appReady',
-      // ])
+    name: "GameDeckPlaying",
+    components: {
+      'game-deck-playing-dealer': GameDeckPlayingDealer,
+      'game-deck-playing-player': GameDeckPlayingPlayer,
     },
-    // mounted() {
-    //   this.setAppReady();
-    // },
-    // methods: {
-    //   // ...mapActions('game', [
-    //   //     'updateInfoText',
-    //   // ]),
-    //   ...mapMutations('game', [
-    //     'setAppReady',
-    //     'updateInfoText',
-    //   ]),
-    //   updateText() {
-    //     const updatedText = 'This is updated state text';
-    //     this.updateInfoText(updatedText);
-    //   },
-    // }
+    computed: {
+      ...mapState('game', [
+          'playerIsDealer',
+      ])
+    },
   }
 </script>
 
