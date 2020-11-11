@@ -20,7 +20,7 @@
   import { mapActions, mapState } from 'vuex';
   import GameDeckPlaying from "./components/GameDeckPlaying.vue";
   import GameDeckStart from "./components/GameDeckStart.vue";
-  export default {      
+  export default {
     components: {
       'game-deck-player': GameDeckPlaying,
       'game-deck-start': GameDeckStart,
@@ -31,21 +31,23 @@
       }
     },
     sockets: {
-      socketReconnect() {
-          console.log(`socketReconnect()`);
+      SOCKET_RECONNECT() {
+        console.log(`SOCKET_RECONNECT()`);
+        this.GET_LATEST_GAME_DATA();
       },
       SOCKET_GET_LATEST_GAME_DATA() {
+        console.log(`SOCKET_GET_LATEST_GAME_DATA()`);
         this.GET_LATEST_GAME_DATA();
       }
     },
     computed: {
       ...mapState('game', [
-          'gameState',
+        'gameState',
       ])
     },
     methods: {
       ...mapActions('game', [
-          'GET_LATEST_GAME_DATA',
+        'GET_LATEST_GAME_DATA',
       ]),
     }
   }

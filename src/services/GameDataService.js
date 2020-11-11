@@ -14,6 +14,10 @@ class GameDataService {
         return http.post("/games/getLatestGameData", data);
     }
 
+    setDealer(data) {
+      return http.post("/games/setDealer", data);
+    }
+
 }
 
 export default new GameDataService();

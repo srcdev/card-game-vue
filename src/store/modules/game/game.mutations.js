@@ -18,7 +18,7 @@ export const mutations = {
   },
   SET_PLAYER_DATA: (state, payload) => {
     state.gameData = payload;
-    state.gameId = payload.gameid;
+    state.gameId = payload.gameId;
     state.gameName = payload.gamename;
     state.gameState = 1;
     state.gameCreated = true;
@@ -30,9 +30,11 @@ export const mutations = {
     state.playerIsAdmin = state.playerId === state.gameCreatedById;
   },
   UPDATE_GAME_DATA: (state, payload) => {
+    state.gameState = payload.gameState;
     state.gameData = payload;
     state.playerData = payload.players[state.playerId];
     state.playerHand = payload.players[state.playerId].hand;
+    state.playerIsDealer = (payload.dealerId === state.playerId);
   },
   // START_GAME(state, payload) {
   // }

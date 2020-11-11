@@ -11,7 +11,7 @@ let playerObj = {
   playerIsDealer: false,
   roundPlayed: false,
   winCount: 0,
-  userCreatedGame: false  
+  userCreatedGame: false
 };
 
 export const actions = {
@@ -34,7 +34,7 @@ export const actions = {
       GameDataService.createNewGame(playerObj)
         .then((response) => {
           commit('SET_PLAYER_DATA', response.data);
-          resolve(response.data.gameid);
+          resolve(response.data.gameId);
         })
         .catch((err) => {
           reject(err);
@@ -55,7 +55,7 @@ export const actions = {
         .then((response) => {
           this._vm.$socket.emit("BROADCAST_UPDATE_GAME_DATA", gameId);
           commit('SET_PLAYER_DATA', response.data);
-          resolve(response.data.gameid);
+          resolve(response.data.gameId);
         })
         .catch((err) => {
           reject(err);
@@ -64,12 +64,31 @@ export const actions = {
 
   },
   GET_LATEST_GAME_DATA({commit, state}) {
-    const gameId = { gameId: state.gameId };    
+    if (state.gameId !== null) {
+      const gameId = { gameId: state.gameId };
+      return new Promise((resolve, reject) => {
+        GameDataService.getLatestGameData(gameId)
+          .then((response) => {
+            commit('UPDATE_GAME_DATA', response.data);
+            resolve();
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
+    }
+  },
+  SET_DEALER({state}, playerId) {
+    const gameId = state.gameId;
+    const playerData = state.gameData.players[playerId];
+
     return new Promise((resolve, reject) => {
-      GameDataService.getLatestGameData(gameId)
+      GameDataService.setDealer(playerData)
         .then((response) => {
-          commit('UPDATE_GAME_DATA', response.data);
-          resolve();
+          if (response.data.statusCode === 200) {
+            this._vm.$socket.emit("BROADCAST_UPDATE_GAME_DATA", gameId);
+            resolve(response);
+          }
         })
         .catch((err) => {
           reject(err);

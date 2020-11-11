@@ -5,14 +5,14 @@
     <ul class="player-list">
       <li class="player-list-item" v-for="(player, index) in gameData.players" :key="`user-${index}`">
         <span class="player-list-item-name">{{ player.playerName }}</span>
-        <button v-if="playerIsAdmin" class="player-list-item-btn btn secondary">Select as dealer</button>
+        <button v-if="playerIsAdmin" @click.prevent="startGame(player.playerId)" class="player-list-item-btn btn secondary">Select as dealer</button>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-  import { mapState } from 'vuex';
+  import { mapActions, mapState } from 'vuex';
   export default {
     name: "GameDeckStartChooseDealer",
     computed: {
@@ -23,6 +23,12 @@
       ])
     },
     methods: {
+      ...mapActions('game', [
+        'SET_DEALER',
+      ]),
+      startGame(playerId) {
+        this.SET_DEALER(playerId);
+      }
     }
   }
 </script>
