@@ -1,4 +1,6 @@
 export const state = {
+  appReady: false,
+  dealerData: {},
   gameRatings: [
     {
       'id':'rating1',
@@ -23,11 +25,11 @@ export const state = {
   gameCreatedById: null,
   gameCreatedByName: null,
   infoText: 'Welcome message text from store',
-  appReady: false,
   userData: null,
   gameId: null,
   gameData: null,
   gameName: null,
+  playerId: null,
   playerIsDealer: false,
   playerIsAdmin: false,
   playerData: null,

@@ -1,12 +1,18 @@
 <template>
   <div>
-    <p>You are a player</p>
+    <p>Dealer is: <span>{{ dealerData.dealerName }}</span></p>
   </div>
 </template>
 
 <script>
+  import { mapState } from 'vuex';
   export default {
     name: "GameDeckPlayingPlayer",
+    computed: {
+      ...mapState('game', [
+          'dealerData',
+      ])
+    },
   }
 </script>
 

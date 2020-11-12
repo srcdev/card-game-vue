@@ -47,13 +47,13 @@ body {
     order: 4;
 }
 
-@media all and (min-width: 600px) {
+@include breakpoint(600) {
     .aside { 
         flex: 1.25 0 0;
     }
 }
 
-@media all and (min-width: 800px) {
+@include breakpoint(800) {
     .game-deck-question { 
         order: 1; 
     } 

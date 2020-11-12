@@ -1,10 +1,29 @@
 <template>
   <div class="wrapper">
     <div class="game-deck-question aside">
-      <p>Question card displayed here</p>
+      <game-deck-card
+        :question-data="questionData"
+        :card-size="questionCardSize"
+        card-type="Q"
+      />
     </div>
-    <div class="game-deck-answers">
-      <p>Answers cards here</p>
+    <div class="game-deck-answers" v-if="!playerIsDealer">
+      <ul class="game-deck-answers-list">
+        <li
+          v-for="(answer, index) in playerHand"
+          :key="index"
+          class="game-deck-answers-item"
+        >
+          <game-deck-card
+            :answer-data="{
+              answerId: index,
+              answerText: answer
+            }"
+            card-size="M"
+            card-type="A"
+          />
+        </li>
+      </ul>
     </div>
     <div class="game-deck-status aside">
       <p>Game status here</p>
@@ -18,22 +37,71 @@
   import { mapState } from 'vuex';
   import GameDeckPlayingDealer from "./GameDeckPlayingDealer";
   import GameDeckPlayingPlayer from "./GameDeckPlayingPlayer";
+  import Card from "./partials/Card";
 
   export default {
     name: "GameDeckPlaying",
     components: {
       'game-deck-playing-dealer': GameDeckPlayingDealer,
       'game-deck-playing-player': GameDeckPlayingPlayer,
+      'game-deck-card': Card,
+    },
+    data() {
+      return {
+        questionData: {},
+        questionCardSize: 'L',
+      }
     },
     computed: {
       ...mapState('game', [
-          'playerIsDealer',
-      ])
+        'gameData',
+        'playerHand',
+        'playerIsDealer',
+      ]),
     },
+    created() {
+      this.setQuestionData();
+    },
+    methods: {
+      setQuestionData() {
+        this.questionCardSize = this.playerIsDealer ? 'XL' : 'L';
+        this.questionData = {
+          questionText: this.gameData.currentQuestion.text,
+          questionId: this.gameData.currentQuestion.id,
+        }
+      }
+    }
   }
 </script>
 
 <style lang="scss">
   @import "../styles/imports";
+
+  .game-deck-answers {
+    overflow-y: scroll;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+
+    &-list {
+      display: flex;
+      width: max-content;
+    }
+    &-item {
+      display: flex;
+      list-style-type: none;
+    }
+  }
+
+  // @include breakpoint(1025) {
+  //   .game-deck-answers {
+  //     overflow-y: auto;
+  //     padding-bottom: 0;
+  //     -webkit-overflow-scrolling: none;
+
+  //     &-list {
+  //       width: inherit;
+  //     }
+  //   }
+  // }
 
 </style>
