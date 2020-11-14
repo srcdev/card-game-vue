@@ -1,8 +1,4 @@
 export const mutations = {
-  updateInfoText: (state, payload) => {
-    console.log("updateInfoText mutations");
-    state.infoText = payload;
-  },
   setAppReady: (state) => {
     setTimeout(() => {
       state.appReady = true;
@@ -17,27 +13,32 @@ export const mutations = {
     state.gameCreated = true;
   },
   SET_PLAYER_DATA: (state, payload) => {
-    state.gameData = payload;
-    state.gameId = payload.gameId;
-    state.gameName = payload.gamename;
-    state.gameState = 1;
-    state.gameCreated = true;
-    state.gameCreatedById = payload.gamecreatedbyid;
-    state.gameCreatedByName = payload.gamecreatedbyname;
-    state.playerData = payload.players[state.playerId];
+    state.gameName = payload.gameName;
+    state.gameState = payload.gameState;
+    state.gameCreatedById = payload.gameCreatedById;
+    state.gameCreatedByName = payload.gameCreatedByName;
+    state.playerData = payload.playerData;
+    state.playersObj = payload.playersObj;
     state.playerState = 1;
-    state.playerHand = payload.players[state.playerId].hand;
-    state.playerIsAdmin = state.playerId === state.gameCreatedById;
+    state.playerIsAdmin = (payload.gameCreatedById === state.playerId);
+    state.playerCount = payload.playerCount;
   },
   UPDATE_GAME_DATA: (state, payload) => {
     const dealerId = payload.dealerId;
     const playerId = state.playerId;
     state.gameState = payload.gameState;
-    state.gameData = payload;
+    state.gameName = payload.gameName;
+    state.gameCreatedById = payload.gameCreatedById;
+    state.gameCreatedByName = payload.gameCreatedByName;
+    state.playerCount = payload.playerCount;
+    state.currentQuestion = payload.currentQuestion;
     if (state.playerId !== null) {
-      state.dealerData = payload.dealer;
-      state.playerData = payload.players[playerId];
-      state.playerHand = payload.players[playerId].hand;
+      state.gameCreated = true;
+      state.dealerData = payload.dealerData;
+      state.playersObj = payload.playersObj;
+      state.playerData = payload.playerData;
+      state.playerHand = payload.playerData.hand;
+      state.playerState = payload.gameState;
       state.playerIsDealer = (dealerId === playerId);
     }
   },

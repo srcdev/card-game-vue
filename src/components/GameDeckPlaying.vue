@@ -56,7 +56,7 @@
     },
     computed: {
       ...mapState('game', [
-        'gameData',
+        'currentQuestion',
         'playerHand',
         'playerIsDealer',
       ]),
@@ -68,8 +68,8 @@
       setQuestionData() {
         this.questionCardSize = this.playerIsDealer ? 'XL' : 'L';
         this.questionData = {
-          questionText: this.gameData.currentQuestion.text,
-          questionId: this.gameData.currentQuestion.id,
+          questionText: this.currentQuestion.text,
+          questionId: this.currentQuestion.id,
         }
       }
     }

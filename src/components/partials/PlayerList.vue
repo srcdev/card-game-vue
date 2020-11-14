@@ -1,6 +1,6 @@
 <template>
   <ul class="player-list">
-    <li class="player-list-item" v-for="(player, index) in gameData.players" :key="`user-${index}`">
+    <li class="player-list-item" v-for="(player, index) in playersObj" :key="index">
       <span class="player-list-item-name">{{ player.playerName }}</span>
       <button v-if="playerIsAdmin" @click.prevent="startGame(player.playerId)" class="player-list-item-btn btn cancel">
         <svg class="clear-cards">
@@ -19,7 +19,7 @@
     name: "PlayerList",
     computed: {
       ...mapState('game', [
-        'gameData',
+        'playersObj',
         'playerIsAdmin',
       ])
     },
