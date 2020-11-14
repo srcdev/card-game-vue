@@ -11,7 +11,7 @@
         class="form-input_radio"
         :class="[
           {'error': inputHasErrors},
-          {'valid': !inputHasErrors}
+          {'valid': !inputHasErrors && inputTouched}
         ]"
         type="radio"
         :name="inputName"
@@ -34,6 +34,7 @@
     data() {
       return {
         inputHasErrors: false,
+        inputTouched: false,
       }
     },
 		props: {
@@ -75,6 +76,7 @@
     methods: {
       updateValue(value) {
         this.inputHasErrors = false;
+        this.inputTouched = true;
         this.$emit('input', value)
       },
       isChecked(savedValue, value) {
