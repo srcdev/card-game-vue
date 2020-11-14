@@ -40,6 +40,7 @@
 </template>
 
 <script>
+  //import { debounce } from '../../helpers/debounce';
   import validationPatterns from './validationPatterns';
   export default {
     name: "FormInputText",
@@ -123,6 +124,12 @@
         setTimeout(() => {
           this.testInputValidity(value);
         }, 0);
+
+        // debounce(() => {
+        //   console.log(`debounce(`);
+        //   this.testInputValidity();
+        // }, 300);
+
       },
       testInputValidity() {
         const regex = new RegExp(this.setValidationPattern());
