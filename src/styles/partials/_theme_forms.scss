@@ -123,11 +123,14 @@
     &.error + .form_label .form-input_radio-icon {
       box-shadow: 0 0 2px 2px $input-border-error-light;
     }
+    &.valid + .form_label .form-input_radio-icon {
+      box-shadow: 0 0 2px 2px $input-border-valid-light;
+    }
     &:focus + .form_label .form-input_radio-icon {
       box-shadow: 0 0 2px 2px $input-border-light;
     }
     &:checked + .form_label .form-input_radio-icon {
-      background-color: $input-radio-light;
+      background-color: $input-radio-bg-light;
       box-shadow: 0 0 0 1px $input-border-light;
     }
   }
@@ -215,12 +218,15 @@
       &.error + .form_label .form-input_radio-icon {
         box-shadow: 0 0 2px 2px $input-border-error-dark;
       }
+      &.valid + .form_label .form-input_radio-icon {
+        box-shadow: 0 0 2px 2px $input-border-valid-dark;
+      }
       &:focus + .form_label .form-input_radio-icon {
         box-shadow: 0 0 2px 2px $input-border-dark;
       }
 
       &:checked + .form_label .form-input_radio-icon {
-        background-color: $input-radio-dark;
+        background-color: $input-radio-bg-dark;
         box-shadow: 0 0 0 1px $input-border-dark;
       }
     }
