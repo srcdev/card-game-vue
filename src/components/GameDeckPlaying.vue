@@ -26,9 +26,9 @@
       </ul>
     </div>
     <div class="game-deck-status aside">
-      <p>Game status here</p>
       <game-deck-playing-dealer v-if="playerIsDealer" />
       <game-deck-playing-player v-else />
+      <game-deck-players />
     </div>
   </div>
 </template>
@@ -38,6 +38,7 @@
   import GameDeckPlayingDealer from "./GameDeckPlayingDealer";
   import GameDeckPlayingPlayer from "./GameDeckPlayingPlayer";
   import Card from "./partials/Card";
+  import PlayerList from "./partials/PlayerList";
 
   export default {
     name: "GameDeckPlaying",
@@ -45,6 +46,7 @@
       'game-deck-playing-dealer': GameDeckPlayingDealer,
       'game-deck-playing-player': GameDeckPlayingPlayer,
       'game-deck-card': Card,
+      'game-deck-players': PlayerList,
     },
     data() {
       return {
