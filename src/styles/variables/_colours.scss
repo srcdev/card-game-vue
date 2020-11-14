@@ -42,6 +42,7 @@ $color-red-2: #d21c29;
 $color-red-3: #ec7676;
 $color-red-4: #fce7e7;
 $color-red-5: #c50000;
+$color-red-6: #ff1010;
 
 // Oranges
 $color-orange-1: #e49600;
@@ -66,19 +67,21 @@ $input-text-dark: $white;
 $input-label-light: $greyGreyText;
 $input-label-dark: #d2d0d0;
 $input-label-error-light: $color-red-2;
-$input-label-error-dark: $color-red-2;
+$input-label-error-dark: $color-red-6;
 $input-placeholder-light: #a2a2a2;
+$input-placeholder-error-light: $black;
 $input-placeholder-dark: #a2a2a2;
+$input-placeholder-error-dark: $black;
 $input-bg-light: $white;
 $input-bg-dark: #525050;
 $input-radio-light: #a2a2a2;
 $input-radio-dark: $white;
 $input-bg-error-light: $color-red-4;
-$input-bg-error-dark: $color-red-3;
+$input-bg-error-dark: $color-red-6;
 $input-border-light: $greyGreyText;
 $input-border-dark: #f9f7f7;
-$input-border-error-light: $color-red-2;
-$input-border-error-dark: $color-red-2;
+$input-border-error-light: $color-red-6;
+$input-border-error-dark: $color-red-6;
 $input-border-valid-light: $color-green-1;
 $input-border-valid-dark: $color-green-1;
 

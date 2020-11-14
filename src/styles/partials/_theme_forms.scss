@@ -56,6 +56,19 @@
     }
   }
 
+  &.cancel {
+    background-color: transparent;
+    border-radius: 50%;
+    box-shadow: none;
+    height: 24px;
+    line-height: 16px;
+    padding: 0;
+    width: 24px;
+    svg {
+      fill: $input-label-error-light;
+    }
+  }
+
   &.secondary {
     @include secondaryInputElement;
   }
@@ -80,6 +93,9 @@
   &.error {
     background-color: $input-bg-error-light;
     box-shadow: 0 0 0 1px $input-border-error-light;
+    &::placeholder {
+      color: $input-placeholder-error-light;
+    }
   }
   &.valid {
     box-shadow: 0 0 0 1px $input-border-valid-light;
@@ -102,6 +118,10 @@
       // #{ $parent }:checked #{ $self } {
       //     box-shadow: 0 0 0 1px #f00;
       // }
+    }
+
+    &.error + .form_label .form-input_radio-icon {
+      box-shadow: 0 0 2px 2px $input-border-error-light;
     }
     &:focus + .form_label .form-input_radio-icon {
       box-shadow: 0 0 2px 2px $input-border-light;
@@ -175,10 +195,12 @@
     &:focus {
       box-shadow: 0 0 2px 2px $input-border-dark;
     }
-
     &.error {
       background-color: $input-bg-error-dark;
       box-shadow: 0 0 0 1px $input-border-error-dark;
+      &::placeholder {
+        color: $input-placeholder-error-dark;
+      }
     }
     &.valid {
       box-shadow: 0 0 0 1px $input-border-valid-dark;
@@ -190,7 +212,9 @@
       &-icon {
         box-shadow: 0 0 0 1px $input-border-dark;
       }
-
+      &.error + .form_label .form-input_radio-icon {
+        box-shadow: 0 0 2px 2px $input-border-error-dark;
+      }
       &:focus + .form_label .form-input_radio-icon {
         box-shadow: 0 0 2px 2px $input-border-dark;
       }
