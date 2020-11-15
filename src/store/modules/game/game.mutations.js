@@ -12,6 +12,9 @@ export const mutations = {
     state.gameState = 1;
     state.gameCreated = true;
   },
+  SET_DEALER: (state) => {
+    state.gameRunning = true;
+  },
   SET_PLAYER_DATA: (state, payload) => {
     state.gameName = payload.gameName;
     state.gameState = payload.gameState;
@@ -19,7 +22,7 @@ export const mutations = {
     state.gameCreatedByName = payload.gameCreatedByName;
     state.playerData = payload.playerData;
     state.playersObj = payload.playersObj;
-    state.playerState = 1;
+    state.playerState = payload.gameState;
     state.playerIsAdmin = (payload.gameCreatedById === state.playerId);
     state.playerCount = payload.playerCount;
   },
@@ -53,6 +56,7 @@ export const mutations = {
       state.playerHand = payload.playerData.hand;
       state.playerState = payload.gameState;
       state.playerIsDealer = (state.dealerData.playerId === state.playerId);
+      state.currentCard.gameId = state.playerData.gameId;
       state.currentCard.playerId = state.playerData.playerId;
       state.currentCard.playerName = state.playerData.playerName;
       state.currentCard.question.id = state.currentQuestion.id;
@@ -76,6 +80,7 @@ export const mutations = {
   },
   RESET_PLAYED_ANSWERS(state) {
     state.currentCard = {
+      'gameId': state.gameId,
       'playerId': state.playerId,
       'playerName': state.playerData.playerName,
       'question': {
@@ -95,6 +100,10 @@ export const mutations = {
         'text': ''
       }
     }
-  }
+  },
+  UPDATE_CURRENT_QUESTION(state, payload) {
+    state.currentQuestion = payload;
+    state.allowSkipQuestion = true;
+  },
 };
 export default mutations;

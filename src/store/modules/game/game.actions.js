@@ -78,7 +78,7 @@ export const actions = {
       });
     }
   },
-  SET_DEALER({state}, playerId) {
+  SET_DEALER({commit, state}, playerId) {
     const gameId = state.gameId;
     const playerData = state.playersObj[playerId];
 
@@ -86,6 +86,7 @@ export const actions = {
       GameDataService.setDealer(playerData)
         .then((response) => {
           if (response.data.statusCode === 200) {
+            commit('SET_DEALER');
             this._vm.$socket.emit("BROADCAST_UPDATE_GAME_DATA", gameId);
             resolve(response);
           }
@@ -94,6 +95,27 @@ export const actions = {
           reject(err);
         });
     });
+  },
+  SKIP_QUESTION({commit, state}) {
+    const gameId = {
+      gameId: state.gameId
+    };
+    return new Promise((resolve, reject) => {
+      GameDataService.skipQuestion(gameId)
+        .then((response) => {
+          if (response.data.statusCode === 200) {
+            commit('UPDATE_CURRENT_QUESTION', response.data);
+            resolve();
+          }
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  },
+  SUBMIT_ROUND({state}) {
+    console.log(`SUBMIT_ROUND`);
+    console.log(state.currentCard);
   }
 };
 export default actions;

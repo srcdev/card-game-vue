@@ -18,6 +18,14 @@ class GameDataService {
       return http.post("/games/setDealer", data);
     }
 
+    submitRound(data) {
+      return http.post("/games/submitRound", data);
+    }
+
+    skipQuestion(data) {
+      return http.post("/games/skipQuestion", data);
+    }
+
 }
 
 export default new GameDataService();
