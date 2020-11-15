@@ -1,5 +1,8 @@
 <template>
-  <div class="card">
+  <div
+    @click.prevent="selectAnswerCard()"
+    class="card"
+    >
     <div
       class="card-inner"
       :class="[
@@ -26,14 +29,14 @@
     name: "GameDeckPlayingPlayer",
     computed: {
       ...mapState('game', [
-        'gameData',
+        'currentCard',
         'playerIsDealer',
       ])
     },
     data() {
       return {
         textToDisplay: '',
-        cardId: null,
+        currentSlot: 1,
       }
     },
     props: {
@@ -48,46 +51,61 @@
       answerData: {
         type: Object,
       },
-      questionData: {
-        type: Object,
-      },
       winnerData: {
         type: Object,
       },
     },
-    methods: {
-      ...mapMutations('game', [
-          'SET_GAME_STATE',
-      ]),
-      renderQuestionText() {
-        const text = this.questionData.questionText;
-          let replacedCopy = text.replace("{0}", "<span class='question'></span>");
-          replacedCopy = replacedCopy.replace("{1}", "<span class='question'></span>");
-          replacedCopy = replacedCopy.replace("{2}", "<span class='question'></span>");
-          this.textToDisplay = replacedCopy;
-      },
-      renderQuestionAnswersText() {
-          const text = this.winnerData.questionText;
-          let replacedCopy = text.replace("{0}", `<span class='question answered'>${this.winnerData.answer1text}</span>`);
-          replacedCopy = replacedCopy.replace("{1}", `<span class='question answered'>${this.winnerData.answer2text}</span>`);
-          replacedCopy = replacedCopy.replace("{2}", `<span class='question answered'>${this.winnerData.answer3text}</span>`);
-          this.textToDisplay = replacedCopy;
+    created() {
+      if (this.cardType === 'A') {
+        this.textToDisplay = this.answerData.answerText;
+      } else {
+        this.renderQuestionAnswersText();
       }
     },
-    mounted() {
-      if (this.cardType === 'Q') {
-        this.cardId = this.questionData.questionId;
-        this.renderQuestionText();
-      } else if (this.cardType === 'QA') {
-        this.cardId = this.questionData.questionId;
-        this.renderQuestionText();
-      } else if (this.cardType === 'A') {
-        // const answerKey = Object.keys(this.answerData)[0];
-        // this.textToDisplay = this.answerData[answerKey];
-        this.cardId = this.answerData.answerId;
-        this.textToDisplay = this.answerData.answerText;
+    watch: {
+      currentCard() {
+        if (this.cardType === 'Q') {
+          this.renderQuestionAnswersText()
+        }
       }
-    }
+    },
+    methods: {
+      ...mapMutations('game', [
+          'SET_ANSWER',
+      ]),
+      questionAnswerContent(text) {
+        let answer;
+        if (text.length > 0) {
+          answer = `<span class='question answered'>${text}</span>`;
+        } else {
+          answer = `<span class='question'></span>`;
+        }
+        return answer;
+      },
+      renderQuestionAnswersText() {
+        //const dummyText = `<span class='question answered'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>`;
+        this.textToDisplay = this.currentCard.question.text;
+        this.textToDisplay = this.textToDisplay.replace("{0}", this.questionAnswerContent(this.currentCard.answer1.text));
+        this.textToDisplay = this.textToDisplay.replace("{1}", this.questionAnswerContent(this.currentCard.answer2.text));
+        this.textToDisplay = this.textToDisplay.replace("{2}", this.questionAnswerContent(this.currentCard.answer3.text));
+      },
+      selectAnswerCard() {
+        const currentSlot = `answer${this.currentSlot}`;
+        const answer = {
+          'id': this.answerData.answerId,
+          'text': this.answerData.answerText,
+        }
+        const payload = {
+          'answer': currentSlot,
+          'data': answer
+        }
+        if (this.currentSlot < this.currentCard.answerCount) {
+          console.log(`Increase slot count`);
+          this.currentSlot + 1;
+        }
+        this.SET_ANSWER(payload);
+      }
+    },
   }
 </script>
 
@@ -109,22 +127,14 @@
         #{ $card }-text {
             color: $card-answer-text-light;
         }
-
-        #{ $card } & {
-            &-text {
-                color: $card-answer-text-light;
-            }
-        }
       }
 
       &.question {
         background-color: $card-question-bg-light;
         box-shadow: 0 0 1px 1px $card-question-border-light;
 
-        #{ $card } & {
-            &.text {
-                color: $card-question-text-light;
-            }
+        #{ $card }-text {
+          color: $card-question-text-light;
         }
       }
 
@@ -164,10 +174,16 @@
       font-size: 14px;
       .question {
         display: inline-block;
-        border-bottom: 2px solid $card-question-text-light;
-        height: 20px;
+        border-bottom: 1px solid $card-question-text-light;
+        line-height: 20px;
         margin: 0 8px 0 0;
-        width: 150px;
+        min-width: 50px;
+        //text-decoration: underline;
+
+        &.answered {
+          border-bottom: 1px solid transparent;
+          text-decoration: underline;
+        }
       }
 
       @include breakpoint(1025) {

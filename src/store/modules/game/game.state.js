@@ -30,6 +30,26 @@ export const state = {
   userData: null,
   gameId: null,
   currentQuestion: {},
+  currentCard: {
+    'playerId': null,
+    'playerName': null,
+    'question': {
+      'id': null,
+      'text': null
+    },
+    'answer1': {
+      'id': null,
+      'text': ''
+    },
+    'answer2': {
+      'id': null,
+      'text': ''
+    },
+    'answer3': {
+      'id': null,
+      'text': ''
+    },
+  },
   gameName: null,
   playersObj: {},
   playerId: null,

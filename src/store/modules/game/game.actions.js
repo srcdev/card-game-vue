@@ -65,9 +65,7 @@ export const actions = {
       gameId: state.gameId,
       playerId: state.playerId
     };
-    console.log(`playerData --> ${playerData.playerId}`);
     if (playerData.playerId !== null) {
-      console.log(`IF`);
       return new Promise((resolve, reject) => {
         GameDataService.getLatestGameData(playerData)
           .then((response) => {

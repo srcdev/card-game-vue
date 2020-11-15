@@ -2,7 +2,6 @@
   <div class="wrapper">
     <div class="game-deck-question aside">
       <game-deck-card
-        :question-data="questionData"
         :card-size="questionCardSize"
         card-type="Q"
       />
@@ -26,9 +25,14 @@
       </ul>
     </div>
     <div class="game-deck-status aside">
-      <game-deck-playing-dealer v-if="playerIsDealer" />
-      <game-deck-playing-player v-else />
-      <game-deck-players />
+      <div>
+        <game-deck-playing-dealer v-if="playerIsDealer" />
+        <game-deck-playing-player v-else />
+        <game-deck-players />
+      </div>
+      <div>
+        <game-deck-playing-actions />
+      </div>
     </div>
   </div>
 </template>
@@ -37,6 +41,7 @@
   import { mapState } from 'vuex';
   import GameDeckPlayingDealer from "./GameDeckPlayingDealer";
   import GameDeckPlayingPlayer from "./GameDeckPlayingPlayer";
+  import GameDeckPlayingActions from "./GameDeckPlayingActions";
   import Card from "./partials/Card";
   import PlayerList from "./partials/PlayerList";
 
@@ -45,6 +50,7 @@
     components: {
       'game-deck-playing-dealer': GameDeckPlayingDealer,
       'game-deck-playing-player': GameDeckPlayingPlayer,
+      'game-deck-playing-actions': GameDeckPlayingActions,
       'game-deck-card': Card,
       'game-deck-players': PlayerList,
     },
@@ -56,7 +62,6 @@
     },
     computed: {
       ...mapState('game', [
-        'currentQuestion',
         'playerHand',
         'playerIsDealer',
       ]),
@@ -67,11 +72,7 @@
     methods: {
       setQuestionData() {
         this.questionCardSize = this.playerIsDealer ? 'XL' : 'L';
-        this.questionData = {
-          questionText: this.currentQuestion.text,
-          questionId: this.currentQuestion.id,
-        }
-      }
+      },
     }
   }
 </script>

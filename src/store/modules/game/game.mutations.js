@@ -24,14 +24,27 @@ export const mutations = {
     state.playerCount = payload.playerCount;
   },
   UPDATE_GAME_DATA: (state, payload) => {
-    const dealerId = payload.dealerId;
-    const playerId = state.playerId;
+    // const dealerId = payload.dealerId;
+    // const playerId = state.playerId;
     state.gameState = payload.gameState;
     state.gameName = payload.gameName;
     state.gameCreatedById = payload.gameCreatedById;
     state.gameCreatedByName = payload.gameCreatedByName;
     state.playerCount = payload.playerCount;
-    state.currentQuestion = payload.currentQuestion;
+
+    let answerCount = 1;
+    if (payload.currentQuestion.text.indexOf('{1}') > -1) {
+      answerCount = 2;
+    } else if (payload.currentQuestion.text.indexOf('{2}') > -1) {
+      answerCount = 3;
+    }
+    const currentQuestion = {
+      answerCount: answerCount,
+      id: payload.currentQuestion.id,
+      text: payload.currentQuestion.text
+    }
+    state.currentQuestion = currentQuestion;
+
     if (state.playerId !== null) {
       state.gameCreated = true;
       state.dealerData = payload.dealerData;
@@ -39,10 +52,49 @@ export const mutations = {
       state.playerData = payload.playerData;
       state.playerHand = payload.playerData.hand;
       state.playerState = payload.gameState;
-      state.playerIsDealer = (dealerId === playerId);
+      state.playerIsDealer = (state.dealerData.playerId === state.playerId);
+      state.currentCard.playerId = state.playerData.playerId;
+      state.currentCard.playerName = state.playerData.playerName;
+      state.currentCard.question.id = state.currentQuestion.id;
+      state.currentCard.question.text = state.currentQuestion.text;
+      state.currentCard.question.text = state.currentQuestion.text;
+      let answerCount = 1;
+      if (payload.currentQuestion.text.indexOf('{1}') > -1) {
+        answerCount = 2;
+      } else if (payload.currentQuestion.text.indexOf('{2}') > -1) {
+        answerCount = 3;
+      }
+      state.currentCard.answerCount = answerCount;
     }
   },
-  // START_GAME(state, payload) {
-  // }
+  SET_ANSWER(state, payload) {
+
+    const currentCard = state.currentCard;
+    currentCard[payload.answer] = payload.data;
+    state.currentCard = {};
+    state.currentCard = currentCard;
+  },
+  RESET_PLAYED_ANSWERS(state) {
+    state.currentCard = {
+      'playerId': state.playerId,
+      'playerName': state.playerData.playerName,
+      'question': {
+        'id': state.currentQuestion.id,
+        'text': state.currentQuestion.text
+      },
+      'answer1': {
+        'id': null,
+        'text': ''
+      },
+      'answer2': {
+        'id': null,
+        'text': ''
+      },
+      'answer3': {
+        'id': null,
+        'text': ''
+      }
+    }
+  }
 };
 export default mutations;

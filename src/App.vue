@@ -6,7 +6,7 @@
     </header>
   </div>
   <game-deck-start v-if="gameState <= 1" />
-  <game-deck-player v-else />
+  <game-deck-playing v-else />
   <div class="wrapper">
     <footer class="footer">
       <p>Footer</p>
@@ -22,7 +22,7 @@
   import GameDeckStart from "./components/GameDeckStart.vue";
   export default {
     components: {
-      'game-deck-player': GameDeckPlaying,
+      'game-deck-playing': GameDeckPlaying,
       'game-deck-start': GameDeckStart,
     },
     data () {
