@@ -5,7 +5,7 @@
       <h1 class="header3" data-test="h1-text">Fill in the blanks game</h1>
     </header>
   </div>
-  <game-deck-start v-if="gameState <= 1" />
+  <game-deck-start v-if="isGameRunning" />
   <game-deck-playing v-else />
   <div class="wrapper">
     <footer class="footer">
@@ -42,12 +42,25 @@
     computed: {
       ...mapState('game', [
         'gameState',
-      ])
+        'playerState'
+      ]),
+      isGameRunning() {
+        console.log(`gameState(${this.gameState}) < 2 && playerState(${this.playerState}) < 2`);
+        const isTrue = (this.gameState < 2 && this.playerState < 2);
+        console.log(`isTrue --> ${isTrue}`);
+        return isTrue;
+      }
     },
     methods: {
       ...mapActions('game', [
         'GET_LATEST_GAME_DATA',
       ]),
+      // isGameRunning() {
+      //   console.log(`gameState(${this.gameState}) < 2 && playerState(${this.playerState}) < 2`);
+      //   const isTrue = (this.gameState < 2 && this.playerId < 2);
+      //   console.log(`isTrue --> ${isTrue}`);
+      //   return isTrue;
+      // }
     }
   }
 </script>

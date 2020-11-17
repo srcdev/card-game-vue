@@ -1,6 +1,6 @@
 export const state = {
   appReady: false,
-  dealerData: {},
+  dealerData: null,
   gameRatings: [
     {
       'id':'rating1',

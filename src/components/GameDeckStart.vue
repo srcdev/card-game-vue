@@ -1,8 +1,8 @@
 <template>
   <div class="wrapper">
     <game-deck-start-create v-if="!gameCreated" />
-    <game-deck-start-join v-else-if="gameCreated && gameState === 0" />
-    <game-deck-start-waiting v-else-if="gameCreated && gameState === 1" />
+    <game-deck-start-join v-else-if="gameCreated && playerState === 0" />
+    <game-deck-start-waiting v-else-if="gameCreated && playerState === 1" />
   </div>
 </template>
 
@@ -22,7 +22,8 @@
       ...mapState('game', [
           'gameId',
           'gameCreated',
-          'gameState'
+          'gameState',
+          'playerState'
       ])
     },
     created() {

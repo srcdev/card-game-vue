@@ -25,7 +25,7 @@ export const actions = {
     this._vm.$socket.emit("JOIN_GAME", gameId);
 
     commit('SET_GAME_STATE', playerObj.gameId);
-    commit('SET_PLAYER_ID', playerObj.playerId);
+    commit('INIT_PLAYER', playerObj.playerId);
 
     return new Promise((resolve, reject) => {
       GameDataService.createNewGame(playerObj)
@@ -45,7 +45,7 @@ export const actions = {
     playerObj.playerName = payload.playerName;
     playerObj.gameId = gameId;
 
-    commit('SET_PLAYER_ID', playerObj.playerId);
+    commit('INIT_PLAYER', playerObj.playerId);
 
     return new Promise((resolve, reject) => {
       GameDataService.joinCurrentGame(playerObj)
@@ -68,6 +68,9 @@ export const actions = {
       return new Promise((resolve, reject) => {
         GameDataService.getLatestGameData(playerData)
           .then((response) => {
+            if (state.playerState === 2) {
+              commit('UPDATE_CURRENT_QUESTION', response.data.currentQuestion);
+            }
             commit('UPDATE_GAME_DATA', response.data);
             resolve();
           })

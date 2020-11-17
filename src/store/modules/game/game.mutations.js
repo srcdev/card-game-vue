@@ -4,8 +4,11 @@ export const mutations = {
       state.appReady = true;
     }, 500);
   },
-  SET_PLAYER_ID: (state, payload) => {
+  INIT_PLAYER: (state, payload) => {
     state.playerId = payload;
+    if (state.gameCreated && state.playerData === null) {
+      state.playerState = 0;
+    }
   },
   SET_GAME_STATE: (state, gameId) => {
     state.gameId = gameId;
@@ -23,9 +26,11 @@ export const mutations = {
     state.playerData = payload.playerData;
     state.playerHand = payload.playerData.hand;
     state.playersObj = payload.playersObj;
-    state.playerState = payload.gameState;
     state.playerIsAdmin = (payload.gameCreatedById === state.playerId);
     state.playerCount = payload.playerCount;
+    if (state.gameCreated && state.playerData !== null) {
+      state.playerState = 1;
+    }
   },
   UPDATE_GAME_DATA: (state, payload) => {
     state.gameState = payload.gameState;
@@ -34,26 +39,26 @@ export const mutations = {
     state.gameCreatedByName = payload.gameCreatedByName;
     state.playerCount = payload.playerCount;
 
-    if (payload.currentQuestion !== null) {
-      const currentQuestion = {
-        answerCount: answerCount,
-        id: payload.currentQuestion.id,
-        text: payload.currentQuestion.text
-      }
-      state.currentQuestion = currentQuestion;
-        state.currentCard.gameId = state.gameId;
-        state.currentCard.playerId = state.playerId;
-        state.currentCard.playerName = state.playerName;
-        state.currentCard.question.id = state.currentQuestion.id;
-        state.currentCard.question.text = state.currentQuestion.text;
-        let answerCount = 1;
-        if (payload.currentQuestion.text.indexOf('{1}') > -1) {
-          answerCount = 2;
-        } else if (payload.currentQuestion.text.indexOf('{2}') > -1) {
-          answerCount = 3;
-        }
-        state.currentCard.answerCount = answerCount;
-    }
+    // if (payload.currentQuestion !== null) {
+    //   const currentQuestion = {
+    //     answerCount: answerCount,
+    //     id: payload.currentQuestion.id,
+    //     text: payload.currentQuestion.text
+    //   }
+    //   state.currentQuestion = currentQuestion;
+    //     state.currentCard.gameId = state.gameId;
+    //     state.currentCard.playerId = state.playerId;
+    //     state.currentCard.playerName = state.playerName;
+    //     state.currentCard.question.id = state.currentQuestion.id;
+    //     state.currentCard.question.text = state.currentQuestion.text;
+    //     let answerCount = 1;
+    //     if (payload.currentQuestion.text.indexOf('{1}') > -1) {
+    //       answerCount = 2;
+    //     } else if (payload.currentQuestion.text.indexOf('{2}') > -1) {
+    //       answerCount = 3;
+    //     }
+    //     state.currentCard.answerCount = answerCount;
+    // }
 
     if (state.playerId !== null) {
       state.gameCreated = true;
@@ -61,8 +66,13 @@ export const mutations = {
       state.playersObj = payload.playersObj;
       state.playerData = payload.playerData;
       state.playerHand = payload.playerData.hand;
-      state.playerState = payload.gameState;
-      state.playerIsDealer = (payload.dealerData.playerId === state.playerId);
+      if (payload.dealerData !== null) {
+        state.playerIsDealer = (payload.dealerData.playerId === state.playerId);
+      }
+
+      if (state.gameCreated) {
+        state.playerState = state.dealerData === null ? 1 : 2;
+      }
     }
   },
   SET_ANSWER(state, payload) {
@@ -96,7 +106,28 @@ export const mutations = {
     }
   },
   UPDATE_CURRENT_QUESTION(state, payload) {
-    state.currentQuestion = payload;
+
+    if (payload !== null) {
+      const currentQuestion = {
+        answerCount: 1,
+        id: payload.id,
+        text: payload.text
+      }
+      state.currentQuestion = currentQuestion;
+        state.currentCard.gameId = state.gameId;
+        state.currentCard.playerId = state.playerId;
+        state.currentCard.playerName = state.playerData.playerName;
+        state.currentCard.question.id = state.currentQuestion.id;
+        state.currentCard.question.text = state.currentQuestion.text;
+        let answerCount = 1;
+        if (payload.text.indexOf('{1}') > -1) {
+          answerCount = 2;
+        } else if (payload.text.indexOf('{2}') > -1) {
+          answerCount = 3;
+        }
+        state.currentCard.answerCount = answerCount;
+    }
+
     state.allowSkipQuestion = true;
   },
 };
