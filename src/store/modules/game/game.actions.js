@@ -24,6 +24,7 @@ export const actions = {
     playerObj.gameRating = payload.gameRating;
     this._vm.$socket.emit("JOIN_GAME", gameId);
 
+    commit('SET_GAME_STATE', playerObj.gameId);
     commit('SET_PLAYER_ID', playerObj.playerId);
 
     return new Promise((resolve, reject) => {
@@ -48,11 +49,9 @@ export const actions = {
 
     return new Promise((resolve, reject) => {
       GameDataService.joinCurrentGame(playerObj)
-        .then((response) => {
+        .then(() => {
           this._vm.$socket.emit("BROADCAST_UPDATE_GAME_DATA", gameId);
-          commit('SET_PLAYER_DATA', response.data);
-          resolve(response.data.gameId);
-          //resolve;
+          resolve;
         })
         .catch((err) => {
           reject(err);

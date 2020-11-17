@@ -16,7 +16,6 @@
 </template>
 
 <script>
-  // import { mapGetters, mapMutations, mapState } from 'vuex';
   import { mapActions, mapState } from 'vuex';
   import GameDeckPlaying from "./components/GameDeckPlaying.vue";
   import GameDeckStart from "./components/GameDeckStart.vue";
