@@ -30,13 +30,17 @@
       }
     },
     sockets: {
-      SOCKET_RECONNECT() {
-        console.log(`SOCKET_RECONNECT()`);
+      RECEIVE_SOCKET_RECONNECT() {
+        console.log(`App.vue --> Recieved websocket --> SOCKET_RECONNECT()`);
         this.GET_LATEST_GAME_DATA();
       },
-      SOCKET_GET_LATEST_GAME_DATA() {
-        console.log(`SOCKET_GET_LATEST_GAME_DATA()`);
+      RECEIVE_SOCKET_GET_LATEST_GAME_DATA() {
+        console.log(`App.vue --> Recieved websocket --> SOCKET_GET_LATEST_GAME_DATA()`);
         this.GET_LATEST_GAME_DATA();
+      },
+      RECEIVE_SOCKET_GET_CURRENT_QUESTION() {
+        console.log(`App.vue --> Recieved websocket --> SOCKET_GET_CURRENT_QUESTION()`);
+        this.GET_CURRENT_QUESTION();
       }
     },
     computed: {
@@ -45,15 +49,16 @@
         'playerState'
       ]),
       isGameRunning() {
-        console.log(`gameState(${this.gameState}) < 2 && playerState(${this.playerState}) < 2`);
-        const isTrue = (this.gameState < 2 && this.playerState < 2);
-        console.log(`isTrue --> ${isTrue}`);
-        return isTrue;
+        // console.log(`gameState(${this.gameState}) < 2 && playerState(${this.playerState}) < 2`);
+        // const isTrue = (this.gameState < 2 && this.playerState < 2);
+        // console.log(`isTrue --> ${isTrue}`);
+        return this.gameState < 2 && this.playerState < 2;
       }
     },
     methods: {
       ...mapActions('game', [
         'GET_LATEST_GAME_DATA',
+        'GET_CURRENT_QUESTION'
       ]),
       // isGameRunning() {
       //   console.log(`gameState(${this.gameState}) < 2 && playerState(${this.playerState}) < 2`);

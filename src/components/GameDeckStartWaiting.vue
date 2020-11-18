@@ -71,7 +71,7 @@
   .game-deck-start {
     .tabs {
       &-nav {
-        border-bottom: 2px solid $white;
+        border-bottom: 2px solid $input-border-light;
         margin-bottom: 12px;
         margin-top: 12px;
         &-list {
@@ -81,11 +81,11 @@
           &-item {
             margin-right: 12px;
             .btn.link {
-              background-color: $input-bg-dark;
-              color: $input-text-dark;
+              background-color: $input-bg-light;
+              color: $input-text-light;
               &.active {
-                background-color: $input-bg-light;
-                color: $input-text-light;
+                background-color: $input-bg-dark;
+                color: $input-text-dark;
               }
             }
           }
@@ -95,7 +95,25 @@
   }
 
   @media (prefers-color-scheme: dark) {
-
+    .game-deck-start {
+      .tabs {
+        &-nav {
+          border-bottom: 2px solid $white;
+          &-list {
+            &-item {
+              .btn.link {
+                background-color: $input-bg-dark;
+                color: $input-text-dark;
+                &.active {
+                  background-color: $input-bg-light;
+                  color: $input-text-light;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 
 </style>

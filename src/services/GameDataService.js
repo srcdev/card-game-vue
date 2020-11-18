@@ -26,6 +26,10 @@ class GameDataService {
       return http.post("/games/skipQuestion", data);
     }
 
+    getCurrentQuestion(data) {
+      return http.post("/games/getCurrentQuestion", data);
+    }
+
 }
 
 export default new GameDataService();

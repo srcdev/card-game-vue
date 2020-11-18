@@ -30,13 +30,13 @@
     computed: {
       ...mapState('game', [
         'currentCard',
+        'currentQuestion',
         'playerIsDealer',
       ])
     },
     data() {
       return {
         textToDisplay: '',
-        currentSlot: 1,
       }
     },
     props: {
@@ -64,9 +64,14 @@
     },
     watch: {
       currentCard() {
+        console.log(`currentCard() changed & cardType --> ${this.cardType}`);
         if (this.cardType === 'Q') {
           this.renderQuestionAnswersText()
         }
+      },
+      currentQuestion() {
+        console.log(`currentQuestion() changed`);
+        //this.renderQuestionAnswersText()
       }
     },
     methods: {
@@ -90,7 +95,8 @@
         this.textToDisplay = this.textToDisplay.replace("{2}", this.questionAnswerContent(this.currentCard.answer3.text));
       },
       selectAnswerCard() {
-        const currentSlot = `answer${this.currentSlot}`;
+        console.log(`1 - this.currentCard.activeSlot --> ${this.currentCard.activeSlot}`);
+        const currentSlot = `answer${this.currentCard.activeSlot}`;
         const answer = {
           'id': this.answerData.answerId,
           'text': this.answerData.answerText,
@@ -98,10 +104,6 @@
         const payload = {
           'answer': currentSlot,
           'data': answer
-        }
-        if (this.currentSlot < this.currentCard.answerCount) {
-          console.log(`Increase slot count`);
-          this.currentSlot + 1;
         }
         this.SET_ANSWER(payload);
       }

@@ -67,7 +67,7 @@ describe('GameDeckStartJoin.vue', () => {
     wrapper.get('#formSubmit').trigger('click')
     await wrapper.trigger('keyup')
     expect(spyOnFormSubmit).toHaveBeenCalled();
-    expect(actions.JOIN_GAME).toHaveBeenCalled()
+    expect(actions.BROADCAST_SOCKET_JOIN_GAME).toHaveBeenCalled()
     wrapper.destroy()
   })
 

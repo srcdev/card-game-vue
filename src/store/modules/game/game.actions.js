@@ -22,7 +22,8 @@ export const actions = {
     playerObj.gameId = gameId;
     playerObj.gameName = payload.gameName;
     playerObj.gameRating = payload.gameRating;
-    this._vm.$socket.emit("JOIN_GAME", gameId);
+    console.log(`Action --> START_GAME --> BROADCAST_SOCKET_JOIN_GAME`);
+    this._vm.$socket.emit("BROADCAST_SOCKET_JOIN_GAME", gameId);
 
     commit('SET_GAME_STATE', playerObj.gameId);
     commit('INIT_PLAYER', playerObj.playerId);
@@ -50,7 +51,8 @@ export const actions = {
     return new Promise((resolve, reject) => {
       GameDataService.joinCurrentGame(playerObj)
         .then(() => {
-          this._vm.$socket.emit("BROADCAST_UPDATE_GAME_DATA", gameId);
+          console.log(`Action --> JOIN_GAME --> BROADCAST_SOCKET_UPDATE_GAME_DATA`);
+          this._vm.$socket.emit("BROADCAST_SOCKET_UPDATE_GAME_DATA", gameId);
           resolve;
         })
         .catch((err) => {
@@ -60,13 +62,13 @@ export const actions = {
 
   },
   GET_LATEST_GAME_DATA({commit, state}) {
-    const playerData = {
+    const data = {
       gameId: state.gameId,
       playerId: state.playerId
     };
-    if (playerData.playerId !== null) {
+    if (data.playerId !== null) {
       return new Promise((resolve, reject) => {
-        GameDataService.getLatestGameData(playerData)
+        GameDataService.getLatestGameData(data)
           .then((response) => {
             if (state.playerState === 2) {
               commit('UPDATE_CURRENT_QUESTION', response.data.currentQuestion);
@@ -89,7 +91,8 @@ export const actions = {
         .then((response) => {
           if (response.data.statusCode === 200) {
             commit('SET_DEALER');
-            this._vm.$socket.emit("BROADCAST_UPDATE_GAME_DATA", gameId);
+            console.log(`Action --> SET_DEALER --> BROADCAST_SOCKET_UPDATE_GAME_DATA`);
+            this._vm.$socket.emit("BROADCAST_SOCKET_UPDATE_GAME_DATA", gameId);
             resolve(response);
           }
         })
@@ -98,17 +101,33 @@ export const actions = {
         });
     });
   },
-  SKIP_QUESTION({commit, state}) {
-    const gameId = {
+  SKIP_QUESTION({state}) {
+    const gameId = state.gameId;
+    const data = {
       gameId: state.gameId
     };
     return new Promise((resolve, reject) => {
-      GameDataService.skipQuestion(gameId)
+      GameDataService.skipQuestion(data)
+        .then(() => {
+          console.log(`Action --> SKIP_QUESTION --> BROADCAST_SOCKET_GET_CURRENT_QUESTION`);
+          this._vm.$socket.emit("BROADCAST_SOCKET_GET_CURRENT_QUESTION", gameId);
+          resolve();
+        })
+        .catch((err) => {
+          reject(err);
+        }),state;
+    });
+  },
+  GET_CURRENT_QUESTION({commit, state}) {
+    const data = {
+      gameId: state.gameId
+    };
+    return new Promise((resolve, reject) => {
+      GameDataService.getCurrentQuestion(data)
         .then((response) => {
-          if (response.data.statusCode === 200) {
-            commit('UPDATE_CURRENT_QUESTION', response.data);
-            resolve();
-          }
+          console.log(`Action --> GET_CURRENT_QUESTION`);
+          commit('UPDATE_CURRENT_QUESTION', response.data);
+          resolve();
         })
         .catch((err) => {
           reject(err);

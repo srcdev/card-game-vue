@@ -34,6 +34,7 @@ export const state = {
     'gameId': null,
     'playerId': null,
     'playerName': null,
+    'activeSlot': 1,
     'question': {
       'id': null,
       'text': null
