@@ -25,7 +25,7 @@
       </ul>
     </div>
     <div class="game-deck-status aside">
-      <div>
+      <div v-if="showStatusAside">
         <game-deck-playing-dealer v-if="playerIsDealer" />
         <game-deck-playing-player v-else />
         <game-deck-players />
@@ -62,9 +62,13 @@
     },
     computed: {
       ...mapState('game', [
+        'gameState',
         'playerHand',
         'playerIsDealer',
       ]),
+      showStatusAside: function () {
+        return this.gameState === 2;
+      }
     },
     created() {
       this.setQuestionData();

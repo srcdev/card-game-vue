@@ -55,7 +55,7 @@
         type: Object,
       },
     },
-    created() {
+    mounted() {
       if (this.cardType === 'A') {
         this.textToDisplay = this.answerData.answerText;
       } else {
@@ -64,15 +64,10 @@
     },
     watch: {
       currentCard() {
-        console.log(`currentCard() changed & cardType --> ${this.cardType}`);
         if (this.cardType === 'Q') {
           this.renderQuestionAnswersText()
         }
       },
-      currentQuestion() {
-        console.log(`currentQuestion() changed`);
-        //this.renderQuestionAnswersText()
-      }
     },
     methods: {
       ...mapMutations('game', [
@@ -88,14 +83,16 @@
         return answer;
       },
       renderQuestionAnswersText() {
-        //const dummyText = `<span class='question answered'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>`;
-        this.textToDisplay = this.currentCard.question.text;
-        this.textToDisplay = this.textToDisplay.replace("{0}", this.questionAnswerContent(this.currentCard.answer1.text));
-        this.textToDisplay = this.textToDisplay.replace("{1}", this.questionAnswerContent(this.currentCard.answer2.text));
-        this.textToDisplay = this.textToDisplay.replace("{2}", this.questionAnswerContent(this.currentCard.answer3.text));
+        setTimeout(() => {
+          if (this.currentCard.question.text !== null) {
+            this.textToDisplay = this.currentCard.question.text;
+            this.textToDisplay = this.textToDisplay.replace("{0}", this.questionAnswerContent(this.currentCard.answer1.text));
+            this.textToDisplay = this.textToDisplay.replace("{1}", this.questionAnswerContent(this.currentCard.answer2.text));
+            this.textToDisplay = this.textToDisplay.replace("{2}", this.questionAnswerContent(this.currentCard.answer3.text));
+          }
+        }, 0);
       },
       selectAnswerCard() {
-        console.log(`1 - this.currentCard.activeSlot --> ${this.currentCard.activeSlot}`);
         const currentSlot = `answer${this.currentCard.activeSlot}`;
         const answer = {
           'id': this.answerData.answerId,
@@ -184,6 +181,7 @@
 
         &.answered {
           border-bottom: 1px solid transparent;
+          display: inline;
           text-decoration: underline;
         }
       }

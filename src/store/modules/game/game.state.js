@@ -1,5 +1,4 @@
 export const state = {
-  appReady: false,
   dealerData: null,
   gameRatings: [
     {

@@ -12,7 +12,6 @@
 </template>
 
 <script>
-  // import { mapState } from 'vuex';
   import QrcodeVue from 'qrcode.vue';
   export default {
     name: "GameDeckShare",

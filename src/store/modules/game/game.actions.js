@@ -70,10 +70,12 @@ export const actions = {
       return new Promise((resolve, reject) => {
         GameDataService.getLatestGameData(data)
           .then((response) => {
-            if (state.playerState === 2) {
+            console.log(`Actions --> GET_LATEST_GAME_DATA --> response.data.currentQuestion --> state.playerState(${state.playerState})`);
+            console.log(response.data.currentQuestion);
+            commit('UPDATE_GAME_DATA', response.data);
+            if (state.playerState > 1) {
               commit('UPDATE_CURRENT_QUESTION', response.data.currentQuestion);
             }
-            commit('UPDATE_GAME_DATA', response.data);
             resolve();
           })
           .catch((err) => {
@@ -90,10 +92,10 @@ export const actions = {
       GameDataService.setDealer(playerData)
         .then((response) => {
           if (response.data.statusCode === 200) {
-            commit('SET_DEALER');
             console.log(`Action --> SET_DEALER --> BROADCAST_SOCKET_UPDATE_GAME_DATA`);
             this._vm.$socket.emit("BROADCAST_SOCKET_UPDATE_GAME_DATA", gameId);
-            resolve(response);
+            commit('SET_DEALER');
+            resolve;
           }
         })
         .catch((err) => {

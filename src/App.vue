@@ -31,28 +31,30 @@
     },
     sockets: {
       RECEIVE_SOCKET_RECONNECT() {
-        console.log(`App.vue --> Recieved websocket --> SOCKET_RECONNECT()`);
         this.GET_LATEST_GAME_DATA();
       },
       RECEIVE_SOCKET_GET_LATEST_GAME_DATA() {
-        console.log(`App.vue --> Recieved websocket --> SOCKET_GET_LATEST_GAME_DATA()`);
         this.GET_LATEST_GAME_DATA();
       },
       RECEIVE_SOCKET_GET_CURRENT_QUESTION() {
-        console.log(`App.vue --> Recieved websocket --> SOCKET_GET_CURRENT_QUESTION()`);
         this.GET_CURRENT_QUESTION();
       }
     },
     computed: {
       ...mapState('game', [
+        'gameId',
         'gameState',
         'playerState'
       ]),
       isGameRunning() {
-        // console.log(`gameState(${this.gameState}) < 2 && playerState(${this.playerState}) < 2`);
-        // const isTrue = (this.gameState < 2 && this.playerState < 2);
-        // console.log(`isTrue --> ${isTrue}`);
         return this.gameState < 2 && this.playerState < 2;
+      }
+    },
+    watch: {
+      gameId(newVal) {
+        if (newVal !== null) {
+          this.$socket.emit("BROADCAST_SOCKET_KEEP_ALIVE", this.gameId);
+        }
       }
     },
     methods: {
@@ -60,12 +62,6 @@
         'GET_LATEST_GAME_DATA',
         'GET_CURRENT_QUESTION'
       ]),
-      // isGameRunning() {
-      //   console.log(`gameState(${this.gameState}) < 2 && playerState(${this.playerState}) < 2`);
-      //   const isTrue = (this.gameState < 2 && this.playerId < 2);
-      //   console.log(`isTrue --> ${isTrue}`);
-      //   return isTrue;
-      // }
     }
   }
 </script>
