@@ -35,7 +35,7 @@
 
 
 <style lang="scss">
-  @import "../styles/imports";
+  @import "@/styles/imports";
 
   .player {
     &-list {

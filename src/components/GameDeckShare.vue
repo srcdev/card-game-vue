@@ -38,7 +38,7 @@
 </script>
 
 <style lang="scss">
-  @import "../styles/imports";
+  @import "@/styles/imports";
 
   .body__section__inner {
 

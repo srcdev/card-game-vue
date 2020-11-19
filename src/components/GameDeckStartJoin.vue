@@ -29,8 +29,8 @@
 
 <script>
   import { mapActions, mapState } from 'vuex';
-  import FormInputText from './forms/FormInputText';
-  import FormValidate from './forms/FormValidate';
+  import FormInputText from '@/components/forms/FormInputText';
+  import FormValidate from '@/components/forms/FormValidate';
 
   export default {
     name: "GameDeckStartJoin",

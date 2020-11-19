@@ -17,8 +17,8 @@
 
 <script>
   import { mapActions, mapState } from 'vuex';
-  import GameDeckPlaying from "./components/GameDeckPlaying.vue";
-  import GameDeckStart from "./components/GameDeckStart.vue";
+  import GameDeckPlaying from "@/components/GameDeckPlaying.vue";
+  import GameDeckStart from "@/components/GameDeckStart.vue";
   export default {
     components: {
       'game-deck-playing': GameDeckPlaying,
@@ -67,6 +67,6 @@
 </script>
 
 <style lang="scss">
-  @import "./styles/imports";
-  @import "./styles/main";
+  @import "@/styles/imports";
+  @import "@/styles/main";
 </style>

@@ -39,9 +39,9 @@
 
 <script>
   import { mapState } from 'vuex';
-  import GameDeckPlayingDealer from "./GameDeckPlayingDealer";
-  import GameDeckPlayingPlayer from "./GameDeckPlayingPlayer";
-  import GameDeckPlayingActions from "./GameDeckPlayingActions";
+  import GameDeckPlayingDealer from "@/components/GameDeckPlayingDealer";
+  import GameDeckPlayingPlayer from "@/components/GameDeckPlayingPlayer";
+  import GameDeckPlayingActions from "@/components/GameDeckPlayingActions";
   import Card from "./partials/Card";
   import PlayerList from "./partials/PlayerList";
 
@@ -82,7 +82,7 @@
 </script>
 
 <style lang="scss">
-  @import "../styles/imports";
+  @import "@/styles/imports";
 
   .game-deck-answers {
     overflow-y: scroll;

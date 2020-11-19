@@ -18,8 +18,8 @@
 
 <script>
   import { mapState } from 'vuex';
-  import GameDeckShare from './GameDeckShare'
-  import GameDeckStartChooseDealer from './GameDeckStartChooseDealer'
+  import GameDeckShare from '@/components/GameDeckShare'
+  import GameDeckStartChooseDealer from '@/components/GameDeckStartChooseDealer'
   export default {
     name: "GameDeckStartWaiting",
     components: {
@@ -65,7 +65,7 @@
 
 
 <style lang="scss">
-  @import "../styles/imports";
+  @import "@/styles/imports";
 
   .game-deck-start {
     .tabs {

@@ -53,9 +53,9 @@
 
 <script>
   import { mapActions, mapState } from 'vuex';
-  import FormInputRadio from './forms/FormInputRadio';
-  import FormInputText from './forms/FormInputText';
-  import FormValidate from './forms/FormValidate';
+  import FormInputRadio from '@/components/forms/FormInputRadio';
+  import FormInputText from '@/components/forms/FormInputText';
+  import FormValidate from '@/components/forms/FormValidate';
   export default {
     name: "GameDeckStartCreate",
     components: {
