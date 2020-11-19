@@ -4,7 +4,7 @@
     <div v-if="playerIsDealer">
       <ul class="game-actions__list">
         <li class="game-actions__item">
-          <button class="btn secondary" @click.prevent="SKIP_QUESTION()">Skip question</button>
+          <button class="btn secondary" @click.prevent="skipQuestion()">Skip question</button>
         </li>
       </ul>
     </div>
@@ -43,10 +43,10 @@
         'currentCard',
         'playerIsDealer',
       ]),
-      canResetCard: function () {
+      canResetCard() {
         return this.currentCard['answer1'].id === null && !this.playerIsDealer;
       },
-      canSubmit: function () {
+      canSubmit() {
         const answerCountRequired = this.currentCard.answerCount;
         return this.currentCard[`answer${answerCountRequired}`].id === null && !this.playerIsDealer;
       }
@@ -59,6 +59,10 @@
       ...mapMutations('game', [
         'RESET_PLAYED_ANSWERS',
       ]),
+      skipQuestion() {
+        this.SKIP_QUESTION()
+        this.$bus.$emit('dealer-has-skipped-question');
+      }
     }
   }
 </script>

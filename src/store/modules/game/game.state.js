@@ -39,6 +39,7 @@ export const state = {
   playerInGame: false,
   playerHand: null,
   playerCount: 0,
-  allowSkipQuestion: true
+  allowSkipQuestion: true,
+  reviewingAnswers: false
 };
 export default state;

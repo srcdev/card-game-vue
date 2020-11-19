@@ -26,6 +26,7 @@ export const actions = {
 
     commit('SET_GAME_STATE', playerObj.gameId);
     commit('INIT_PLAYER', playerObj.playerId);
+    this._vm.$socket.emit("BROADCAST_SOCKET_KEEP_ALIVE", playerObj.playerId);
 
     return new Promise((resolve, reject) => {
       GameDataService.createNewGame(playerObj)
@@ -46,6 +47,7 @@ export const actions = {
     playerObj.gameId = gameId;
 
     commit('INIT_PLAYER', playerObj.playerId);
+    this._vm.$socket.emit("BROADCAST_SOCKET_KEEP_ALIVE", playerObj);
 
     return new Promise((resolve, reject) => {
       GameDataService.joinCurrentGame(playerObj)
@@ -64,6 +66,7 @@ export const actions = {
       gameId: state.gameId,
       playerId: state.playerId
     };
+    this._vm.$socket.emit("BROADCAST_SOCKET_KEEP_ALIVE", data);
     if (data.playerId !== null) {
       return new Promise((resolve, reject) => {
         GameDataService.getLatestGameData(data)
@@ -129,9 +132,10 @@ export const actions = {
         });
     });
   },
-  SUBMIT_ROUND({state}) {
+  SUBMIT_ROUND({commit, state}) {
     console.log(`SUBMIT_ROUND`);
     console.log(state.currentCard);
+    const gameId = state.gameId;
     const currentCard = {
       currentCard: state.currentCard
     };
@@ -141,7 +145,26 @@ export const actions = {
         .then((response) => {
           console.log(`Action --> SUBMIT_ROUND`);
           console.log(response);
-          //commit('UPDATE_CURRENT_QUESTION', response.data);
+          this._vm.$socket.emit("BROADCAST_SOCKET_GET_ROUND_IN_PLAY", gameId);
+
+          commit('UPDATE_ROUND_IN_PLAY', response.data);
+          resolve();
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  },
+  GET_ROUND_IN_PLAY({commit, state}) {
+    const gameId = {
+      gameId: state.gameId
+    };
+    console.log(`Action --> GET_ROUND_IN_PLAY`);
+
+    return new Promise((resolve, reject) => {
+      GameDataService.getRoundInPlay(gameId)
+        .then((response) => {
+          commit('UPDATE_ROUND_IN_PLAY', response.data);
           resolve();
         })
         .catch((err) => {

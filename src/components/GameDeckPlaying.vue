@@ -25,7 +25,7 @@
       </ul>
     </div>
     <div class="game-deck-status aside">
-      <div v-if="showStatusAside">
+      <div>
         <game-deck-playing-dealer v-if="playerIsDealer" />
         <game-deck-playing-player v-else />
         <game-deck-players />
@@ -66,13 +66,15 @@
         'playerHand',
         'playerIsDealer',
       ]),
-      showStatusAside: function () {
-        return this.gameState === 2;
-      }
     },
-    created() {
+    created () {
       this.setQuestionData();
+      //this.$bus.$emit('dealer-has-skipped-question')
+      this.$bus.$on('dealer-has-skipped-question', () => {
+        console.log('GameDeckPlaying --> dealer-has-skipped-question');
+      })
     },
+
     methods: {
       setQuestionData() {
         this.questionCardSize = this.playerIsDealer ? 'XL' : 'L';

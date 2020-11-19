@@ -116,5 +116,10 @@ export const mutations = {
     }
     state.allowSkipQuestion = true;
   },
+  UPDATE_ROUND_IN_PLAY(state, payload) {
+    state.playersObj = payload.playersObj;
+    state.reviewingAnswers = payload.reviewingAnswers;
+    state.roundInPlay = payload.roundInPlay;
+  }
 };
 export default mutations;

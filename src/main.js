@@ -7,6 +7,16 @@ import VueSocketIO from 'vue-socket.io';
 import { WEBSOCKETS_IP, WEBSOCKETS_PORT } from "./config.js";
 
 Vue.config.productionTip = false
+
+const EventBus = new Vue()
+Object.defineProperties(Vue.prototype, {
+  $bus: {
+    get: function () {
+      return EventBus
+    }
+  }
+})
+
 Vue.use(Vuex);
 
 Vue.use(VueRouter);
