@@ -64,28 +64,39 @@ $border-dark: #f9f7f7;
 **/
 
 $input-text-light: $greyGreyText;
-$input-text-dark: $white;
 $input-label-light: $greyGreyText;
-$input-label-dark: #d2d0d0;
 $input-label-error-light: $color-red-2;
-$input-label-error-dark: $color-red-6;
 $input-placeholder-light: #a2a2a2;
 $input-placeholder-error-light: $black;
-$input-placeholder-dark: #a2a2a2;
-$input-placeholder-error-dark: $black;
 $input-bg-light: $white;
-$input-bg-dark: #525050;
 $input-radio-light: #a2a2a2;
 $input-radio-bg-light: $color-green-2;
+$input-bg-error-light: $color-red-4;
+$input-border-light: $greyGreyText;
+$input-border-error-light: $color-red-6;
+$input-border-valid-light: $color-green-1;
+
+$input-text-disabled-light: $color-grey-4;
+$input-bg-disabled-light: $white;
+$input-border-disabled-light: $color-grey-4;
+
+$input-text-dark: $white;
+$input-label-dark: #d2d0d0;
+$input-label-error-dark: $color-red-6;
+$input-placeholder-dark: #a2a2a2;
+$input-placeholder-error-dark: $black;
+$input-bg-dark: #525050;
 $input-radio-dark: $white;
 $input-radio-bg-dark: $color-green-2;
-$input-bg-error-light: $color-red-4;
 $input-bg-error-dark: $color-red-6;
-$input-border-light: $greyGreyText;
 $input-border-dark: #f9f7f7;
-$input-border-error-light: $color-red-6;
+
+$input-text-disabled-dark: $color-grey-2;
+$input-bg-disabled-dark: $color-grey-1;
+$input-border-disabled-dark: $color-grey-2;
+
+
 $input-border-error-dark: $color-red-6;
-$input-border-valid-light: $color-green-1;
 $input-border-valid-dark: $color-green-7;
 
 /*

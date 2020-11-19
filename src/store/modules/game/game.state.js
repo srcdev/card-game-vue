@@ -29,28 +29,7 @@ export const state = {
   userData: null,
   gameId: null,
   currentQuestion: {},
-  currentCard: {
-    'gameId': null,
-    'playerId': null,
-    'playerName': null,
-    'activeSlot': 1,
-    'question': {
-      'id': null,
-      'text': null
-    },
-    'answer1': {
-      'id': null,
-      'text': ''
-    },
-    'answer2': {
-      'id': null,
-      'text': ''
-    },
-    'answer3': {
-      'id': null,
-      'text': ''
-    },
-  },
+  currentCard: null,
   gameName: null,
   playersObj: {},
   playerId: null,

@@ -83,14 +83,12 @@
         return answer;
       },
       renderQuestionAnswersText() {
-        setTimeout(() => {
-          if (this.currentCard.question.text !== null) {
-            this.textToDisplay = this.currentCard.question.text;
-            this.textToDisplay = this.textToDisplay.replace("{0}", this.questionAnswerContent(this.currentCard.answer1.text));
-            this.textToDisplay = this.textToDisplay.replace("{1}", this.questionAnswerContent(this.currentCard.answer2.text));
-            this.textToDisplay = this.textToDisplay.replace("{2}", this.questionAnswerContent(this.currentCard.answer3.text));
-          }
-        }, 0);
+        if (this.currentCard.question.text !== null) {
+          this.textToDisplay = this.currentCard.question.text;
+          this.textToDisplay = this.textToDisplay.replace("{0}", this.questionAnswerContent(this.currentCard.answer1.text));
+          this.textToDisplay = this.textToDisplay.replace("{1}", this.questionAnswerContent(this.currentCard.answer2.text));
+          this.textToDisplay = this.textToDisplay.replace("{2}", this.questionAnswerContent(this.currentCard.answer3.text));
+        }
       },
       selectAnswerCard() {
         const currentSlot = `answer${this.currentCard.activeSlot}`;

@@ -48,6 +48,12 @@
     outline: 0;
   }
 
+  &:disabled {
+    background-color: $input-bg-disabled-light;
+    box-shadow: 0 0 0 2px $input-border-disabled-light;
+    color:$input-text-disabled-light;
+  }
+
   &.link {
     background-color: transparent;
     box-shadow: none;
@@ -180,6 +186,12 @@
 
     &:focus {
       box-shadow: 0 0 2px 2px $input-border-dark;
+    }
+
+    &:disabled {
+      background-color: $input-bg-disabled-dark;
+      box-shadow: 0 0 0 2px $input-border-disabled-dark;
+      color:$input-text-disabled-dark;
     }
 
   }

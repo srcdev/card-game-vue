@@ -39,7 +39,7 @@ describe('GameDeckStartJoin.vue', () => {
     await wrapper.trigger('keyup')
     expect(wrapper.find('[name="playerName"].error')).toBeTruthy()
 
-    // playerName constains bad characters
+    // playerName contains bad characters
     wrapper.get('[name="playerName"]').setValue(`~`)
     await wrapper.trigger('keyup')
     expect(wrapper.find('[name="playerName"].error')).toBeTruthy()
@@ -67,7 +67,7 @@ describe('GameDeckStartJoin.vue', () => {
     wrapper.get('#formSubmit').trigger('click')
     await wrapper.trigger('keyup')
     expect(spyOnFormSubmit).toHaveBeenCalled();
-    expect(actions.BROADCAST_SOCKET_JOIN_GAME).toHaveBeenCalled()
+    expect(actions.JOIN_GAME).toHaveBeenCalled()
     wrapper.destroy()
   })
 

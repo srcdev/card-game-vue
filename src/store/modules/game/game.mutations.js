@@ -91,9 +91,6 @@ export const mutations = {
     }
   },
   SET_ANSWER(state, payload) {
-    console.log(`Mutation --> SET_ANSWER`);
-    console.log(payload.answer);
-    console.log(payload.data.text);
 
     let tempCardData = state.currentCard;
     let currentSlot = tempCardData.activeSlot;
@@ -112,8 +109,10 @@ export const mutations = {
   },
   UPDATE_CURRENT_QUESTION(state, payload) {
     if (payload.id !== null) {
-      state.currentQuestion = payload;
-      state.currentCard = buildCurrentCard(state);
+      if (state.currentQuestion.id !== payload.id) {
+        state.currentQuestion = payload;
+        state.currentCard = buildCurrentCard(state);
+      }
     }
     state.allowSkipQuestion = true;
   },

@@ -22,7 +22,6 @@ export const actions = {
     playerObj.gameId = gameId;
     playerObj.gameName = payload.gameName;
     playerObj.gameRating = payload.gameRating;
-    console.log(`Action --> START_GAME --> BROADCAST_SOCKET_JOIN_GAME`);
     this._vm.$socket.emit("BROADCAST_SOCKET_JOIN_GAME", gameId);
 
     commit('SET_GAME_STATE', playerObj.gameId);
@@ -51,7 +50,6 @@ export const actions = {
     return new Promise((resolve, reject) => {
       GameDataService.joinCurrentGame(playerObj)
         .then(() => {
-          console.log(`Action --> JOIN_GAME --> BROADCAST_SOCKET_UPDATE_GAME_DATA`);
           this._vm.$socket.emit("BROADCAST_SOCKET_UPDATE_GAME_DATA", gameId);
           resolve;
         })
@@ -70,8 +68,6 @@ export const actions = {
       return new Promise((resolve, reject) => {
         GameDataService.getLatestGameData(data)
           .then((response) => {
-            console.log(`Actions --> GET_LATEST_GAME_DATA --> response.data.currentQuestion --> state.playerState(${state.playerState})`);
-            console.log(response.data.currentQuestion);
             commit('UPDATE_GAME_DATA', response.data);
             if (state.playerState > 1) {
               commit('UPDATE_CURRENT_QUESTION', response.data.currentQuestion);
@@ -92,7 +88,6 @@ export const actions = {
       GameDataService.setDealer(playerData)
         .then((response) => {
           if (response.data.statusCode === 200) {
-            console.log(`Action --> SET_DEALER --> BROADCAST_SOCKET_UPDATE_GAME_DATA`);
             this._vm.$socket.emit("BROADCAST_SOCKET_UPDATE_GAME_DATA", gameId);
             commit('SET_DEALER');
             resolve;
@@ -111,7 +106,6 @@ export const actions = {
     return new Promise((resolve, reject) => {
       GameDataService.skipQuestion(data)
         .then(() => {
-          console.log(`Action --> SKIP_QUESTION --> BROADCAST_SOCKET_GET_CURRENT_QUESTION`);
           this._vm.$socket.emit("BROADCAST_SOCKET_GET_CURRENT_QUESTION", gameId);
           resolve();
         })
@@ -127,7 +121,6 @@ export const actions = {
     return new Promise((resolve, reject) => {
       GameDataService.getCurrentQuestion(data)
         .then((response) => {
-          console.log(`Action --> GET_CURRENT_QUESTION`);
           commit('UPDATE_CURRENT_QUESTION', response.data);
           resolve();
         })
@@ -139,6 +132,22 @@ export const actions = {
   SUBMIT_ROUND({state}) {
     console.log(`SUBMIT_ROUND`);
     console.log(state.currentCard);
+    const currentCard = {
+      currentCard: state.currentCard
+    };
+
+    return new Promise((resolve, reject) => {
+      GameDataService.submitRound(currentCard)
+        .then((response) => {
+          console.log(`Action --> SUBMIT_ROUND`);
+          console.log(response);
+          //commit('UPDATE_CURRENT_QUESTION', response.data);
+          resolve();
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
   }
 };
 export default actions;

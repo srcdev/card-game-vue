@@ -122,11 +122,9 @@ describe('GameDeckStartCreate.vue', () => {
     wrapper.get('[name="gameName"]').setValue(`Simon's Game`)
     await wrapper.trigger('keyup')
     await localVue.nextTick()
-    wrapper.get('[name="gameRating"][id="rating2"]').setChecked(true)
-    await wrapper.trigger('keyup')
-    await localVue.nextTick()
+    //wrapper.find('#rating2').setChecked(true)
+    //await localVue.nextTick()
     wrapper.get('#formSubmit').trigger('click')
-    await wrapper.trigger('keyup')
     await localVue.nextTick()
     expect(spyOnFormSubmit).toHaveBeenCalled();
     expect(actions.START_GAME).toHaveBeenCalled()

@@ -11,10 +11,18 @@
     <div v-else>
       <ul class="game-actions__list">
         <li class="game-actions__item">
-          <button class="btn secondary" @click.prevent="RESET_PLAYED_ANSWERS()">Reset answers</button>
+          <button
+            class="btn secondary"
+            @click.prevent="RESET_PLAYED_ANSWERS()"
+            :disabled="canResetCard"
+            >Reset answers</button>
         </li>
         <li class="game-actions__item">
-          <button class="btn secondary" @click.prevent="SUBMIT_ROUND()">Submit answers</button>
+          <button
+            class="btn secondary"
+            @click.prevent="SUBMIT_ROUND()"
+            :disabled="canSubmit"
+            >Submit answers</button>
         </li>
       </ul>
     </div>
@@ -25,18 +33,31 @@
   import { mapActions, mapMutations, mapState } from 'vuex';
   export default {
     name: "GameDeckPlayingActions",
+    data() {
+      return {
+        isDisabled: true,
+      }
+    },
     computed: {
       ...mapState('game', [
+        'currentCard',
         'playerIsDealer',
-      ])
+      ]),
+      canResetCard: function () {
+        return this.currentCard['answer1'].id === null && !this.playerIsDealer;
+      },
+      canSubmit: function () {
+        const answerCountRequired = this.currentCard.answerCount;
+        return this.currentCard[`answer${answerCountRequired}`].id === null && !this.playerIsDealer;
+      }
     },
     methods: {
       ...mapActions('game', [
-          'SKIP_QUESTION',
-          'SUBMIT_ROUND',
+        'SKIP_QUESTION',
+        'SUBMIT_ROUND',
       ]),
       ...mapMutations('game', [
-          'RESET_PLAYED_ANSWERS',
+        'RESET_PLAYED_ANSWERS',
       ]),
     }
   }
