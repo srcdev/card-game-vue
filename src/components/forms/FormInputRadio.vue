@@ -17,7 +17,7 @@
         :name="inputName"
         :id="item.id"
         :value="value"
-        :checked="isChecked(item.value, value)"
+        :checked="isChecked(item, value)"
         :required="inputRequired"
         v-on:input="updateValue(item.value)"
       />
@@ -79,8 +79,8 @@
         this.inputTouched = true;
         this.$emit('input', value)
       },
-      isChecked(savedValue, value) {
-        return savedValue == value;
+      isChecked(item, value) {
+        return !this.inputTouched && item.checked || item.value == value;
       }
     }
   }
