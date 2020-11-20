@@ -46,7 +46,9 @@
             playerId: this.playerId
           };
           //console.log(`RECEIVE_SOCKET_KEEP_ALIVE --> IF --> data --> ${data}`);
-          this.$socket.emit("BROADCAST_SOCKET_KEEP_ALIVE", data);
+          setTimeout(() => {
+            this.$socket.emit("BROADCAST_SOCKET_KEEP_ALIVE", data);
+          }, 15000);
         }
         // else {
         //   console.log(`RECEIVE_SOCKET_KEEP_ALIVE --> ELSE`);

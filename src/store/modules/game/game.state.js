@@ -30,6 +30,7 @@ export const state = {
   gameId: null,
   currentQuestion: {},
   currentCard: null,
+  roundInPlay: {},
   gameName: null,
   playersObj: {},
   playerId: null,

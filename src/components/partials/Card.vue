@@ -1,6 +1,6 @@
 <template>
   <div
-    @click.prevent="selectAnswerCard()"
+    @click.prevent="selectCard()"
     class="card"
     >
     <div
@@ -12,6 +12,7 @@
         {'xlarge' : cardSize === 'XL'},
         {'answer' : cardType === 'A'},
         {'question' : cardType === 'Q'},
+        {'question' : cardType === 'QA'},
       ]"
     >
       <p
@@ -32,6 +33,7 @@
         'currentCard',
         'currentQuestion',
         'playerIsDealer',
+        'reviewingAnswers',
       ])
     },
     data() {
@@ -51,11 +53,16 @@
       answerData: {
         type: Object,
       },
+      qaData: {
+        type: Object,
+      },
       winnerData: {
         type: Object,
       },
     },
     mounted() {
+      console.log(`qaData`);
+      console.log(this.qaData);
       if (this.cardType === 'A') {
         this.textToDisplay = this.answerData.answerText;
       } else {
@@ -83,14 +90,28 @@
         return answer;
       },
       renderQuestionAnswersText() {
-        if (this.currentCard.question.text !== null) {
+        if (this.cardType === 'QA') {
+          this.textToDisplay = this.qaData.data.question.text;
+          this.textToDisplay = this.textToDisplay.replace("{0}", this.questionAnswerContent(this.qaData.data.answer1.text));
+          this.textToDisplay = this.textToDisplay.replace("{1}", this.questionAnswerContent(this.qaData.data.answer2.text));
+          this.textToDisplay = this.textToDisplay.replace("{2}", this.questionAnswerContent(this.qaData.data.answer3.text));
+        } else if (this.currentCard.question.text !== null) {
           this.textToDisplay = this.currentCard.question.text;
           this.textToDisplay = this.textToDisplay.replace("{0}", this.questionAnswerContent(this.currentCard.answer1.text));
           this.textToDisplay = this.textToDisplay.replace("{1}", this.questionAnswerContent(this.currentCard.answer2.text));
           this.textToDisplay = this.textToDisplay.replace("{2}", this.questionAnswerContent(this.currentCard.answer3.text));
         }
       },
-      selectAnswerCard() {
+      selectCard() {
+        if (this.reviewingAnswers && this.playerIsDealer) {
+          console.log(`IN IF`);
+          this.selectWinner();
+        } else if (!this.reviewingAnswers && !this.playerIsDealer) {
+          console.log(`IN ELSE`);
+          this.selectAnswer()
+        }
+      },
+      selectAnswer() {
         const currentSlot = `answer${this.currentCard.activeSlot}`;
         const answer = {
           'id': this.answerData.answerId,
@@ -101,6 +122,9 @@
           'data': answer
         }
         this.SET_ANSWER(payload);
+      },
+      selectWinner() {
+        console.log(`selectWinner()`);
       }
     },
   }
@@ -172,8 +196,7 @@
       .question {
         display: inline-block;
         border-bottom: 1px solid $card-question-text-light;
-        line-height: 20px;
-        margin: 0 8px 0 0;
+        margin: 0 2px 0 0;
         min-width: 50px;
         //text-decoration: underline;
 

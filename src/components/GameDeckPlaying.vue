@@ -7,11 +7,11 @@
       />
     </div>
     <div class="game-deck-answers" v-if="!playerIsDealer">
-      <ul class="game-deck-answers-list">
+      <ul class="game-deck-cards-list">
         <li
           v-for="(answer, index) in playerHand"
           :key="index"
-          class="game-deck-answers-item"
+          class="game-deck-cards-item"
         >
           <game-deck-card
             :answer-data="{
@@ -86,18 +86,26 @@
 <style lang="scss">
   @import "@/styles/imports";
 
-  .game-deck-answers {
-    overflow-y: scroll;
-    padding-bottom: 8px;
-    -webkit-overflow-scrolling: touch;
+  .game-deck {
 
-    &-list {
-      display: flex;
-      width: max-content;
+    &-answers {
+      overflow-y: scroll;
+      padding-bottom: 8px;
+      -webkit-overflow-scrolling: touch;
     }
-    &-item {
-      display: flex;
-      list-style-type: none;
+
+    &-cards {
+      overflow-y: scroll;
+      padding-bottom: 8px;
+      -webkit-overflow-scrolling: touch;
+      &-list {
+        display: flex;
+        width: max-content;
+      }
+      &-item {
+        display: flex;
+        list-style-type: none;
+      }
     }
   }
 
