@@ -61,8 +61,6 @@
       },
     },
     mounted() {
-      console.log(`qaData`);
-      console.log(this.qaData);
       if (this.cardType === 'A') {
         this.textToDisplay = this.answerData.answerText;
       } else {
@@ -104,10 +102,8 @@
       },
       selectCard() {
         if (this.reviewingAnswers && this.playerIsDealer) {
-          console.log(`IN IF`);
           this.selectWinner();
         } else if (!this.reviewingAnswers && !this.playerIsDealer) {
-          console.log(`IN ELSE`);
           this.selectAnswer()
         }
       },
@@ -124,7 +120,7 @@
         this.SET_ANSWER(payload);
       },
       selectWinner() {
-        console.log(`selectWinner()`);
+        console.log(`selectWinner(${this.qaData.data.playerId})`);
       }
     },
   }
@@ -188,7 +184,6 @@
 
         }
       }
-
     }
 
     &-text {
@@ -198,7 +193,6 @@
         border-bottom: 1px solid $card-question-text-light;
         margin: 0 2px 0 0;
         min-width: 50px;
-        //text-decoration: underline;
 
         &.answered {
           border-bottom: 1px solid transparent;
