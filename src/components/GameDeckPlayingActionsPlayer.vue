@@ -1,5 +1,11 @@
 <template>
-  <ul class="game-actions__list">
+  <p
+    v-if="roundPlayed"
+  >Answer submitted</p>
+  <ul
+    v-else
+    class="game-actions__list"
+    >
     <li class="game-actions__item">
       <button
         class="btn secondary"
@@ -24,7 +30,9 @@
     computed: {
       ...mapState('game', [
         'currentCard',
+        'playerId',
         'playerIsDealer',
+        'roundInPlay'
       ]),
       canResetCard() {
         return this.currentCard['answer1'].id === null && !this.playerIsDealer;
@@ -32,8 +40,16 @@
       canSubmit() {
         const answerCountRequired = this.currentCard.answerCount;
         return this.currentCard[`answer${answerCountRequired}`].id === null && !this.playerIsDealer;
+      },
+      roundPlayed() {
+        return this.roundInPlay !== null && typeof this.roundInPlay[this.playerId] === 'object';
       }
     },
+    // data() {
+    //   return {
+    //     roundPlayed: false,
+    //   }
+    // },
     methods: {
       ...mapActions('game', [
         'SUBMIT_ROUND',

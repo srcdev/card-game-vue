@@ -17,6 +17,7 @@ function buildCurrentCard(state) {
     'playerName': state.playerData.playerName,
     'activeSlot': 1,
     'answerCount': returnAnswerCount(state.currentQuestion.text),
+    'isWinner': false,
     'question': {
       'id': state.currentQuestion.id,
       'text': state.currentQuestion.text
