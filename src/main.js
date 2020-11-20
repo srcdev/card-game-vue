@@ -6,7 +6,7 @@ import store from "./store/index";
 import VueSocketIO from 'vue-socket.io';
 import { WEBSOCKETS_IP, WEBSOCKETS_PORT } from "./config.js";
 
-Vue.config.productionTip = false
+Vue.config.productionTip = true
 
 const EventBus = new Vue()
 Object.defineProperties(Vue.prototype, {
@@ -20,6 +20,7 @@ Object.defineProperties(Vue.prototype, {
 Vue.use(Vuex);
 
 Vue.use(VueRouter);
+
 const router = new VueRouter({
   mode: 'history',
   routes: [],
@@ -33,7 +34,6 @@ Vue.use(new VueSocketIO({
         actionPrefix: 'SOCKET_',
         mutationPrefix: 'SOCKET_'
     },
-    //options: { path: "/my-app/" } //Optional options
 }))
 
 new Vue({
