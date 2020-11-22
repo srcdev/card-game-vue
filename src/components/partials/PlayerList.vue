@@ -1,7 +1,7 @@
 <template>
   <ul class="player-list">
     <li
-      v-for="(player, index) in playersObj"
+      v-for="(player, index) in players"
       :key="index"
       class="player-list-item"
       >
@@ -40,12 +40,21 @@
   import { mapState } from 'vuex';
   export default {
     name: "PlayerList",
+    data() {
+      return {
+        players: []
+      }
+    },
     computed: {
       ...mapState('game', [
+        'dealerData',
         'playersObj',
         'playerIsAdmin',
         'roundInPlay',
       ])
+    },
+    created() {
+      this.playersWithoutDealer();
     },
     methods: {
       ejectPlayer(playerId) {
@@ -53,6 +62,12 @@
       },
       roundPlayed(playerId) {
         return this.roundInPlay !== null && typeof this.roundInPlay[playerId] === 'object';
+      },
+      playersWithoutDealer() {
+        const tempPlayers = this.playersObj;
+        delete tempPlayers[this.dealerData.playerId];
+        this.players = tempPlayers;
+
       }
     }
   }

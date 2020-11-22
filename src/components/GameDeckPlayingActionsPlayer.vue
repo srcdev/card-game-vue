@@ -42,14 +42,11 @@
         return this.currentCard[`answer${answerCountRequired}`].id === null && !this.playerIsDealer;
       },
       roundPlayed() {
-        return this.roundInPlay !== null && typeof this.roundInPlay[this.playerId] === 'object';
+        const isPlayed = this.roundInPlay !== null && typeof this.roundInPlay[this.playerId] === 'object';
+        this.$bus.$emit('player-round-played', isPlayed);
+        return isPlayed;
       }
     },
-    // data() {
-    //   return {
-    //     roundPlayed: false,
-    //   }
-    // },
     methods: {
       ...mapActions('game', [
         'SUBMIT_ROUND',

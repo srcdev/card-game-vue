@@ -6,7 +6,7 @@
         card-type="Q"
       />
     </div>
-    <div class="game-deck-answers" v-if="!playerIsDealer">
+    <div class="game-deck-answers" v-if="!playerIsDealer && !roundPlayed">
       <ul class="game-deck-cards-list">
         <li
           v-for="(answer, index) in playerHand"
@@ -28,7 +28,7 @@
       <div>
         <game-deck-playing-dealer v-if="playerIsDealer" />
         <game-deck-playing-player v-else />
-        <game-deck-players />
+        <game-deck-players v-if="!reviewingAnswers" />
       </div>
       <div>
         <game-deck-playing-actions />
@@ -58,6 +58,7 @@
       return {
         questionData: {},
         questionCardSize: 'L',
+        roundPlayed: false
       }
     },
     computed: {
@@ -65,13 +66,15 @@
         'gameState',
         'playerHand',
         'playerIsDealer',
+        'roundInPlay',
+        'reviewingAnswers'
       ]),
     },
     created () {
       this.setQuestionData();
-      //this.$bus.$emit('dealer-has-skipped-question')
-      this.$bus.$on('dealer-has-skipped-question', () => {
-        console.log('GameDeckPlaying --> dealer-has-skipped-question');
+      this.$bus.$on('player-round-played', (state) => {
+        this.roundPlayed = state;
+        console.log('GameDeckPlaying --> player-round-played');
       })
     },
 
@@ -79,6 +82,9 @@
       setQuestionData() {
         this.questionCardSize = this.playerIsDealer ? 'XL' : 'L';
       },
+    },
+    destroyed () {
+      this.$bus.$off('dealer-select-winner');
     }
   }
 </script>
