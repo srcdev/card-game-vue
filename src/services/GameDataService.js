@@ -34,6 +34,10 @@ class GameDataService {
       return http.post("/games/getRoundInPlay", data);
     }
 
+    setWinner(data) {
+      return http.post("/games/setWinner", data);
+    }
+
 }
 
 export default new GameDataService();
