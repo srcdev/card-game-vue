@@ -86,9 +86,11 @@
   background-color: $input-bg-light;
   box-shadow: 0 0 0 1px $input-border-light;
   color: $input-text-light;
+  transition: background-color linear 200ms, box-shadow linear 200ms, color linear 200ms;
   &::placeholder {
     color: $input-placeholder-light;
     font-style: italic;
+    transition: color linear 200ms;
   }
 
   &:active,
@@ -120,6 +122,7 @@
       display: inline-block;
       height: 16px;
       margin-right: 8px;
+      transition: background-color linear 200ms, box-shadow linear 200ms, color linear 200ms;
       width: 16px;
       // #{ $parent }:checked #{ $self } {
       //     box-shadow: 0 0 0 1px #f00;
