@@ -2,9 +2,11 @@ function returnAnswerCount(text) {
   let answerCount = 1;
   if (text.indexOf('{1}') > -1) {
     answerCount = 2;
-  } else if (text.indexOf('{2}') > -1) {
+  }
+  if (text.indexOf('{2}') > -1) {
     answerCount = 3;
-  } else if (text.indexOf('{3}') > -1) {
+  }
+  if (text.indexOf('{3}') > -1) {
     answerCount = 4;
   }
   return answerCount;
@@ -76,20 +78,11 @@ export const mutations = {
     state.playerCount = payload.playerCount;
     state.playersObj = payload.playersObj;
 
-    console.log(`payload.roundInPlay`);
-    console.log(payload.roundInPlay);
-
     if (typeof payload.roundInPlay !== 'undefined' && payload.roundInPlay !== null) {
-      console.log(`UPDATE_GAME_DATA --> IF`);
       state.roundInPlay = payload.roundInPlay;
-
-      console.log(`payload.roundInPlay[state.playerId]`);
-      console.log(typeof payload.roundInPlay[state.playerId]);
-
       state.roundPlayed = typeof payload.roundInPlay[state.playerId] === 'object';
       state.allowSkipQuestion = false;
     } else {
-      console.log(`UPDATE_GAME_DATA --> ELSE`);
       state.roundInPlay = {};
       state.roundPlayed = false;
     }
@@ -135,7 +128,6 @@ export const mutations = {
         state.currentCard = buildCurrentCard(state);
       }
     }
-    //state.allowSkipQuestion = false;
   },
   UPDATE_ROUND_IN_PLAY(state, payload) {
     state.playersObj = payload.playersObj;
@@ -143,16 +135,10 @@ export const mutations = {
     state.roundInPlay = payload.roundInPlay;
 
     if (typeof payload.roundInPlay !== 'undefined') {
-      console.log(`UPDATE_ROUND_IN_PLAY --> IF`);
       state.roundInPlay = payload.roundInPlay;
-
-      console.log(`payload.roundInPlay[state.playerId]`);
-      console.log(typeof payload.roundInPlay[state.playerId]);
-
       state.roundPlayed = typeof payload.roundInPlay[state.playerId] === 'object';
       state.allowSkipQuestion = false;
     } else {
-      console.log(`UPDATE_ROUND_IN_PLAY --> ELSE`);
       state.roundInPlay = {};
       state.roundPlayed = false;
     }
