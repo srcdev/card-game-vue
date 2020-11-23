@@ -74,11 +74,31 @@ export const mutations = {
     state.gameCreatedById = payload.gameCreatedById;
     state.gameCreatedByName = payload.gameCreatedByName;
     state.playerCount = payload.playerCount;
+    state.playersObj = payload.playersObj;
+
+    console.log(`payload.roundInPlay`);
+    console.log(payload.roundInPlay);
+
+    if (typeof payload.roundInPlay !== 'undefined' && payload.roundInPlay !== null) {
+      console.log(`UPDATE_GAME_DATA --> IF`);
+      state.roundInPlay = payload.roundInPlay;
+
+      console.log(`payload.roundInPlay[state.playerId]`);
+      console.log(typeof payload.roundInPlay[state.playerId]);
+
+      state.roundPlayed = typeof payload.roundInPlay[state.playerId] === 'object';
+      state.allowSkipQuestion = false;
+    } else {
+      console.log(`UPDATE_GAME_DATA --> ELSE`);
+      state.roundInPlay = {};
+      state.roundPlayed = false;
+    }
+
+    state.reviewingAnswers = payload.reviewingAnswers;
 
     if (state.playerId !== null) {
       state.gameCreated = true;
       state.dealerData = payload.dealerData;
-      state.playersObj = payload.playersObj;
       state.playerData = payload.playerData;
       state.playerHand = payload.playerData.hand;
       if (payload.dealerData !== null) {
@@ -115,12 +135,27 @@ export const mutations = {
         state.currentCard = buildCurrentCard(state);
       }
     }
-    state.allowSkipQuestion = true;
+    //state.allowSkipQuestion = false;
   },
   UPDATE_ROUND_IN_PLAY(state, payload) {
     state.playersObj = payload.playersObj;
     state.reviewingAnswers = payload.reviewingAnswers;
     state.roundInPlay = payload.roundInPlay;
+
+    if (typeof payload.roundInPlay !== 'undefined') {
+      console.log(`UPDATE_ROUND_IN_PLAY --> IF`);
+      state.roundInPlay = payload.roundInPlay;
+
+      console.log(`payload.roundInPlay[state.playerId]`);
+      console.log(typeof payload.roundInPlay[state.playerId]);
+
+      state.roundPlayed = typeof payload.roundInPlay[state.playerId] === 'object';
+      state.allowSkipQuestion = false;
+    } else {
+      console.log(`UPDATE_ROUND_IN_PLAY --> ELSE`);
+      state.roundInPlay = {};
+      state.roundPlayed = false;
+    }
   }
 };
 export default mutations;

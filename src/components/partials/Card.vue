@@ -24,7 +24,7 @@
 </template>
 
 <script>
-  import { mapMutations, mapState } from 'vuex';
+  import { mapActions, mapMutations, mapState } from 'vuex';
   export default {
     inheritAttrs: false,
     name: "GameDeckPlayingPlayer",
@@ -75,6 +75,9 @@
       },
     },
     methods: {
+      ...mapActions('game', [
+          'SET_WINNER',
+      ]),
       ...mapMutations('game', [
           'SET_ANSWER',
       ]),
@@ -102,7 +105,8 @@
       },
       selectCard() {
         if (this.reviewingAnswers && this.playerIsDealer) {
-          this.selectWinner();
+          console.log(`selectWinner(${this.qaData.data.playerId})`);
+          this.SET_WINNER(this.qaData.data.playerId)
         } else if (!this.reviewingAnswers && !this.playerIsDealer) {
           this.selectAnswer()
         }
@@ -119,9 +123,9 @@
         }
         this.SET_ANSWER(payload);
       },
-      selectWinner() {
-        console.log(`selectWinner(${this.qaData.data.playerId})`);
-      }
+      // selectWinner() {
+      //   console.log(`selectWinner(${this.qaData.data.playerId})`);
+      // }
     },
   }
 </script>

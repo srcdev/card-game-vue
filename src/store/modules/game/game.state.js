@@ -26,7 +26,6 @@ export const state = {
   gameRunning: false,
   gameCreatedById: null,
   gameCreatedByName: null,
-  userData: null,
   gameId: null,
   currentQuestion: {},
   currentCard: null,
@@ -41,6 +40,7 @@ export const state = {
   playerHand: null,
   playerCount: 0,
   allowSkipQuestion: true,
-  reviewingAnswers: false
+  reviewingAnswers: false,
+  roundPlayed: false,
 };
 export default state;

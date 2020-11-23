@@ -1,7 +1,11 @@
 <template>
   <ul class="game-actions__list">
     <li class="game-actions__item">
-      <button class="btn secondary" @click.prevent="SKIP_QUESTION()">Skip question</button>
+      <button
+        class="btn secondary"
+        @click.prevent="SKIP_QUESTION()"
+        :disabled="!allowSkipQuestion"
+      >Skip question</button>
     </li>
   </ul>
 </template>
@@ -13,6 +17,7 @@
     computed: {
       ...mapState('game', [
         'currentCard',
+        'allowSkipQuestion'
       ]),
     },
     methods: {

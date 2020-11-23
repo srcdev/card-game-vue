@@ -1,7 +1,7 @@
 <template>
   <ul class="player-list">
     <li
-      v-for="(player, index) in players"
+      v-for="(player, index) in playersObj"
       :key="index"
       class="player-list-item"
       >
@@ -13,7 +13,7 @@
         >
         {{ player.playerName }}
         <svg
-          v-if="roundPlayed(player.playerId)"
+          v-if="roundPlayed"
           class="icon-tick"
           >
           <g transform="scale(0.008 0.008)">
@@ -40,35 +40,42 @@
   import { mapState } from 'vuex';
   export default {
     name: "PlayerList",
-    data() {
-      return {
-        players: []
-      }
-    },
+    // data() {
+    //   return {
+    //     players: []
+    //   }
+    // },
     computed: {
       ...mapState('game', [
-        'dealerData',
+        //'dealerData',
         'playersObj',
         'playerIsAdmin',
         'roundInPlay',
+        // 'roundPlayed'
       ])
     },
-    created() {
-      this.playersWithoutDealer();
-    },
+    // created() {
+    //   this.playersWithoutDealer();
+    // },
     methods: {
       ejectPlayer(playerId) {
         console.log(`ejectPlayer(${playerId})`);
       },
       roundPlayed(playerId) {
-        return this.roundInPlay !== null && typeof this.roundInPlay[playerId] === 'object';
+        let played = false;
+        if (this.roundInPlay !== 'undefined') {
+          played = this.roundInPlay !== null && typeof this.roundInPlay[playerId] === 'object';
+        }
+        return played;
       },
-      playersWithoutDealer() {
-        const tempPlayers = this.playersObj;
-        delete tempPlayers[this.dealerData.playerId];
-        this.players = tempPlayers;
+      // playersWithoutDealer() {
+      //   const tempPlayers = this.playersObj;
+      //   //if (typeof tempPlayers[this.dealerData.playerId] !== 'undefined') {
+      //     delete tempPlayers[this.dealerData.playerId];
+      //   //}
+      //   this.players = tempPlayers;
 
-      }
+      // }
     }
   }
 </script>
@@ -86,14 +93,14 @@
           flex-grow: 1;
 
           .icon-tick {
-            fill: $color-green-7;
+            fill: $color-green-6;
             height: 12px;
             opacity: 0;
             width: 12px;
           }
 
           &.played {
-            color: $color-green-7;
+            color: $color-green-6;
 
             .icon-tick {
               opacity: 1;
@@ -110,7 +117,25 @@
   }
 
   @media (prefers-color-scheme: dark) {
+    .player {
+      &-list {
+        &-item {
+          &-name {
+            .icon-tick {
+              fill: $color-green-7;
+            }
 
+            &.played {
+              color: $color-green-7;
+            }
+          }
+
+          &-btn {
+
+          }
+        }
+      }
+    }
   }
 
 </style>

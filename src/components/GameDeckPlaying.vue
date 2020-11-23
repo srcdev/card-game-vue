@@ -58,7 +58,7 @@
       return {
         questionData: {},
         questionCardSize: 'L',
-        roundPlayed: false
+        //roundPlayed: false
       }
     },
     computed: {
@@ -67,15 +67,16 @@
         'playerHand',
         'playerIsDealer',
         'roundInPlay',
-        'reviewingAnswers'
+        'reviewingAnswers',
+        'roundPlayed'
       ]),
     },
     created () {
       this.setQuestionData();
-      this.$bus.$on('player-round-played', (state) => {
-        this.roundPlayed = state;
-        console.log('GameDeckPlaying --> player-round-played');
-      })
+      // this.$bus.$on('player-round-played', (state) => {
+      //   this.roundPlayed = state;
+      //   console.log('GameDeckPlaying --> player-round-played');
+      // })
     },
 
     methods: {
@@ -83,9 +84,9 @@
         this.questionCardSize = this.playerIsDealer ? 'XL' : 'L';
       },
     },
-    destroyed () {
-      this.$bus.$off('dealer-select-winner');
-    }
+    // destroyed () {
+    //   this.$bus.$off('dealer-select-winner');
+    // }
   }
 </script>
 

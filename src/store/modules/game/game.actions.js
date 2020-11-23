@@ -155,6 +155,25 @@ export const actions = {
         });
     });
   },
+  SET_WINNER({state}, playerId) {
+    console.log(`SET_WINNER`);
+    const data = {
+      playerId: playerId,
+      gameId: state.gameId,
+    };
+
+    return new Promise((resolve, reject) => {
+      GameDataService.setWinner(data)
+        .then(() => {
+          console.log(`Action --> SET_WINNER`);
+          this._vm.$socket.emit("BROADCAST_SOCKET_UPDATE_GAME_DATA", state.gameId);
+          resolve();
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  },
   GET_ROUND_IN_PLAY({commit, state}) {
     const gameId = {
       gameId: state.gameId
