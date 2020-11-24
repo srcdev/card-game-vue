@@ -4,7 +4,7 @@
       <button
         class="btn secondary"
         @click.prevent="SKIP_QUESTION()"
-        :disabled="!allowSkipQuestion"
+        :disabled="skipQuestionDisabled"
       >Skip question</button>
     </li>
   </ul>
@@ -17,7 +17,7 @@
     computed: {
       ...mapState('game', [
         'currentCard',
-        'allowSkipQuestion'
+        'skipQuestionDisabled'
       ]),
     },
     methods: {

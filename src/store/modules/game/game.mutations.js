@@ -77,14 +77,15 @@ export const mutations = {
     state.gameCreatedByName = payload.gameCreatedByName;
     state.playerCount = payload.playerCount;
     state.playersObj = payload.playersObj;
-
+    state.skipQuestionDisabled = payload.skipQuestionDisabled;
     if (typeof payload.roundInPlay !== 'undefined' && payload.roundInPlay !== null) {
       state.roundInPlay = payload.roundInPlay;
       state.roundPlayed = typeof payload.roundInPlay[state.playerId] === 'object';
-      state.allowSkipQuestion = false;
+      //state.skipQuestionDisabled = true;
     } else {
       state.roundInPlay = {};
       state.roundPlayed = false;
+      //state.skipQuestionDisabled = false;
     }
 
     state.reviewingAnswers = payload.reviewingAnswers;
@@ -133,14 +134,15 @@ export const mutations = {
     state.playersObj = payload.playersObj;
     state.reviewingAnswers = payload.reviewingAnswers;
     state.roundInPlay = payload.roundInPlay;
-
+    state.skipQuestionDisabled = payload.skipQuestionDisabled;
     if (typeof payload.roundInPlay !== 'undefined') {
       state.roundInPlay = payload.roundInPlay;
       state.roundPlayed = typeof payload.roundInPlay[state.playerId] === 'object';
-      state.allowSkipQuestion = false;
+      //state.skipQuestionDisabled = true;
     } else {
       state.roundInPlay = {};
       state.roundPlayed = false;
+      //state.skipQuestionDisabled = false;
     }
   }
 };
