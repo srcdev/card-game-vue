@@ -78,6 +78,7 @@ export const mutations = {
     state.playerCount = payload.playerCount;
     state.playersObj = payload.playersObj;
     state.skipQuestionDisabled = payload.skipQuestionDisabled;
+    state.scoresObj = payload.scoresObj;
     if (typeof payload.roundInPlay !== 'undefined' && payload.roundInPlay !== null) {
       state.roundInPlay = payload.roundInPlay;
       state.roundPlayed = typeof payload.roundInPlay[state.playerId] === 'object';

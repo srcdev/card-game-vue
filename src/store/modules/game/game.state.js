@@ -42,5 +42,6 @@ export const state = {
   skipQuestionDisabled: false,
   reviewingAnswers: false,
   roundPlayed: false,
+  scoresObj: {}
 };
 export default state;
