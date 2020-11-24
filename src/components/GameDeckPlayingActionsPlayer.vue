@@ -8,17 +8,17 @@
     >
     <li class="game-actions__item">
       <button
-        class="btn secondary"
+        class="btn secondary warning"
         @click.prevent="RESET_PLAYED_ANSWERS()"
         :disabled="canResetCard"
-        >Reset answers</button>
+        >Reset</button>
     </li>
     <li class="game-actions__item">
       <button
-        class="btn secondary"
+        class="btn secondary proceed"
         @click.prevent="SUBMIT_ROUND()"
         :disabled="canSubmit"
-        >Submit answers</button>
+        >Submit</button>
     </li>
   </ul>
 </template>
@@ -72,3 +72,48 @@
     }
   }
 </script>
+
+<style lang="scss">
+  @import "@/styles/imports";
+
+  // .game-actions {
+  //   &__item {
+  //     .btn {
+  //       width: 100%;
+  //     }
+  //   }
+  // }
+
+  .game-actions {
+    &__list {
+      align-items: baseline;
+      display: flex;
+      justify-content: space-between;
+    }
+    &__item {
+      flex-grow: 1;
+      .btn {
+        margin: 0 auto;
+        width: calc(100% - 8px);
+      }
+    }
+  }
+
+  // @include breakpoint(1025) {
+  //   .game-actions {
+  //     &__list {
+  //       align-items: baseline;
+  //       display: flex;
+  //       justify-content: space-between;
+  //     }
+  //     &__item {
+  //       flex-grow: 1;
+  //       .btn {
+  //         margin: 0 auto;
+  //         width: calc(100% - 8px);
+  //       }
+  //     }
+  //   }
+  // }
+
+</style>

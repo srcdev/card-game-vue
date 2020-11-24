@@ -25,12 +25,12 @@
       </ul>
     </div>
     <div class="game-deck-status aside">
-      <div>
+      <div class="game-deck-status__players">
         <game-deck-playing-dealer v-if="playerIsDealer" />
         <game-deck-playing-player v-else />
         <game-deck-players v-if="!reviewingAnswers" />
       </div>
-      <div>
+      <div class="game-deck-status__actions">
         <game-deck-playing-actions />
       </div>
     </div>
@@ -58,7 +58,6 @@
       return {
         questionData: {},
         questionCardSize: 'L',
-        //roundPlayed: false
       }
     },
     computed: {
@@ -73,10 +72,6 @@
     },
     created () {
       this.setQuestionData();
-      // this.$bus.$on('player-round-played', (state) => {
-      //   this.roundPlayed = state;
-      //   console.log('GameDeckPlaying --> player-round-played');
-      // })
     },
 
     methods: {
@@ -84,9 +79,6 @@
         this.questionCardSize = this.playerIsDealer ? 'XL' : 'L';
       },
     },
-    // destroyed () {
-    //   this.$bus.$off('dealer-select-winner');
-    // }
   }
 </script>
 
@@ -112,6 +104,24 @@
       &-item {
         display: flex;
         list-style-type: none;
+      }
+    }
+
+    &-status {
+      align-items: flex-start;
+      display: flex;
+      //flex-grow: 1;
+      flex-direction: column;
+      &__players {
+        // align-self: flex-start;
+        // flex-grow: 1;
+        width: 100%;
+      }
+      &__actions {
+        // align-self: flex-end;
+        // flex-grow: 1;
+        margin-top: auto;
+        width: 100%;
       }
     }
   }

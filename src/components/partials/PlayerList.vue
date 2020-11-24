@@ -40,23 +40,13 @@
   import { mapState } from 'vuex';
   export default {
     name: "PlayerList",
-    // data() {
-    //   return {
-    //     players: []
-    //   }
-    // },
     computed: {
       ...mapState('game', [
-        //'dealerData',
         'playersObj',
         'playerIsAdmin',
         'roundInPlay',
-        // 'roundPlayed'
       ])
     },
-    // created() {
-    //   this.playersWithoutDealer();
-    // },
     methods: {
       ejectPlayer(playerId) {
         console.log(`ejectPlayer(${playerId})`);
@@ -68,14 +58,6 @@
         }
         return played;
       },
-      // playersWithoutDealer() {
-      //   const tempPlayers = this.playersObj;
-      //   //if (typeof tempPlayers[this.dealerData.playerId] !== 'undefined') {
-      //     delete tempPlayers[this.dealerData.playerId];
-      //   //}
-      //   this.players = tempPlayers;
-
-      // }
     }
   }
 </script>
@@ -85,10 +67,12 @@
 
   .player {
     &-list {
-      margin-top: 12px;
+      border-top: 1px solid $border-light;
+      margin-top: 4px;
+      padding-top: 4px;
       &-item {
         display: flex;
-        margin-bottom: 12px;
+        margin-bottom: 2px;
         &-name {
           flex-grow: 1;
 
@@ -108,10 +92,6 @@
             }
           }
         }
-
-        &-btn {
-
-        }
       }
     }
   }
@@ -119,6 +99,7 @@
   @media (prefers-color-scheme: dark) {
     .player {
       &-list {
+        border-top: 1px solid $border-dark;
         &-item {
           &-name {
             .icon-tick {
@@ -128,10 +109,6 @@
             &.played {
               color: $color-green-7;
             }
-          }
-
-          &-btn {
-
           }
         }
       }

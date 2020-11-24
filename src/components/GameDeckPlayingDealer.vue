@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <p>You are the dealer</p>
-  </div>
+  <p>You are the dealer</p>
 </template>
 
 <script>

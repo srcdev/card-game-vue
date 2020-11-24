@@ -18,7 +18,7 @@ body {
 }
 
 .wrapper {
-    display: flex;  
+    display: flex;
     flex-flow: row wrap;
 }
 
@@ -28,44 +28,47 @@ body {
 }
 
 .header {
-    box-shadow: 0 0 0 1px #000;
+    box-shadow: 0 0 0 1px $border-light;
+    @media (prefers-color-scheme: dark) {
+        box-shadow: 0 0 0 1px $border-dark;
+    }
 }
 
-.game-deck-question { 
+.game-deck-question {
     flex: 1 0 0;
-    order: 1; 
-} 
-.game-deck-status { 
+    order: 1;
+}
+.game-deck-status {
     flex: 1 0 0;
-    order: 2; 
+    order: 2;
 }
 .game-deck-answers,
-.game-deck-start { 
+.game-deck-start {
     order: 3;
 }
-.footer { 
+.footer {
     order: 4;
 }
 
 @include breakpoint(600) {
-    .aside { 
+    .aside {
         flex: 1.25 0 0;
     }
 }
 
 @include breakpoint(800) {
-    .game-deck-question { 
-        order: 1; 
-    } 
+    .game-deck-question {
+        order: 1;
+    }
     .game-deck-answers,
-    .game-deck-start { 
+    .game-deck-start {
         flex: 3 0px;
         order: 2;
     }
-    .game-deck-status { 
+    .game-deck-status {
         order: 3;
     }
-    .footer  { 
+    .footer  {
         order: 4;
     }
 }

@@ -1,6 +1,5 @@
 <template>
   <div class="game-actions">
-    <p>Game actions</p>
     <game-deck-playing-actions-dealer  v-if="playerIsDealer" />
     <game-deck-playing-actions-player  v-else />
   </div>

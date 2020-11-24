@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <p>Dealer is: <span>{{ dealerData.dealerName }}</span></p>
-  </div>
+  <p>Dealer is: <strong>{{ dealerData.dealerName }}</strong></p>
 </template>
 
 <script>

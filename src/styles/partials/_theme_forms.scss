@@ -42,16 +42,10 @@
   background-color: $input-bg-light;
   box-shadow: 0 0 0 1px $input-border-light;
   display: block;
-
+  transition: opacity linear 200ms;
   &:focus {
     box-shadow: 0 0 2px 2px $input-border-light;
     outline: 0;
-  }
-
-  &:disabled {
-    background-color: $input-bg-disabled-light;
-    box-shadow: 0 0 0 2px $input-border-disabled-light;
-    color:$input-text-disabled-light;
   }
 
   &.link {
@@ -78,6 +72,21 @@
   &.secondary {
     @include secondaryInputElement;
   }
+
+  &.warning {
+    background-color: $input-bg-error-light;
+    box-shadow: 0 0 0 1px $input-border-error-light;
+    color: $input-border-error-light;
+  }
+  &.proceed {
+    box-shadow: 0 0 0 1px $input-border-valid-light;
+    color: $input-border-valid-light;
+  }
+
+  &:disabled {
+    opacity: 0.25;
+  }
+
 }
 
 .form-input_text {
@@ -191,10 +200,14 @@
       box-shadow: 0 0 2px 2px $input-border-dark;
     }
 
-    &:disabled {
-      background-color: $input-bg-disabled-dark;
-      box-shadow: 0 0 0 2px $input-border-disabled-dark;
-      color:$input-text-disabled-dark;
+    &.warning {
+      background-color: $input-bg-error-dark;
+      box-shadow: 0 0 0 1px $input-border-error-dark;
+      color: $input-border-error-dark;
+    }
+    &.proceed {
+      box-shadow: 0 0 0 1px $input-border-valid-dark;
+      color: $input-border-valid-dark;
     }
 
   }

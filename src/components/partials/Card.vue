@@ -153,7 +153,7 @@
       &.question {
         background-color: $card-question-bg-light;
         box-shadow: 0 0 1px 1px $card-question-border-light;
-
+        margin: 0 auto;
         #{ $card }-text {
           color: $card-question-text-light;
         }

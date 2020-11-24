@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="choose-dealer">
     <h3 v-if="playerIsAdmin">Choose a player to start game as the dealer</h3>
     <h3 v-else>Waiting for {{ gameCreatedByName }} to pick a dealer</h3>
     <ul class="player-list">
@@ -34,28 +34,22 @@
 </script>
 
 
-<style lang="scss">
+<style lang="scss" scoped>
   @import "@/styles/imports";
 
-  .player {
-    &-list {
-      margin-top: 12px;
-      &-item {
-        display: flex;
-        margin-bottom: 12px;
-        &-name {
-          flex-grow: 1;
-        }
-
-        &-btn {
-
+  .choose-dealer {
+    .player {
+      &-list {
+        margin-top: 12px;
+        &-item {
+          display: flex;
+          margin-bottom: 12px;
+          &-name {
+            flex-grow: 1;
+          }
         }
       }
     }
-  }
-
-  @media (prefers-color-scheme: dark) {
-
   }
 
 </style>
