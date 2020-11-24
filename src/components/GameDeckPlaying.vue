@@ -7,22 +7,26 @@
       />
     </div>
     <div class="game-deck-answers" v-if="!playerIsDealer && !roundPlayed">
-      <ul class="game-deck-cards-list">
-        <li
-          v-for="(answer, index) in playerHand"
-          :key="index"
-          class="game-deck-cards-item"
-        >
-          <game-deck-card
-            :answer-data="{
-              answerId: index,
-              answerText: answer
-            }"
-            card-size="M"
-            card-type="A"
-          />
-        </li>
-      </ul>
+      <div class="shim shim__left"></div>
+      <div class="inner">
+        <ul class="game-deck-cards-list">
+          <li
+            v-for="(answer, index) in playerHand"
+            :key="index"
+            class="game-deck-cards-item"
+          >
+            <game-deck-card
+              :answer-data="{
+                answerId: index,
+                answerText: answer
+              }"
+              card-size="M"
+              card-type="A"
+            />
+          </li>
+        </ul>
+      </div>
+      <div class="shim shim__right"></div>
     </div>
     <div class="game-deck-status aside">
       <div class="game-deck-status__players">
@@ -88,9 +92,31 @@
   .game-deck {
 
     &-answers {
-      overflow-y: scroll;
-      padding-bottom: 8px;
-      -webkit-overflow-scrolling: touch;
+      overflow: hidden;
+      position: relative;
+      .inner {
+        overflow-y: scroll;
+        padding: 0 24px 8px 24px;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .shim {
+        background: linear-gradient(to right, white, transparent);
+        bottom: 0;
+        position: absolute;
+        top: 1px;
+        width: 24px;
+        z-index: 9;
+
+        &__right {
+          background: linear-gradient(to left, white, transparent);
+          right: 0;
+        }
+      }
+
+      .question {
+        margin: 8px;
+      }
     }
 
     &-cards {
