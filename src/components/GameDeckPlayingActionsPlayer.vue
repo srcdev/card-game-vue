@@ -42,19 +42,7 @@
         const answerCountRequired = this.currentCard.answerCount;
         return this.currentCard[`answer${answerCountRequired}`].id === null && !this.playerIsDealer;
       },
-      // roundPlayed() {
-      //   const isPlayed = this.roundInPlay !== null && typeof this.roundInPlay[this.playerId] === 'object';
-      //   console.log(`isPlayed`);
-      //   console.log(isPlayed);
-      //   this.$bus.$emit('player-round-played', isPlayed);
-      //   return isPlayed;
-      // }
     },
-    // watch: {
-    //   roundInPlay() {
-    //     this.roundPlayed();
-    //   }
-    // },
     methods: {
       ...mapActions('game', [
         'SUBMIT_ROUND',
@@ -62,13 +50,6 @@
       ...mapMutations('game', [
         'RESET_PLAYED_ANSWERS',
       ]),
-      // roundPlayed() {
-      //   const isPlayed = typeof this.roundInPlay !== 'undefined' && this.roundInPlay !== null && typeof this.roundInPlay[this.playerId] === 'object';
-      //   console.log(`roundPlayed --> isPlayed`);
-      //   console.log(isPlayed);
-      //   this.$bus.$emit('player-round-played', isPlayed);
-      //   return isPlayed;
-      // }
     }
   }
 </script>

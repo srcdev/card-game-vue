@@ -101,7 +101,7 @@
       }
 
       .shim {
-        background: linear-gradient(to right, white, transparent);
+        background: linear-gradient(to right, $page-bg-light, transparent);
         bottom: 0;
         position: absolute;
         top: 1px;
@@ -109,7 +109,7 @@
         z-index: 9;
 
         &__right {
-          background: linear-gradient(to left, white, transparent);
+          background: linear-gradient(to left, $page-bg-dark, transparent);
           right: 0;
         }
       }
@@ -164,4 +164,18 @@
   //   }
   // }
 
+  @media (prefers-color-scheme: dark) {
+    .game-deck {
+      &-answers {
+        .shim {
+          background: linear-gradient(to right, $page-bg-dark, transparent);
+
+          &__right {
+            background: linear-gradient(to left, $page-bg-dark, transparent);
+            right: 0;
+          }
+        }
+      }
+    }
+  }
 </style>

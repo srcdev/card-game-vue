@@ -103,4 +103,10 @@
 <style lang="scss">
   @import "@/styles/imports";
   @import "@/styles/main";
+
+  .header {
+    .header3 {
+      margin-bottom: 0;
+    }
+  }
 </style>

@@ -74,7 +74,6 @@
   }
 
   &.warning {
-    background-color: $input-bg-error-light;
     box-shadow: 0 0 0 1px $input-border-error-light;
     color: $input-border-error-light;
   }
@@ -201,7 +200,7 @@
     }
 
     &.warning {
-      background-color: $input-bg-error-dark;
+      background-color: $btn-bg-error-dark;
       box-shadow: 0 0 0 1px $input-border-error-dark;
       color: $input-border-error-dark;
     }
