@@ -147,6 +147,7 @@
 
         #{ $card }-text {
             color: $card-answer-text-light;
+            font-size: 12px;
         }
       }
 

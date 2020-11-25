@@ -109,7 +109,7 @@
         z-index: 9;
 
         &__right {
-          background: linear-gradient(to left, $page-bg-dark, transparent);
+          background: linear-gradient(to left, $page-bg-light, transparent);
           right: 0;
         }
       }

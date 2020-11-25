@@ -1,5 +1,5 @@
 <template>
-  <p>Dealer is: <strong>{{ dealerData.dealerName }}</strong></p>
+  <p>Dealer: <strong>{{ dealerData.dealerName }}</strong></p>
 </template>
 
 <script>
