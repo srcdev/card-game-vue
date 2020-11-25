@@ -46,8 +46,8 @@
   import GameDeckPlayingDealer from "@/components/GameDeckPlayingDealer";
   import GameDeckPlayingPlayer from "@/components/GameDeckPlayingPlayer";
   import GameDeckPlayingActions from "@/components/GameDeckPlayingActions";
-  import Card from "./partials/Card";
-  import PlayerList from "./partials/PlayerList";
+  import Card from "@/components/partials/Card";
+  import PlayerList from "@/components/partials/PlayerList";
 
   export default {
     name: "GameDeckPlaying",

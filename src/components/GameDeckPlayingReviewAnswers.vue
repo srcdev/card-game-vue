@@ -30,7 +30,7 @@
 
 <script>
   import { mapState } from 'vuex';
-  import Card from "./partials/Card";
+  import Card from "@/components/partials/Card";
   export default {
     name: "GameDeckPlayingReviewingAnswers",
     components: {
