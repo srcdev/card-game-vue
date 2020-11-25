@@ -1,40 +1,44 @@
 <template>
-  <div class="form-row-inner form-row-inner_text">
-    <div class="form-row-inner-col">
-      <label v-if="requiredIsRequiredError" :data-test="`${inputName}ErrorRequiredLabel`" class="form_label error" :for="inputName">{{ this.inputLabel }} is required</label>
-      <label v-else-if="inputHasErrors && !inputValueShort" :data-test="`${inputName}ErrorBadCharsLabel`"  class="form_label error" :for="inputName">{{ this.inputPatternErrorMessage }}</label>
-      <label v-else-if="inputHasErrors && inputValueShort" :data-test="`${inputName}ErrorShortLabel`"  class="form_label error" :for="inputName">{{ this.inputLabel }} too short</label>
-      <label v-else :data-test="`${inputName}Label`" class="form_label" :for="inputName">{{ this.inputLabel }}</label>
-    </div>
-    <div class="form-row-inner-col">
-      <input
-        class="form-input_text"
-        :class="[
-          {'active': this.inputIsActive},
-          {'error': this.inputHasErrors || this.requiredIsRequiredError},
-          {'dirty': this.inputIsDirty},
-          {'valid': this.inputIsValid}
-        ]"
-        @focus="[
-          setActiveFieldState(),
-        ]"
-        @focusout="[
-          setBlurFieldState($event),
-        ]"
-        type="text"
-        :id="inputName"
-        :name="inputName"
-        :ref="inputName"
-        :placeholder="this.inputPlaceholder"
-        :minlength="this.inputMinLength"
-        :maxlength="this.inputMaxLength"
-        :pattern="setValidationPattern()"
-        :title="this.inputLabel"
-        v-bind:required="this.inputRequired"
-        :value="value"
-        v-on:input="updateValue($event.target.value)"
-        :autocomplete="this.autocomplete"
-      />
+  <div class="form-row">
+    <div class="form-row-inner form-row-inner_text">
+      <div class="form-row-inner-col">
+        <label v-if="requiredIsRequiredError" :data-test="`${inputName}ErrorRequiredLabel`" class="form_label error" :for="inputName">{{ this.inputLabel }} is required</label>
+        <label v-else-if="inputHasErrors && !inputValueShort" :data-test="`${inputName}ErrorBadCharsLabel`"  class="form_label error" :for="inputName">{{ this.inputPatternErrorMessage }}</label>
+        <label v-else-if="inputHasErrors && inputValueShort" :data-test="`${inputName}ErrorShortLabel`"  class="form_label error" :for="inputName">{{ this.inputLabel }} too short</label>
+        <label v-else :data-test="`${inputName}Label`" class="form_label" :for="inputName">{{ this.inputLabel }}</label>
+      </div>
+      <div class="form-row-inner-col">
+        <input
+          class="form-input_text"
+          :class="[
+            {'active': this.inputIsActive},
+            {'error': this.inputHasErrors || this.requiredIsRequiredError},
+            {'dirty': this.inputIsDirty},
+            {'valid': this.inputIsValid}
+          ]"
+          @focus="[
+            setActiveFieldState(),
+          ]"
+          @focusout="[
+            setBlurFieldState($event),
+          ]"
+          type="text"
+          :id="inputName"
+          :name="inputName"
+          :ref="inputName"
+          :placeholder="this.inputPlaceholder"
+          :minlength="this.inputMinLength"
+          :maxlength="this.inputMaxLength"
+          :pattern="setValidationPattern()"
+          :title="this.inputLabel"
+          :required="this.inputRequired"
+          :aria-required="`${this.inputRequired}`"
+          :aria-labelledby="`${this.inputName}label`"
+          :value="value"
+          v-on:input="updateValue($event.target.value)"
+          :autocomplete="this.autocomplete"
+        />
+      </div>
     </div>
   </div>
 </template>

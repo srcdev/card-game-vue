@@ -42,10 +42,17 @@
   background-color: $input-bg-light;
   box-shadow: 0 0 0 1px $input-border-light;
   display: block;
+  overflow: hidden;
   transition: opacity linear 200ms;
+
   &:focus {
     box-shadow: 0 0 2px 2px $input-border-light;
-    outline: 0;
+  }
+
+  &.question {
+    &:focus {
+      box-shadow: none;
+    }
   }
 
   &.link {
@@ -238,6 +245,9 @@
   }
 
   .form-row-inner_radio {
+    display: block;
+    list-style-type: none;
+
     .form-input_radio {
       &-icon {
         box-shadow: 0 0 0 1px $input-border-dark;

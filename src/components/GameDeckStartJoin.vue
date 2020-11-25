@@ -2,7 +2,7 @@
     <div class="game-deck-start">
         <h2 class="header2">Join a game</h2>
         <p>Join Game id: {{ gameId }}</p>
-        <form @submit.prevent="formSubmit" class="form" :id="formId" novalidate>
+        <form @submit.prevent="formSubmit" class="form" :id="formId" novalidate aria-label="Join a game">
           <div class="form-row">
             <form-input-text
                 v-model="formValues.playerName"

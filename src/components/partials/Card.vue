@@ -1,7 +1,11 @@
 <template>
-  <div
+  <button
     @click.prevent="selectCard()"
+    :role="setRole"
     class="card"
+    :class="[
+      {'question' : cardType === 'Q'},
+    ]"
     >
     <div
       class="card-inner"
@@ -20,7 +24,7 @@
         v-html="textToDisplay"
       />
     </div>
-  </div>
+  </button>
 </template>
 
 <script>
@@ -34,7 +38,10 @@
         'currentQuestion',
         'playerIsDealer',
         'reviewingAnswers',
-      ])
+      ]),
+      setRole() {
+        return this.cardType === 'A' ? 'button' : false;
+      },
     },
     data() {
       return {
@@ -135,6 +142,9 @@
 
   .card {
     $card: &;
+    background-color: transparent;
+    border: 0;
+    text-align: left;
     &-inner {
       border-radius: 4px;
       height: calc(100% * 1.15);
@@ -202,6 +212,7 @@
         &.answered {
           border-bottom: 1px solid transparent;
           display: inline;
+          margin-left: 0;
           text-decoration: underline;
         }
       }
