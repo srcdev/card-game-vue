@@ -80,7 +80,11 @@
         this.$emit('input', value)
       },
       isChecked(item, value) {
-        return !this.inputTouched && item.checked || item.value == value;
+        const checkedStated = !this.inputTouched && item.checked || item.value == value;
+        if (checkedStated) {
+          this.updateValue(item.value);
+        }
+        return checkedStated;
       }
     }
   }
