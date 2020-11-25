@@ -27,13 +27,6 @@ body {
     flex: 1 100%;
 }
 
-.header {
-    box-shadow: 0 0 0 1px $border-light;
-    @media (prefers-color-scheme: dark) {
-        box-shadow: 0 0 0 1px $border-dark;
-    }
-}
-
 .game-deck-question {
     flex: 1 0 0;
     order: 1;
