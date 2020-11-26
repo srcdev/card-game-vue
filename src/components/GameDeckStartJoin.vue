@@ -1,30 +1,30 @@
 <template>
-    <div class="game-deck-start">
-        <h2 class="header2">Join a game</h2>
-        <p>Join Game id: {{ gameId }}</p>
-        <form @submit.prevent="formSubmit" class="form" :id="formId" novalidate aria-label="Join a game">
-          <div class="form-row">
-            <form-input-text
-                v-model="formValues.playerName"
-                autocomplete="off"
-                input-name="playerName"
-                input-label="Player name"
-                input-pattern="username"
-                input-pattern-error-message="Player name has bad characters"
-                input-placeholder="eg. Simon"
-                :input-min-length=2
-                :input-max-length=50
-                :input-required=true
-                :input-in-error="formErrors.playerName"
-            />
-          </div>
-          <div class="form-row">
-            <div class="form-row-inner form-row-inner_actions">
-              <input type="submit" class="btn" value="Submit" id="formSubmit" @click.prevent="formSubmit" />
-            </div>
-          </div>
-        </form>
-    </div>
+  <div class="game-deck-start">
+    <h2 class="header2">Join a game</h2>
+    <p>Join Game id: {{ gameId }}</p>
+    <form @submit.prevent="formSubmit" class="form" :id="formId" novalidate aria-label="Join a game">
+      <div class="form-row">
+        <form-input-text
+          v-model="formValues.playerName"
+          autocomplete="off"
+          input-name="playerName"
+          input-label="Player name"
+          input-pattern="username"
+          input-pattern-error-message="Player name has bad characters"
+          input-placeholder="eg. Simon"
+          :input-min-length=2
+          :input-max-length=50
+          :input-required=true
+          :input-in-error="formErrors.playerName"
+        />
+      </div>
+      <div class="form-row">
+        <div class="form-row-inner form-row-inner_actions">
+          <input type="submit" class="btn" value="Submit" id="formSubmit" @click.prevent="formSubmit" />
+        </div>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script>

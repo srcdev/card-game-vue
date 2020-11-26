@@ -57,14 +57,6 @@
 <style lang="scss">
   @import "@/styles/imports";
 
-  // .game-actions {
-  //   &__item {
-  //     .btn {
-  //       width: 100%;
-  //     }
-  //   }
-  // }
-
   .game-actions {
     &__list {
       align-items: baseline;
@@ -79,22 +71,5 @@
       }
     }
   }
-
-  // @include breakpoint(1025) {
-  //   .game-actions {
-  //     &__list {
-  //       align-items: baseline;
-  //       display: flex;
-  //       justify-content: space-between;
-  //     }
-  //     &__item {
-  //       flex-grow: 1;
-  //       .btn {
-  //         margin: 0 auto;
-  //         width: calc(100% - 8px);
-  //       }
-  //     }
-  //   }
-  // }
 
 </style>

@@ -130,9 +130,6 @@
         }
         this.SET_ANSWER(payload);
       },
-      // selectWinner() {
-      //   console.log(`selectWinner(${this.qaData.data.playerId})`);
-      // }
     },
   }
 </script>
@@ -144,17 +141,50 @@
     $card: &;
     background-color: transparent;
     border: 0;
+    display: block;
+    margin: 0 auto;
     text-align: left;
     &-inner {
       border-radius: 4px;
       height: calc(100% * 1.15);
       margin: 8px;
       padding: 8px;
+      width: 95%;
+
+      &.small {
+
+      }
+      &.medium {
+        height: 170px;
+        max-width: 120px;
+
+        @include breakpoint(1025) {
+          height: 200px;
+          max-width: 150px;
+        }
+      }
+      &.large {
+        height: 280px;
+        max-width: 150px;
+
+        @include breakpoint(1025) {
+          height: 300px;
+          max-width: 180px;
+        }
+      }
+      &.xlarge {
+        height: 400px;
+        max-width: 230px;
+
+        @include breakpoint(1025) {
+
+        }
+      }
 
       &.answer {
         background-color: $card-answer-bg-light;
         box-shadow: 0 0 1px 1px $card-answer-border-light;
-
+        width: 200px;
         #{ $card }-text {
             color: $card-answer-text-light;
             font-size: 12px;
@@ -170,35 +200,6 @@
         }
       }
 
-      &.small {
-
-      }
-      &.medium {
-        height: 170px;
-        width: 120px;
-
-        @include breakpoint(1025) {
-          height: 200px;
-          width: 150px;
-        }
-      }
-      &.large {
-        height: 280px;
-        width: 150px;
-
-        @include breakpoint(1025) {
-          height: 300px;
-          width: 180px;
-        }
-      }
-      &.xlarge {
-        height: 400px;
-        width: 230px;
-
-        @include breakpoint(1025) {
-
-        }
-      }
     }
 
     &-text {

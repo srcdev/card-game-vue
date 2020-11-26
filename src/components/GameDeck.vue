@@ -79,8 +79,3 @@
     }
   }
 </script>
-
-<style lang="scss">
-  @import "@/styles/imports";
-
-</style>

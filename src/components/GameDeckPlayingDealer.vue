@@ -1,4 +1,4 @@
-<template>
+<template functional>
   <p>You are the dealer</p>
 </template>
 
@@ -7,8 +7,3 @@
     name: "GameDeckPlayingDealer",
   }
 </script>
-
-<style lang="scss">
-  @import "@/styles/imports";
-
-</style>

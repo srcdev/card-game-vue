@@ -30,12 +30,3 @@
     },
   };
 </script>
-
-<style lang="scss">
-  @import "@/styles/imports";
-
-  @media (prefers-color-scheme: dark) {
-
-  }
-
-</style>

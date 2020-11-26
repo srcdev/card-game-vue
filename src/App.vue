@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="header">
-      <h1 class="header3" data-test="h1-text">Fill in the blanks game ({{ this.gameRunning }})</h1>
+      <h1 class="header3" data-test="h1-text">Fill in the blanks game</h1>
       <nav class="nav" v-if="gameRunning">
         <ul class="nav__list">
           <li class="nav__list"><button class="btn secondary" @click.prevent="setComponent('game-deck')">Game</button></li>
