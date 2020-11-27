@@ -8,11 +8,13 @@
   import { mapActions, mapState } from 'vuex';
   import GameDeckPlaying from "@/components/GameDeckPlaying.vue";
   import GameDeckPlayingReviewAnswers from "@/components/GameDeckPlayingReviewAnswers";
+  import GameDeckPlayingReviewWinner from "@/components/GameDeckPlayingReviewWinner";
   import GameDeckStart from "@/components/GameDeckStart.vue";
   export default {
     components: {
       'game-deck-playing': GameDeckPlaying,
       'game-deck-playing-review-answers': GameDeckPlayingReviewAnswers,
+      'game-deck-playing-review-winner': GameDeckPlayingReviewWinner,
       'game-deck-start': GameDeckStart,
     },
     created () {
@@ -23,7 +25,8 @@
     },
     data() {
       return {
-        componentName: ''
+        componentName: '',
+        showWinner: false,
       }
     },
     sockets: {
@@ -54,6 +57,7 @@
     computed: {
       ...mapState('game', [
         'currentCard',
+        'dealerData',
         'playerId',
         'gameId',
         'gameState',
@@ -78,6 +82,15 @@
       },
       reviewingAnswers() {
         this.setComponent();
+      },
+      dealerData(newVal, oldVal) {
+        if (oldVal.dealerName !== null) {
+          this.showWinner = true;
+          this.setComponent();
+        }
+      },
+      showWinner() {
+        this.setComponent();
       }
     },
     methods: {
@@ -90,11 +103,19 @@
         if (this.gameNotStarted) {
           this.componentName = 'game-deck-start';
         } else if (this.gameRunning) {
-          if (this.reviewingAnswers) {
-            this.componentName = 'game-deck-playing-review-answers';
+          if (this.showWinner) {
+              this.componentName = 'game-deck-playing-review-winner';
+              setTimeout(() => {
+                this.showWinner = false;
+              }, 3500);
           } else {
-            this.componentName = 'game-deck-playing';
+            if (this.reviewingAnswers) {
+              this.componentName = 'game-deck-playing-review-answers';
+            } else {
+              this.componentName = 'game-deck-playing';
+            }
           }
+
         }
       }
     }
