@@ -1,9 +1,7 @@
 <template>
-  <div>
-    <game-deck-start v-if="gameNotStarted" />
-    <game-deck-playing-review-answers v-if="reviewingAnswers && gameRunning" />
-    <game-deck-playing v-else-if="!reviewingAnswers && gameRunning" />
-  </div>
+  <keep-alive>
+    <component :is="componentName"></component>
+  </keep-alive>
 </template>
 
 <script>
@@ -20,7 +18,13 @@
     created () {
       this.$bus.$on('dealer-has-skipped-question', () => {
         console.log('App --> dealer-has-skipped-question');
-      })
+      });
+      this.setComponent();
+    },
+    data() {
+      return {
+        componentName: ''
+      }
     },
     sockets: {
       RECEIVE_SOCKET_KEEP_ALIVE() {
@@ -68,6 +72,12 @@
         if (newVal !== null) {
           this.$socket.emit("BROADCAST_SOCKET_KEEP_ALIVE", this.gameId);
         }
+      },
+      gameRunning() {
+        this.setComponent();
+      },
+      reviewingAnswers() {
+        this.setComponent();
       }
     },
     methods: {
@@ -76,6 +86,17 @@
         'GET_CURRENT_QUESTION',
         'GET_ROUND_IN_PLAY'
       ]),
+      setComponent() {
+        if (this.gameNotStarted) {
+          this.componentName = 'game-deck-start';
+        } else if (this.gameRunning) {
+          if (this.reviewingAnswers) {
+            this.componentName = 'game-deck-playing-review-answers';
+          } else {
+            this.componentName = 'game-deck-playing';
+          }
+        }
+      }
     }
   }
 </script>

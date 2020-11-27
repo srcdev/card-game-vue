@@ -12,7 +12,7 @@
     </div>
 
     <keep-alive>
-      <component v-bind:is="componentName"></component>
+      <component :is="componentName"></component>
     </keep-alive>
 
     <div class="wrapper">
