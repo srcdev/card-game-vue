@@ -84,7 +84,7 @@
         this.setComponent();
       },
       dealerData(newVal, oldVal) {
-        if (oldVal.dealerName !== null) {
+        if (oldVal !== null) {
           this.showWinner = true;
           this.setComponent();
         }

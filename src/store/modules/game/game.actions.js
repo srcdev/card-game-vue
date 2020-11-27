@@ -133,8 +133,6 @@ export const actions = {
     });
   },
   SUBMIT_ROUND({commit, state}) {
-    console.log(`SUBMIT_ROUND`);
-    console.log(state.currentCard);
     const gameId = state.gameId;
     const currentCard = {
       currentCard: state.currentCard
@@ -143,10 +141,7 @@ export const actions = {
     return new Promise((resolve, reject) => {
       GameDataService.submitRound(currentCard)
         .then((response) => {
-          console.log(`Action --> SUBMIT_ROUND`);
-          console.log(response);
           this._vm.$socket.emit("BROADCAST_SOCKET_GET_ROUND_IN_PLAY", gameId);
-
           commit('UPDATE_ROUND_IN_PLAY', response.data);
           resolve();
         })
@@ -156,7 +151,6 @@ export const actions = {
     });
   },
   SET_WINNER({state}, playerId) {
-    console.log(`SET_WINNER`);
     const data = {
       playerId: playerId,
       gameId: state.gameId,
@@ -165,7 +159,6 @@ export const actions = {
     return new Promise((resolve, reject) => {
       GameDataService.setWinner(data)
         .then(() => {
-          console.log(`Action --> SET_WINNER`);
           this._vm.$socket.emit("BROADCAST_SOCKET_UPDATE_GAME_DATA", state.gameId);
           resolve();
         })
@@ -178,7 +171,6 @@ export const actions = {
     const gameId = {
       gameId: state.gameId
     };
-    console.log(`Action --> GET_ROUND_IN_PLAY`);
 
     return new Promise((resolve, reject) => {
       GameDataService.getRoundInPlay(gameId)

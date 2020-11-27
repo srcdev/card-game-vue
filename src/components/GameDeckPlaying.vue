@@ -125,7 +125,8 @@
       -webkit-overflow-scrolling: touch;
       &-list {
         display: flex;
-        padding-top: 2px;
+        margin-bottom: 4px;
+        padding: 2px 12px;
         width: max-content;
       }
       &-item {
