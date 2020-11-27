@@ -6,6 +6,7 @@
     :class="[
       {'question' : cardType === 'Q'},
     ]"
+    :disabled="cardPlayed"
     >
     <div
       class="card-inner"
@@ -46,6 +47,7 @@
     data() {
       return {
         textToDisplay: '',
+        cardPlayed: false
       }
     },
     props: {
@@ -70,6 +72,7 @@
     mounted() {
       if (this.cardType === 'A') {
         this.textToDisplay = this.answerData.answerText;
+        this.isCardPlayed();
       } else {
         this.renderQuestionAnswersText();
       }
@@ -78,6 +81,8 @@
       currentCard() {
         if (this.cardType === 'Q') {
           this.renderQuestionAnswersText()
+        } else if (this.cardType === 'A') {
+          this.isCardPlayed();
         }
       },
     },
@@ -112,10 +117,11 @@
       },
       selectCard() {
         if (this.reviewingAnswers && this.playerIsDealer) {
-          console.log(`selectWinner(${this.qaData.data.playerId})`);
           this.SET_WINNER(this.qaData.data.playerId)
         } else if (!this.reviewingAnswers && !this.playerIsDealer) {
-          this.selectAnswer()
+          if (this.cardType === 'A') {
+            this.selectAnswer()
+          }
         }
       },
       selectAnswer() {
@@ -130,6 +136,10 @@
         }
         this.SET_ANSWER(payload);
       },
+      isCardPlayed() {
+        const answerId = this.answerData.answerId;
+        this.cardPlayed = this.currentCard.answer1.id === answerId || this.currentCard.answer2.id === answerId || this.currentCard.answer3.id === answerId;
+      }
     },
   }
 </script>
@@ -141,9 +151,19 @@
     $card: &;
     background-color: transparent;
     border: 0;
+    border-radius: 3px;
     display: block;
     margin: 0 auto;
     text-align: left;
+    transition: opacity linear 200ms;
+    &:disabled {
+      opacity: 0.8;
+
+      box-shadow: 0 0 0 1px $input-border-valid-light;
+      @media (prefers-color-scheme: dark) {
+        box-shadow: 0 0 0 1px $input-border-valid-dark;
+      }
+    }
     &-inner {
       border-radius: 4px;
       height: calc(100% * 1.15);
