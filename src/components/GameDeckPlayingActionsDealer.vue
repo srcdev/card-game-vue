@@ -3,7 +3,7 @@
     <li class="game-actions__item">
       <button
         class="btn secondary"
-        @click.prevent="SKIP_QUESTION()"
+        @click.prevent="confirmSkipQuestion()"
         :disabled="skipQuestionDisabled"
       >Skip question</button>
     </li>
@@ -20,10 +20,19 @@
         'skipQuestionDisabled'
       ]),
     },
+    created () {
+      this.$bus.$on('skip-question-confirmed', () => {
+        this.SKIP_QUESTION();
+      });
+    },
     methods: {
       ...mapActions('game', [
         'SKIP_QUESTION',
       ]),
+      confirmSkipQuestion() {
+        const message = 'Confirm skip question';
+        this.$bus.$emit('confirm-skip-question', message);
+      },
     }
   }
 </script>

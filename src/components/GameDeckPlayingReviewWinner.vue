@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper winner">
-    <h2 class="header1">Winner is: {{ this.dealerData.dealerName }}</h2>
+    <h2 class="header1">Last round won by: {{ this.dealerData.dealerName }}</h2>
     <game-deck-card
       :qa-data="winningRound"
       card-size="XL"

@@ -23,6 +23,8 @@
       this.$bus.$on('dealer-has-skipped-question', () => {
         console.log('App --> dealer-has-skipped-question');
       });
+    },
+    mounted () {
       this.setComponent();
     },
     data() {
@@ -117,7 +119,6 @@
               this.componentName = 'game-deck-playing';
             }
           }
-
         }
       }
     }

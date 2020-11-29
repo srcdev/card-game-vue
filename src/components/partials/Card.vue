@@ -184,16 +184,16 @@
 
       }
       &.medium {
-        height: 170px;
+        min-height: 170px;
         max-width: 120px;
 
         @include breakpoint(1025) {
-          height: 200px;
+          min-height: 200px;
           max-width: 150px;
         }
       }
       &.large {
-        height: 280px;
+        min-height: 280px;
         max-width: 150px;
 
         @include breakpoint(1025) {
@@ -202,11 +202,11 @@
         }
       }
       &.xlarge {
-        height: 400px;
+        min-height: 300px;
         max-width: 230px;
 
         @include breakpoint(1025) {
-
+          height: 400px;
         }
       }
 
@@ -228,7 +228,6 @@
           color: $card-question-text-light;
         }
       }
-
     }
 
     &-text {

@@ -1,3 +1,20 @@
+function shuffleObjectContent(data) {
+
+  let elementsLength = Object.keys(data).length;
+  let randomIndex;
+  let shuffledObj = {};
+
+  while (elementsLength > 0) {
+    randomIndex = Math.floor(Math.random() * elementsLength);
+    const tempElementKey = Object.keys(data)[randomIndex];
+    const tempElementData = data[tempElementKey];
+    shuffledObj[tempElementKey] = tempElementData;
+    delete data[tempElementKey];
+    elementsLength--;
+  }
+  return shuffledObj;
+}
+
 function returnAnswerCount(text) {
   let answerCount = 1;
   if (text.indexOf('{1}') > -1) {
@@ -62,7 +79,7 @@ export const mutations = {
     state.gameCreatedById = payload.gameCreatedById;
     state.gameCreatedByName = payload.gameCreatedByName;
     state.playerData = payload.playerData;
-    state.playerHand = payload.playerData.hand;
+    state.playerHand = shuffleObjectContent(payload.playerData.hand);
     state.playersObj = payload.playersObj;
     state.playerIsAdmin = (payload.gameCreatedById === state.playerId);
     state.playerCount = payload.playerCount;
@@ -97,7 +114,7 @@ export const mutations = {
       state.gameCreated = true;
       state.dealerData = payload.dealerData;
       state.playerData = payload.playerData;
-      state.playerHand = payload.playerData.hand;
+      state.playerHand = shuffleObjectContent(payload.playerData.hand);
       if (payload.dealerData !== null) {
         state.playerIsDealer = (payload.dealerData.playerId === state.playerId);
         state.playerState = 2;
