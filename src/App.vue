@@ -5,6 +5,7 @@
       <nav class="nav" v-if="gameRunning">
         <ul class="nav__list">
           <li class="nav__list"><button class="btn secondary" @click.prevent="setComponent('game-deck')">Game</button></li>
+          <li class="nav__list"><button class="btn secondary" @click.prevent="setComponent('game-deck-rounds')">Rounds</button></li>
           <li class="nav__list"><button class="btn secondary" @click.prevent="setComponent('game-deck-scores')">Scores</button></li>
           <li class="nav__list"><button class="btn secondary" @click.prevent="setComponent('game-deck-share')">Share</button></li>
         </ul>
@@ -12,7 +13,9 @@
     </div>
 
     <keep-alive>
-      <component :is="componentName"></component>
+      <transition name="bounce" mode="out-in">
+        <component :is="componentName"></component>
+      </transition>
     </keep-alive>
 
     <div class="wrapper">
@@ -28,11 +31,14 @@
   import GameDeck from "@/components/GameDeck.vue";
   import GameDeckScores from "@/components/GameDeckScores.vue";
   import GameDeckShare from "@/components/GameDeckShare.vue";
+  import GameDeckRounds from "@/components/GameDeckRounds.vue";
   export default {
     components: {
       'game-deck': GameDeck,
       'game-deck-scores': GameDeckScores,
       'game-deck-share': GameDeckShare,
+      'game-deck-rounds': GameDeckRounds,
+
     },
     computed: {
       ...mapState('game', [

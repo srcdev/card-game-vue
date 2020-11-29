@@ -1,6 +1,8 @@
 <template>
   <keep-alive>
-    <component :is="componentName"></component>
+    <transition name="bounce" mode="out-in">
+      <component :is="componentName"></component>
+    </transition>
   </keep-alive>
 </template>
 

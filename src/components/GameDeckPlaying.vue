@@ -1,30 +1,35 @@
 <template>
   <div class="wrapper">
     <div class="game-deck-question aside">
-      <game-deck-card
-        :card-size="questionCardSize"
-        card-type="Q"
-      />
+      <transition name="bounce" mode="out-in">
+        <game-deck-card
+          :card-size="questionCardSize"
+          card-type="Q"
+        />
+      </transition>
     </div>
     <div class="game-deck-answers" v-if="!playerIsDealer && !roundPlayed">
       <div class="shim shim__left"></div>
       <div class="inner">
-        <ul class="game-deck-cards-list">
+        <div class="game-deck-cards-list">
           <li
             v-for="(answer, index) in playerHand"
             :key="index"
             class="game-deck-cards-item"
           >
-            <game-deck-card
-              :answer-data="{
-                answerId: index,
-                answerText: answer
-              }"
-              card-size="M"
-              card-type="A"
-            />
+            <transition name="bounce" mode="out-in">
+              <game-deck-card
+                :answer-data="{
+                  answerId: index,
+                  answerText: answer
+                }"
+                card-size="M"
+                card-type="A"
+                :delay="setDelay()"
+              />
+            </transition>
           </li>
-        </ul>
+        </div>
       </div>
       <div class="shim shim__right"></div>
     </div>
@@ -60,8 +65,10 @@
     },
     data() {
       return {
+        delay: 0,
         questionData: {},
         questionCardSize: 'L',
+        timeout: 50,
       }
     },
     computed: {
@@ -77,8 +84,13 @@
     created () {
       this.setQuestionData();
     },
-
     methods: {
+      setDelay() {
+        if (this.delay < 10) {
+          this.delay = this.delay + 1;
+        }
+        return this.delay * this.timeout;
+      },
       setQuestionData() {
         this.questionCardSize = this.playerIsDealer ? 'XL' : 'L';
       },
@@ -132,6 +144,10 @@
       &-item {
         display: flex;
         list-style-type: none;
+        margin-left: 8px;
+        &:first-child {
+          margin-left: 0;
+        }
       }
     }
 
