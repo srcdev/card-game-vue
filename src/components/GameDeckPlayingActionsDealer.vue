@@ -33,6 +33,9 @@
         const message = 'Confirm skip question';
         this.$bus.$emit('confirm-skip-question', message);
       },
+    },
+    destroyed () {
+      this.$bus.$off('skip-question-confirmed');
     }
   }
 </script>

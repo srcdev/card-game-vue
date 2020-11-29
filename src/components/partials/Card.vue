@@ -175,7 +175,6 @@
     }
     &-inner {
       border-radius: 4px;
-      height: calc(100% * 1.15);
       margin: 8px;
       padding: 8px;
       width: 95%;

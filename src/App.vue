@@ -82,6 +82,9 @@
         this.confirmModal = false;
         this.confirmModalMessage = '';
       }
+    },
+    destroyed () {
+      this.$bus.$off('confirm-skip-question');
     }
   }
 </script>
