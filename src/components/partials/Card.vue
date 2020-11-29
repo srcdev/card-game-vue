@@ -1,5 +1,6 @@
 <template>
   <button
+    v-if="renderCard"
     @click.prevent="selectCard()"
     :role="setRole"
     class="card"
@@ -46,11 +47,15 @@
     },
     data() {
       return {
+        cardPlayed: false,
+        renderCard: false,
         textToDisplay: '',
-        cardPlayed: false
       }
     },
     props: {
+      answerData: {
+        type: Object,
+      },
       cardSize: {
         type: String,
         required: true,
@@ -59,8 +64,8 @@
         type: String,
         required: true,
       },
-      answerData: {
-        type: Object,
+      delay: {
+        type: [Number, String],
       },
       qaData: {
         type: Object,
@@ -72,9 +77,13 @@
     mounted() {
       if (this.cardType === 'A') {
         this.textToDisplay = this.answerData.answerText;
+        setTimeout(() => {
+          this.renderCard = true;
+        }, this.delay);
         this.isCardPlayed();
       } else {
         this.renderQuestionAnswersText();
+        this.renderCard = true;
       }
     },
     watch: {
