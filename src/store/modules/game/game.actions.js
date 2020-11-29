@@ -1,5 +1,5 @@
-import GameDataService from "../../../services/GameDataService";
-import uniqueID from "../../../helpers/uniqueID";
+import GameDataService from "@/services/GameDataService";
+import uniqueID from "@/helpers/uniqueID";
 
 let playerObj = {
   playerId: null,
