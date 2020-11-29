@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import VuexPersist from 'vuex-persist';
-import game from "./modules/game/index";
+import game from "@/store/modules/game/index";
 
 Vue.use(Vuex);
 

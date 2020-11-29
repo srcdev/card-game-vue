@@ -1,6 +1,6 @@
 <template>
   <div>
-    
+
     <div class="header">
       <h1 class="header3" data-test="h1-text">Fill in the blanks game</h1>
       <nav class="nav" v-if="gameRunning">
@@ -37,11 +37,11 @@
 
 <script>
   import { mapState } from 'vuex';
-  import ConfirmModal from "@/plugins/ConfirmModal.vue";
-  import GameDeck from "@/components/GameDeck.vue";
-  import GameDeckScores from "@/components/GameDeckScores.vue";
-  import GameDeckShare from "@/components/GameDeckShare.vue";
-  import GameDeckRounds from "@/components/GameDeckRounds.vue";
+  import ConfirmModal from "@/plugins/ConfirmModal";
+  import GameDeck from "@/components/GameDeck";
+  import GameDeckScores from "@/components/GameDeckScores";
+  import GameDeckShare from "@/components/GameDeckShare";
+  import GameDeckRounds from "@/components/GameDeckRounds";
   export default {
     components: {
       'confirm-modal': ConfirmModal,
