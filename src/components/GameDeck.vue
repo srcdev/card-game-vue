@@ -66,7 +66,8 @@
         'gameId',
         'gameState',
         'playerState',
-        'reviewingAnswers'
+        'reviewingAnswers',
+        'rounds'
       ]),
       gameNotStarted() {
         return this.gameState < 2 && this.playerState < 2;
@@ -107,7 +108,7 @@
         if (this.gameNotStarted) {
           this.componentName = 'game-deck-start';
         } else if (this.gameRunning) {
-          if (this.showWinner && typeof this.rounds !== 'undefined') {
+          if (this.showWinner && typeof this.rounds === 'object') {
               this.componentName = 'game-deck-playing-review-winner';
               setTimeout(() => {
                 this.showWinner = false;
