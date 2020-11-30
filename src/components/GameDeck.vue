@@ -107,7 +107,7 @@
         if (this.gameNotStarted) {
           this.componentName = 'game-deck-start';
         } else if (this.gameRunning) {
-          if (this.showWinner) {
+          if (this.showWinner && typeof this.rounds !== 'undefined') {
               this.componentName = 'game-deck-playing-review-winner';
               setTimeout(() => {
                 this.showWinner = false;
