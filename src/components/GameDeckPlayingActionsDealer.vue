@@ -30,8 +30,13 @@
         'SKIP_QUESTION',
       ]),
       confirmSkipQuestion() {
-        const message = 'Confirm skip question';
-        this.$bus.$emit('confirm-skip-question', message);
+        const payload = {
+          message: 'Confirm skip question',
+          callback: 'skip-question-confirmed',
+          cancelText: 'Cancel X',
+          confirmText: 'Confirm X'
+        }
+        this.$bus.$emit('confirm-skip-question', payload);
       },
     },
     destroyed () {

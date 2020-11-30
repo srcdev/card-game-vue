@@ -27,7 +27,7 @@
 
     <confirm-modal
       v-if='confirmModal'
-      :message="confirmModalMessage"
+      :payload="confirmModalPayload"
       @confirm='confirm'
       @cancel="cancel"
     ></confirm-modal>
@@ -60,12 +60,12 @@
       return {
         componentName: 'game-deck',
         confirmModal: false,
-        confirmModalMessage: '',
+        confirmModalPayload: {},
       }
     },
     created () {
-      this.$bus.$on('confirm-skip-question', (message) => {
-        this.confirmModalMessage = message;
+      this.$bus.$on('confirm-skip-question', (confirmModalPayload) => {
+        this.confirmModalPayload = confirmModalPayload;
         this.confirmModal = true;
       });
     },
@@ -76,11 +76,11 @@
       confirm() {
         this.$bus.$emit('skip-question-confirmed');
         this.confirmModal = false;
-        this.confirmModalMessage = '';
+        this.confirmModalPayload = {};
       },
       cancel() {
         this.confirmModal = false;
-        this.confirmModalMessage = '';
+        this.confirmModalPayload = {};
       }
     },
     destroyed () {

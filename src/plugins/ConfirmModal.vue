@@ -1,13 +1,13 @@
 <template>
   <div class="modal">
     <div class="modal-window">
-      <p>{{ message }}</p>
+      <p>{{ this.payload.message }}</p>
       <ul class="game-actions__list">
         <li class="game-actions__item">
-          <button class="btn secondary warning" @click="onCancel">Cancel</button>
+          <button class="btn secondary warning" @click="onCancel">{{ this.payload.cancelText }}</button>
         </li>
         <li class="game-actions__item">
-          <button class="btn secondary proceed" @click="onConfirm">Confirm</button>
+          <button class="btn secondary proceed" @click="onConfirm">{{ this.payload.confirmText }}</button>
         </li>
       </ul>
     </div>
@@ -18,8 +18,8 @@
   export default {
     name: "ConfirmModal",
     props: {
-      message: {
-        type: String,
+      payload: {
+        type: Object,
       },
     },
     methods: {
@@ -27,7 +27,7 @@
         this.$emit('cancel');
       },
       onConfirm() {
-        this.$emit('confirm');
+        this.$emit('confirm', this.payload.callback);
       }
     }
   }
@@ -40,11 +40,11 @@
   *::after {
     box-sizing: border-box;
   }
-  
+
   [v-cloak] {
     display: none;
   }
-  
+
   .modal {
     position: fixed;
     top: 0;
@@ -54,7 +54,7 @@
     background: rgba(0, 0, 0, .7);
     z-index: 9;
   }
-  
+
   .modal-window {
     position: absolute;
     top: 50%;
@@ -75,7 +75,7 @@
     color: black;
     text-align: center;
   }
-  
+
   .modal-window .actions {
     display: flex;
     justify-content: flex-end;
@@ -84,19 +84,19 @@
   .appear-enter {
     opacity: 0;
   }
-  
+
   .appear-enter .modal-window {
     transform: translate(-75%, -50%);
   }
-  
+
   .appear-enter-active {
     transition: .5s;
   }
-  
+
   .appear-leave-active .modal-window {
     transform: translate(0, -50%);
   }
-  
+
   .appear-leave-active {
     opacity: 0;
     transition: .5s;
