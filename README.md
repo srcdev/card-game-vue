@@ -6,7 +6,7 @@ The current version was thrown together during lockdown and had a fair amount of
 
 ## Known issues
 * Security warning as not hosted on https (especially with Brave browser)
-* Brave browser attempts an https updgrade which results in error 404 page not found
+* Brave browser attempts an https upgrade which results in error 404 page not found
 
 ## Dependancies
 * Node Version Manager (NVM)
