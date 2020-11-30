@@ -70,16 +70,6 @@
         formValues: {},
       }
     },
-    watch: {
-      formErrors() {
-        console.log(`formErrors changed`);
-        console.log(this.formErrors);
-      },
-      formValues(newVal) {
-        console.log(`formValues changed`);
-        console.log(newVal);
-      }
-    },
     computed: {
       ...mapState('game', [
         'gameRatings',
