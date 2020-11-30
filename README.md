@@ -32,3 +32,25 @@ npm run test
 ```
 npm run build
 ```
+### Compiles and minifies for production then delpoys via ftp to server
+```
+npm run deploy
+```
+#### NOTE: Requires the ftpDeployConfig file for server login details
+Example file below, DO NOT include in a repo, especially a public on.
+```
+/*
+* Do not keep this file in a Git repo
+**/
+var config = {
+    host: `ftp.your-server.co.uk`,
+    user: `your-server-username`,
+    password: `your-server-password`,
+    sourcePath: `${__dirname}/dist/`,
+    remotePath: `/htdocs`,
+    permissions: 755
+};
+
+exports.config = config;
+```
+

@@ -5,13 +5,18 @@ function ipAddress() {
     return isDev ? "localhost" : "api.uuwuu.co.uk";
 }
 
+function websocketsIpAddress() {
+    // return isDev ? "localhost" : "cards.uuwuu.co.uk"; // <-- When running from Raspberry Pi on home network
+    return isDev ? "192.168.1.145" : "api.uuwuu.co.uk";
+}
+
 function httpPort() {
     // return isDev ? "localhost" : "cards.uuwuu.co.uk"; // <-- When running from Raspberry Pi on home network
     return isDev ? ":8080" : "";
 }
 
 const IPADDRESS = ipAddress();
-const WEBSOCKETS_IP = "192.168.1.145";
+const WEBSOCKETS_IP = websocketsIpAddress();
 const WEBSOCKETS_PORT = 3434;
 const HTTP_PORT = httpPort();
 const NUXT_PORT = 3000;
