@@ -113,6 +113,7 @@
       }
 
       .shim {
+        display: none;
         background: linear-gradient(to right, $page-bg-light, transparent);
         bottom: 0;
         position: absolute;

@@ -1,8 +1,8 @@
 <template>
-  <div v-if="hrefBuilt" class="body__section__inner wrapper">
+  <div v-if="hrefBuilt" class="body__section__inner share wrapper">
     <h3 class="header-3">Scan QR or share link</h3>
-    <p><a :href="whatsAppHref" class="icon-whatsapp" data-action="share/whatsapp/share">Share via Whatsapp</a></p>
-    <p><a :href="gameHref" class="sharelink">{{ gameHref }}</a></p>
+    <p class="share-text"><a :href="whatsAppHref" class="icon-whatsapp" data-action="share/whatsapp/share">Share via Whatsapp</a></p>
+    <p class="share-text share-text__link">{{ gameHref }}</p>
     <div
       class="sharepanel"
       >
@@ -40,7 +40,21 @@
 <style lang="scss">
   @import "@/styles/imports";
 
-  .body__section__inner {
+  .share {
+    &-text {
+      color: $black;
+      line-height: 18px;
+      padding: 0 10px;
+      @media (prefers-color-scheme: dark) {
+          color: $white;
+      }
+      &__link {
+        display: none;
+        font-size: 10px;
+        font-weight: normal;
+        line-height: 12px;
+      }
+    }
 
     .icon-whatsapp {
       @include icon-whatsapp;
@@ -49,16 +63,9 @@
       line-height: 32px;
       padding-left: 36px;
     }
-
-    .sharelink {
-      color: $white;
-      font-size: 10px;
-      font-weight: normal;
-    }
-
     .sharepanel {
       display: flex;
-      margin: 12px 0px;
+      margin: 0px;
       .shareQr {
         background-color: $white;
         display: inline-block;

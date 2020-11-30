@@ -42,7 +42,7 @@
 
           <div class="form-row">
             <div class="form-row-inner form-row-inner_actions">
-              <input type="submit" class="btn" value="Submit" id="formSubmit" @click.prevent="formSubmit" />
+              <input type="submit" class="btn secondary" value="Submit" id="formSubmit" @click.prevent="formSubmit" />
             </div>
           </div>
         </form>

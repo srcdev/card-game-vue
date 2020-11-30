@@ -2,6 +2,10 @@
 * Default theme colours
 **/
 
+input, select {
+  -webkit-appearance: none;
+}
+
 @mixin standardInputElement {
   background-color: $white;
   border: 0;

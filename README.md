@@ -4,6 +4,10 @@ Front end for the fill in the blanks card game.
 This is a public repo for the refactoring of what can be played at [UUWUU](http://uuwuu.co.uk).
 The current version was thrown together during lockdown and had a fair amount of tech debt in it. I'm paying that back now with this pure VueJs version.
 
+## Known issues
+* Security warning as not hosted on https (especially with Brave browser)
+* Brave browser attempts an https updgrade which results in error 404 page not found
+
 ## Dependancies
 * Node Version Manager (NVM)
 

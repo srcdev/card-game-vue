@@ -25,10 +25,10 @@
       </footer>
     </div>
 
-    <confirm-modal 
-      v-if='confirmModal' 
-      :message="confirmModalMessage" 
-      @confirm='confirm' 
+    <confirm-modal
+      v-if='confirmModal'
+      :message="confirmModalMessage"
+      @confirm='confirm'
       @cancel="cancel"
     ></confirm-modal>
 
@@ -122,11 +122,11 @@
         margin-bottom: 0;
       }
       .nav {
-        
+
         flex: initial;
         margin-top: auto;
         &__list {
-          
+
           display: flex;
           width: 100%;
         }

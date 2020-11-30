@@ -116,3 +116,12 @@
     }
   }
 </script>
+
+<style lang="scss" scoped>
+
+  .form-row-inner_radio {
+    display: block;
+    list-style-type: none;
+  }
+
+</style>
