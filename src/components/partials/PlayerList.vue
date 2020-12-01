@@ -63,7 +63,6 @@
 </script>
 
 <style lang="scss">
-  @import "@/styles/imports";
 
   .player {
     &-list {

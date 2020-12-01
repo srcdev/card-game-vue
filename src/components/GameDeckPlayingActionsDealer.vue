@@ -33,8 +33,8 @@
         const payload = {
           message: 'Confirm skip question',
           callback: 'skip-question-confirmed',
-          cancelText: 'Cancel X',
-          confirmText: 'Confirm X'
+          cancelText: 'Cancel',
+          confirmText: 'Confirm'
         }
         this.$bus.$emit('confirm-skip-question', payload);
       },

@@ -65,7 +65,6 @@
 
 
 <style lang="scss">
-  @import "@/styles/imports";
 
   .game-deck-start {
     .tabs {

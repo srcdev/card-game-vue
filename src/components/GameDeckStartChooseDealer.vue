@@ -35,7 +35,6 @@
 
 
 <style lang="scss" scoped>
-  @import "@/styles/imports";
 
   .choose-dealer {
     .player {

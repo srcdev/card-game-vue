@@ -99,7 +99,6 @@
 </script>
 
 <style lang="scss">
-  @import "@/styles/imports";
 
   .game-deck {
 

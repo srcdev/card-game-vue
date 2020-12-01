@@ -34,7 +34,7 @@
 </script>
 
 <style lang="scss">
-  @import "@/styles/imports";
+
   *,
   *::before,
   *::after {

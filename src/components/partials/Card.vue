@@ -154,7 +154,6 @@
 </script>
 
 <style lang="scss">
-  @import "../../styles/imports";
 
   .card {
     $card: &;

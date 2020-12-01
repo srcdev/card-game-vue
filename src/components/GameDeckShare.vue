@@ -38,7 +38,6 @@
 </script>
 
 <style lang="scss">
-  @import "@/styles/imports";
 
   .share {
     &-text {

@@ -55,7 +55,6 @@
 </script>
 
 <style lang="scss">
-  @import "@/styles/imports";
 
   .game-actions {
     &__list {
