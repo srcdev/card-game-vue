@@ -5,6 +5,7 @@ import App from './App.vue'
 import store from "./store/index";
 import VueSocketIO from 'vue-socket.io';
 import { WEBSOCKETS_IP, WEBSOCKETS_PORT } from "./config.js";
+import "./styles/main.scss";
 
 Vue.config.productionTip = true
 

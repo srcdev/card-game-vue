@@ -90,6 +90,7 @@
 </script>
 
 <style lang="scss">
+  // @import "@/styles/main";
 
   .header {
     box-shadow: 0 0 0 1px $border-light;
