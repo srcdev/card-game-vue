@@ -4,7 +4,6 @@ import VueRouter from 'vue-router';
 import App from './App.vue'
 import store from "./store/index";
 import VueSocketIO from 'vue-socket.io';
-import { WEBSOCKETS_IP, WEBSOCKETS_PORT } from "./config.js";
 import "./styles/main.scss";
 
 Vue.config.productionTip = true
@@ -29,7 +28,7 @@ const router = new VueRouter({
 
 Vue.use(new VueSocketIO({
     debug: true,
-    connection: `http://${WEBSOCKETS_IP}:${WEBSOCKETS_PORT}`,
+    connection: `http://${process.env.VUE_APP_WEBSOCKETS_IP}:${process.env.VUE_APP_WEBSOCKETS_PORT}`,
     vuex: {
         store,
         actionPrefix: 'SOCKET_',

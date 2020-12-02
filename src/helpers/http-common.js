@@ -1,18 +1,15 @@
 import axios from "axios";
-import { IPADDRESS, HTTP_PORT} from "../config.js";
 
 const defaultOptions = {
-    baseURL: `http://${IPADDRESS}${HTTP_PORT}/api`,
-    headers: {
-        "Content-type": "application/json"
-    }
+  baseURL: `http://${process.env.VUE_APP_IPADDRESS}${process.env.VUE_APP_HTTP_PORT}/api`,
+  headers: {
+    "Content-type": "application/json"
+  }
 };
 
 function generateHttpOpenClient(){
-
-    let instance = axios.create(defaultOptions);
-    return instance;
-
+  let instance = axios.create(defaultOptions);
+  return instance;
 }
 
 const http = generateHttpOpenClient();
