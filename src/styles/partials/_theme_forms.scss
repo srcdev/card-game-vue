@@ -75,9 +75,6 @@ input, select {
     line-height: 16px;
     padding: 0;
     width: 24px;
-    svg {
-      fill: $input-label-error-light;
-    }
   }
 
   &.secondary {

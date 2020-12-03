@@ -3,7 +3,7 @@
     <h2 class="header3">Support the game</h2>
     <nav class="game-support__nav">
       <ul class="list inline">
-        <li 
+        <li
           v-for="(item, index) in crypto"
           :key="index"
           class="list-item"
@@ -12,7 +12,7 @@
         </li>
       </ul>
     </nav>
-    <div 
+    <div
       v-if="showItem"
       class="donate-panel"
       >

@@ -12,25 +12,25 @@
         }"
         >
         {{ player.playerName }}
-        <svg
+        <span
           v-if="roundPlayed"
-          class="icon-tick"
+          class="icon icon__tick"
           >
-          <g transform="scale(0.008 0.008)">
-            <path d="M1230.641 17.028c46.697-50.735 121.022 23.253 74.325 73.988-259.075 291.726-520.273 579.223-781.471 868.835-12.741 14.798-25.483 27.481-38.245 42.279-19.091 21.14-55.191 19.026-74.325 0-131.64-124.723-263.3-251.56-394.961-376.284-48.842-46.507 25.483-122.609 74.325-73.988 118.898 112.040 235.694 224.079 354.635 338.233 263.3-291.726 524.499-581.337 785.718-873.063z"></path>
-          </g>
-        </svg>
+          <icons icon-name="tick" />
+          <span class="sr-only">{{ player.playerName }} has played their round</span>
+        </span>
       </span>
       <button
         v-if="playerIsAdmin"
         @click.prevent="ejectPlayer(player.playerId)"
         class="player-list-item-btn btn cancel"
         >
-        <svg class="clear-cards">
-          <g transform="scale(0.024 0.024)">
-            <path d="M874.040 149.96c-96.706-96.702-225.28-149.96-362.040-149.96s-265.334 53.258-362.040 149.96c-96.702 96.706-149.96 225.28-149.96 362.040s53.258 265.334 149.96 362.040c96.706 96.702 225.28 149.96 362.040 149.96s265.334-53.258 362.040-149.96c96.702-96.706 149.96-225.28 149.96-362.040s-53.258-265.334-149.96-362.040zM896 512c0 82.814-26.354 159.588-71.112 222.38l-535.266-535.268c62.792-44.758 139.564-71.112 222.378-71.112 211.738 0 384 172.262 384 384zM128 512c0-82.814 26.354-159.586 71.112-222.378l535.27 535.268c-62.794 44.756-139.568 71.11-222.382 71.11-211.738 0-384-172.262-384-384z"></path>
-          </g>
-        </svg>
+        <span
+          class="icon icon__cancel"
+          >
+          <icons icon-name="cancel" />
+          <span class="sr-only">Remove {{ player.playerName }} from game</span>
+        </span>
       </button>
     </li>
   </ul>
@@ -38,8 +38,12 @@
 
 <script>
   import { mapState } from 'vuex';
+  import Icons from "@/components/partials/Icons";
   export default {
     name: "PlayerList",
+    components: {
+      'icons': Icons,
+    },
     computed: {
       ...mapState('game', [
         'playersObj',
@@ -75,20 +79,35 @@
         &-name {
           flex-grow: 1;
 
-          .icon-tick {
-            fill: $color-green-6;
-            height: 12px;
+          .icon__tick {
+            display: inline-block;
+            height: 16px;
             opacity: 0;
-            width: 12px;
+            width: 16px;
+
+            svg path {
+              fill: $color-green-6;
+            }
           }
 
           &.played {
             color: $color-green-6;
 
-            .icon-tick {
+            .icon__tick {
               opacity: 1;
               transition: opacity linear 200ms;
             }
+          }
+        }
+
+        .icon__cancel {
+          display: inline-block;
+          height: 22px;
+          margin-top: 2px;
+          width: 22px;
+
+          svg path {
+            fill: $input-label-error-light;
           }
         }
       }
@@ -101,12 +120,20 @@
         border-top: 1px solid $border-dark;
         &-item {
           &-name {
-            .icon-tick {
-              fill: $color-green-7;
+            .icon__tick {
+              svg path {
+                fill: $color-green-7;
+              }
             }
 
             &.played {
               color: $color-green-7;
+            }
+          }
+
+          .icon__cancel {
+            svg path {
+              fill: $input-label-error-dark;
             }
           }
         }

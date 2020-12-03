@@ -22,10 +22,22 @@
       ]"
     >
       <p
+        v-if="cardType === 'A'"
+        class="card-text"
+      >Answer:</p>
+      <p
         class="card-text"
         v-html="textToDisplay"
       />
     </div>
+    <a
+      v-if="cardType === 'A'"
+      @click.stop="swapAnswer()"
+      aria-role="button"
+      class="icon icon__refresh"
+    >
+      <span class="sr-only">Swap card</span>
+    </a>
   </button>
 </template>
 
@@ -145,6 +157,9 @@
         }
         this.SET_ANSWER(payload);
       },
+      swapAnswer() {
+        console.log(`swapAnswer() --> ${this.answerData.answerId}`);
+      },
       isCardPlayed() {
         const answerId = this.answerData.answerId;
         this.cardPlayed = this.currentCard.answer1.id === answerId || this.currentCard.answer2.id === answerId || this.currentCard.answer3.id === answerId;
@@ -162,6 +177,7 @@
     border-radius: 3px;
     display: block;
     margin: 0 auto;
+    position: relative;
     text-align: left;
     transition: opacity linear 200ms;
     &:disabled {
@@ -171,6 +187,14 @@
       @media (prefers-color-scheme: dark) {
         box-shadow: 0 0 0 1px $input-border-valid-dark;
       }
+    }
+
+    .icon__refresh {
+      display: block;
+      position: absolute;
+      right: 14px;
+      top: 14px;
+      z-index: 9;
     }
     &-inner {
       border-radius: 4px;
@@ -220,6 +244,11 @@
         #{ $card }-text {
           color: $card-answer-text-light;
           font-size: 12px;
+          &:first-child {
+            font-weight: bold;
+            font-size: 13px;
+            line-height: 20px;
+          }
         }
       }
 
