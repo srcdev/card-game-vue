@@ -3,6 +3,7 @@
 @import './partials/_theme_colours';
 @import './partials/_theme_forms';
 @import './partials/_theme_typography';
+@import './ui/_scaffolding';
 
 html {
     -webkit-font-smoothing: antialiased;
@@ -23,7 +24,7 @@ body {
 }
 
 .wrapper > * {
-    padding: 10px;
+    padding: 10px 10px 0;
     flex: 1 100%;
 }
 
@@ -47,32 +48,15 @@ body {
 * Transitions
 **/
 
-.bounce-enter-active {
+.fade-enter-active {
     opacity: 1;
     transition: opacity linear 200ms;
 }
-.bounce-leave-active {
+.fade-leave-active {
     opacity: 0;
     transition: opacity linear 200ms;
 }
-/* @keyframes bounce-in {
-0% {
-    transform: scale(0);
-}
-100% {
-    transform: scale(1);
-}
-} */
 
-.list-enter-active,
-.list-leave-active {
-    transition: all 1s ease;
-}
-.list-enter-from,
-.list-leave-to {
-    opacity: 0;
-    transform: translateY(35px);
-}
 
 @include breakpoint(600) {
     .aside {

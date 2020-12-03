@@ -5,3 +5,19 @@
   text-indent: -9999px;
   width: 0;
 }
+
+.list {
+  list-style-type: none;
+  &.inline {
+    display: flex;
+  }
+  &.centered {
+    justify-content: center;
+  }
+  &-item {
+    margin: 0 12px;
+  }
+  &-link {
+    text-decoration: underline;
+  }
+}

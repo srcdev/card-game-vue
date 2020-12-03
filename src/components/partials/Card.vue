@@ -97,10 +97,10 @@
     },
     methods: {
       ...mapActions('game', [
-          'SET_WINNER',
+        'SET_WINNER',
       ]),
       ...mapMutations('game', [
-          'SET_ANSWER',
+        'SET_ANSWER',
       ]),
       questionAnswerContent(text) {
         let answer;
@@ -191,13 +191,14 @@
         }
       }
       &.large {
-        min-height: 280px;
+        min-height: 250px;
         max-width: 150px;
 
         @include breakpoint(1025) {
-          height: 300px;
           max-width: 180px;
+          min-height: 280px;
         }
+
       }
       &.xlarge {
         min-height: 300px;
@@ -206,6 +207,10 @@
         @include breakpoint(1025) {
           height: 400px;
         }
+        &.question {
+          max-width: 240px;
+          min-height: 340px;
+        }
       }
 
       &.answer {
@@ -213,8 +218,8 @@
         box-shadow: 0 0 1px 1px $card-answer-border-light;
         width: 200px;
         #{ $card }-text {
-            color: $card-answer-text-light;
-            font-size: 12px;
+          color: $card-answer-text-light;
+          font-size: 12px;
         }
       }
 

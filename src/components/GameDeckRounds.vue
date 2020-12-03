@@ -1,8 +1,10 @@
 <template>
   <div class="wrapper">
     <h2 class="header1">Previous rounds</h2>
-    <div class="game-deck__rounds">
-
+    <div
+      v-if="hasRounds"
+      class="game-deck__rounds"
+      >
       <div
         v-for="(round, roundIndex) in rounds"
         :key="roundIndex"
@@ -39,6 +41,9 @@
         </div>
       </div>
     </div>
+    <div v-else>
+      <h3 class="header3">No rounds played yet!</h3>
+    </div>
   </div>
 </template>
 
@@ -54,6 +59,9 @@
       ...mapState('game', [
         'rounds'
       ]),
+      hasRounds() {
+        return typeof this.rounds === 'object';
+      }
     },
   }
 </script>

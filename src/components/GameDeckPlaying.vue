@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div class="game-deck-question aside">
-      <transition name="bounce" mode="out-in">
+      <transition name="fade" mode="out-in">
         <game-deck-card
           :card-size="questionCardSize"
           card-type="Q"
@@ -17,7 +17,7 @@
             :key="index"
             class="game-deck-cards-item"
           >
-            <transition name="bounce" mode="out-in">
+            <transition name="fade" mode="out-in">
               <game-deck-card
                 :answer-data="{
                   answerId: index,
@@ -37,6 +37,7 @@
       <div class="game-deck-status__players">
         <game-deck-playing-dealer v-if="playerIsDealer" />
         <game-deck-playing-player v-else />
+        <h4 class="header4">Players in round</h4>
         <game-deck-players v-if="!reviewingAnswers" />
       </div>
       <div class="game-deck-status__actions">
@@ -160,6 +161,12 @@
         // align-self: flex-start;
         // flex-grow: 1;
         width: 100%;
+
+        .header4 {
+          font-style: italic;
+          font-weight: normal;
+          margin-bottom: 0;
+        }
       }
       &__actions {
         // align-self: flex-end;

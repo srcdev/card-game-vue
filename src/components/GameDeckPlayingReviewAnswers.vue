@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <p v-if="playerIsDealer">You are the dealer, click on a card to select the winner</p>
-    <p v-else>Waiting for <span>{{ dealerData.dealerName }}</span> to pick a winner</p>
+    <p v-else>Waiting for <strong>{{ dealerData.dealerName }}</strong> to pick a winner</p>
     <div class="game-deck-answers">
       <div class="shim shim__left"></div>
       <div class="inner">
