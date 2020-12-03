@@ -1,29 +1,15 @@
 <template>
   <div>
 
-    <div class="header">
-      <h1 class="header3" data-test="h1-text">Fill in the blanks game</h1>
-      <nav class="nav" v-if="gameRunning">
-        <ul class="nav__list">
-          <li class="nav__item"><button class="btn secondary" @click.prevent="setComponent('game-deck')">Game</button></li>
-          <li class="nav__item"><button class="btn secondary" @click.prevent="setComponent('game-deck-rounds')">Rounds</button></li>
-          <li class="nav__item"><button class="btn secondary" @click.prevent="setComponent('game-deck-scores')">Scores</button></li>
-          <li class="nav__item"><button class="btn secondary" @click.prevent="setComponent('game-deck-share')">Share</button></li>
-        </ul>
-      </nav>
-    </div>
+    <game-header />
 
     <keep-alive>
-      <transition name="bounce" mode="out-in">
+      <transition name="fade" mode="out-in">
         <component :is="componentName"></component>
       </transition>
     </keep-alive>
 
-    <div class="wrapper">
-      <footer class="footer">
-        <p>Footer</p>
-      </footer>
-    </div>
+    <game-footer />
 
     <confirm-modal
       v-if='confirmModal'
@@ -42,6 +28,11 @@
   import GameDeckScores from "@/components/GameDeckScores";
   import GameDeckShare from "@/components/GameDeckShare";
   import GameDeckRounds from "@/components/GameDeckRounds";
+  import GameAbout from "@/components/GameAbout";
+  import GameHeader from "@/components/GameHeader";
+  import GameFooter from "@/components/GameFooter";
+  import GameRules from "@/components/GameRules";
+  import GameSupport from "@/components/GameSupport";
   export default {
     components: {
       'confirm-modal': ConfirmModal,
@@ -49,7 +40,11 @@
       'game-deck-scores': GameDeckScores,
       'game-deck-share': GameDeckShare,
       'game-deck-rounds': GameDeckRounds,
-
+      'game-about': GameAbout,
+      'game-header': GameHeader,
+      'game-footer': GameFooter,
+      'game-rules': GameRules,
+      'game-support': GameSupport
     },
     computed: {
       ...mapState('game', [
@@ -68,11 +63,11 @@
         this.confirmModalPayload = confirmModalPayload;
         this.confirmModal = true;
       });
+      this.$bus.$on('set-component', (component) => {
+        this.componentName = component;
+      });
     },
     methods: {
-      setComponent(component) {
-        this.componentName = component;
-      },
       confirm() {
         this.$bus.$emit('skip-question-confirmed');
         this.confirmModal = false;
@@ -85,52 +80,7 @@
     },
     destroyed () {
       this.$bus.$off('confirm-skip-question');
+      this.$bus.$off('set-component');
     }
   }
 </script>
-
-<style lang="scss">
-  // @import "@/styles/main";
-
-  .header {
-    box-shadow: 0 0 0 1px $border-light;
-    padding: 12px;
-    @media (prefers-color-scheme: dark) {
-        box-shadow: 0 0 0 1px $border-dark;
-    }
-    .header3 {
-      margin-bottom: 8px;
-    }
-    .nav {
-      flex: initial;
-      margin-top: auto;
-      &__list {
-        align-content: flex-end;
-        display: flex;
-        list-style-type: none;
-      }
-    }
-  }
-
-  @include breakpoint(768) {
-    .header {
-      display: flex;
-      padding: 12px;
-      .header3 {
-        flex-grow: 1;
-        margin-bottom: 0;
-      }
-      .nav {
-
-        flex: initial;
-        margin-top: auto;
-        &__list {
-
-          display: flex;
-          width: 100%;
-        }
-      }
-    }
-  }
-
-</style>
