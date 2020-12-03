@@ -58,3 +58,16 @@ var config = {
 exports.config = config;
 ```
 
+#### Environment configuration
+/*
+* Do not keep these files in a Git repo
+**/
+* .env.development.local
+* .env.production.local
+NOTE: Values are not in quotes
+```
+VUE_APP_IPADDRESS=
+VUE_APP_WEBSOCKETS_IP=
+VUE_APP_WEBSOCKETS_PORT=
+VUE_APP_HTTP_PORT=
+```
