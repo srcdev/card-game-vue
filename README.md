@@ -25,6 +25,21 @@ npm install
 ```
 npm run serve
 ```
+#### Environment variables
+
+* .env.development.local
+* .env.production.local
+
+NOTE: Values are not in quotes
+```
+/*
+* Do not keep these files in a Git repo
+**/
+VUE_APP_IPADDRESS=
+VUE_APP_WEBSOCKETS_IP=
+VUE_APP_WEBSOCKETS_PORT=
+VUE_APP_HTTP_PORT=
+```
 
 ### Run unit testing
 This project has a (WIP) suit of unit test using Jest
@@ -56,20 +71,4 @@ var config = {
 };
 
 exports.config = config;
-```
-
-#### Environment configuration
-
-* .env.development.local
-* .env.production.local
-
-NOTE: Values are not in quotes
-```
-/*
-* Do not keep these files in a Git repo
-**/
-VUE_APP_IPADDRESS=
-VUE_APP_WEBSOCKETS_IP=
-VUE_APP_WEBSOCKETS_PORT=
-VUE_APP_HTTP_PORT=
 ```
