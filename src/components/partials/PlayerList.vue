@@ -38,12 +38,8 @@
 
 <script>
   import { mapState } from 'vuex';
-  import Icons from "@/components/partials/Icons";
   export default {
     name: "PlayerList",
-    components: {
-      'icons': Icons,
-    },
     computed: {
       ...mapState('game', [
         'playersObj',

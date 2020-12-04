@@ -4,7 +4,10 @@ import VueRouter from 'vue-router';
 import App from './App.vue'
 import store from "./store/index";
 import VueSocketIO from 'vue-socket.io';
+import Icons from "@/plugins/Icons.vue"
 import "./styles/main.scss";
+
+Vue.component('icons', Icons)
 
 Vue.config.productionTip = true
 
@@ -27,13 +30,13 @@ const router = new VueRouter({
 });
 
 Vue.use(new VueSocketIO({
-    debug: true,
-    connection: `http://${process.env.VUE_APP_WEBSOCKETS_IP}:${process.env.VUE_APP_WEBSOCKETS_PORT}`,
-    vuex: {
-        store,
-        actionPrefix: 'SOCKET_',
-        mutationPrefix: 'SOCKET_'
-    },
+  debug: true,
+  connection: `http://${process.env.VUE_APP_WEBSOCKETS_IP}:${process.env.VUE_APP_WEBSOCKETS_PORT}`,
+  vuex: {
+    store,
+    actionPrefix: 'SOCKET_',
+    mutationPrefix: 'SOCKET_'
+  },
 }))
 
 new Vue({
