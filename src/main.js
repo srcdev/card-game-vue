@@ -4,10 +4,12 @@ import VueRouter from 'vue-router';
 import App from './App.vue'
 import store from "./store/index";
 import VueSocketIO from 'vue-socket.io';
-import Icons from "@/plugins/Icons.vue"
+import Icons from "@/plugins/Icons";
+import ConfirmModal from "@/plugins/ConfirmModal";
 import "./styles/main.scss";
 
 Vue.component('icons', Icons)
+Vue.component('confirm-modal', ConfirmModal)
 
 Vue.config.productionTip = true
 
