@@ -38,6 +38,10 @@ class GameDataService {
       return http.post("/games/setWinner", data);
     }
 
+    getWinner(data) {
+      return http.post("/games/getWinner", data);
+    }
+
 }
 
 export default new GameDataService();

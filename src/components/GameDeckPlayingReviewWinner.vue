@@ -1,8 +1,10 @@
 <template>
   <div class="wrapper winner">
-    <h2 class="header1">Last round won by: {{ this.dealerData.dealerName }}</h2>
+    <h2 class="header1">Last round won by: {{ this.winnerData.playerName }}</h2>
     <game-deck-card
-      :qa-data="winningRound"
+      :qa-data="{
+        data: winnerData
+      }"
       card-size="XL"
       card-type="QA"
     />
@@ -19,26 +21,9 @@
     },
     computed: {
       ...mapState('game', [
-        'dealerData',
-        'rounds'
+        'winnerData'
       ]),
     },
-    data() {
-      return {
-        winningRound: {}
-      }
-    },
-    created() {
-      this.setWinningRound();
-    },
-    methods: {
-      setWinningRound() {
-        const lastRoundKey = Object.keys(this.rounds).pop();
-        const lastRound = this.rounds[lastRoundKey];
-        const data = lastRound[this.dealerData.playerId];
-        this.winningRound.data = data;
-      }
-    }
   }
 </script>
 

@@ -30,7 +30,6 @@
     data() {
       return {
         componentName: '',
-        showWinner: false,
       }
     },
     sockets: {
@@ -56,18 +55,25 @@
       },
       RECEIVE_SOCKET_GET_ROUND_IN_PLAY() {
         this.GET_ROUND_IN_PLAY();
+      },
+      RECEIVE_SOCKET_SHOW_WINNER(data) {
+        this.DISPLAY_WINNER(data);
+        setTimeout(() => {
+          this.GET_LATEST_GAME_DATA();
+        }, this.showWinnerTimeout);
       }
     },
     computed: {
       ...mapState('game', [
         'currentCard',
-        'dealerData',
         'playerId',
         'gameId',
         'gameState',
         'playerState',
         'reviewingAnswers',
-        'rounds'
+        'rounds',
+        'showWinner',
+        'showWinnerTimeout'
       ]),
       gameNotStarted() {
         return this.gameState < 2 && this.playerState < 2;
@@ -88,18 +94,13 @@
       reviewingAnswers() {
         this.setComponent();
       },
-      dealerData(newVal, oldVal) {
-        if (oldVal !== null) {
-          this.showWinner = true;
-          this.setComponent();
-        }
-      },
       showWinner() {
         this.setComponent();
       }
     },
     methods: {
       ...mapActions('game', [
+        'DISPLAY_WINNER',
         'GET_LATEST_GAME_DATA',
         'GET_CURRENT_QUESTION',
         'GET_ROUND_IN_PLAY'
@@ -108,11 +109,8 @@
         if (this.gameNotStarted) {
           this.componentName = 'game-deck-start';
         } else if (this.gameRunning) {
-          if (this.showWinner && typeof this.rounds === 'object') {
+          if (this.showWinner) {
               this.componentName = 'game-deck-playing-review-winner';
-              setTimeout(() => {
-                this.showWinner = false;
-              }, 3500);
           } else {
             if (this.reviewingAnswers) {
               this.componentName = 'game-deck-playing-review-answers';

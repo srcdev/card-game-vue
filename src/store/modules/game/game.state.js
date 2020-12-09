@@ -43,6 +43,9 @@ export const state = {
   reviewingAnswers: false,
   roundPlayed: false,
   rounds: {},
-  scoresObj: {}
+  scoresObj: {},
+  showWinner: false,
+  showWinnerTimeout: 2500,
+  winnerData: null
 };
 export default state;

@@ -98,6 +98,7 @@ export const mutations = {
     state.skipQuestionDisabled = payload.skipQuestionDisabled;
     state.scoresObj = payload.scoresObj;
     state.rounds = payload.rounds;
+    state.showWinner = false;
     if (typeof payload.roundInPlay !== 'undefined' && payload.roundInPlay !== null) {
       state.roundInPlay = payload.roundInPlay;
       state.roundPlayed = typeof payload.roundInPlay[state.playerId] === 'object';
@@ -164,6 +165,14 @@ export const mutations = {
       state.roundPlayed = false;
       //state.skipQuestionDisabled = false;
     }
+  },
+  DISPLAY_WINNER(state, payload) {
+    state.winnerData = payload;
+    state.reviewingAnswers = false;
+    state.showWinner = true;
+    setTimeout(() => {
+      state.showWinner = false;
+    }, state.showWinnerTimeout);
   }
 };
 export default mutations;

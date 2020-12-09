@@ -159,7 +159,22 @@ export const actions = {
     return new Promise((resolve, reject) => {
       GameDataService.setWinner(data)
         .then(() => {
-          this._vm.$socket.emit("BROADCAST_SOCKET_UPDATE_GAME_DATA", state.gameId);
+          this._vm.$socket.emit("BROADCAST_SOCKET_GET_ROUND_WINNER", state.gameId);
+          resolve();
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  },
+  DISPLAY_WINNER({commit, state}) {
+    const data = {
+      gameId: state.gameId,
+    };
+    return new Promise((resolve, reject) => {
+      GameDataService.getWinner(data)
+        .then((response) => {
+          commit('DISPLAY_WINNER', response.data);
           resolve();
         })
         .catch((err) => {
