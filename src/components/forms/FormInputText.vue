@@ -124,7 +124,7 @@
         this.inputIsDirty = this.setInputIsDirty(event.target.value)
       },
       updateValue(value) {
-        this.$emit('input', value);
+        this.$emit('input', value.trim());
         setTimeout(() => {
           this.testInputValidity(value);
         }, 0);
