@@ -39,6 +39,7 @@ export const state = {
   playerInGame: false,
   playerHand: null,
   playerCount: 0,
+  canSwapAnswer: true,
   skipQuestionDisabled: false,
   reviewingAnswers: false,
   roundPlayed: false,

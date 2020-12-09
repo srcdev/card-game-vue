@@ -31,12 +31,13 @@
       />
     </div>
     <a
-      v-if="cardType === 'A'"
+      v-if="cardType === 'A' && canSwapAnswer"
       @click.stop="swapAnswer()"
       aria-role="button"
       class="icon icon__refresh"
     >
       <span class="sr-only">Swap card</span>
+      <icons icon-name="refresh" />
     </a>
   </button>
 </template>
@@ -48,6 +49,7 @@
     name: "GameDeckPlayingPlayer",
     computed: {
       ...mapState('game', [
+        'canSwapAnswer',
         'currentCard',
         'currentQuestion',
         'playerIsDealer',
@@ -59,6 +61,7 @@
     },
     data() {
       return {
+        answerId: null,
         cardPlayed: false,
         renderCard: false,
         textToDisplay: '',
@@ -86,6 +89,13 @@
         type: Object,
       },
     },
+    created () {
+      this.$bus.$on('swap-answer-confirmed', () => {
+        if (this.answerId !== null) {
+          this.SWAP_ANSWER(this.answerId);
+        }
+      });
+    },
     mounted() {
       if (this.cardType === 'A') {
         this.textToDisplay = this.answerData.answerText;
@@ -109,7 +119,8 @@
     },
     methods: {
       ...mapActions('game', [
-        'SET_WINNER',
+        'SWAP_ANSWER',
+        'SET_WINNER'
       ]),
       ...mapMutations('game', [
         'SET_ANSWER',
@@ -158,13 +169,23 @@
         this.SET_ANSWER(payload);
       },
       swapAnswer() {
-        console.log(`swapAnswer() --> ${this.answerData.answerId}`);
+        this.answerId = this.answerData.answerId;
+        const payload = {
+          message: 'Confirm swap answer',
+          callback: 'swap-answer-confirmed',
+          cancelText: 'Cancel',
+          confirmText: 'Confirm'
+        }
+        this.$bus.$emit('confirm-swap-answer', payload);
       },
       isCardPlayed() {
         const answerId = this.answerData.answerId;
         this.cardPlayed = this.currentCard.answer1.id === answerId || this.currentCard.answer2.id === answerId || this.currentCard.answer3.id === answerId;
       }
     },
+    destroyed () {
+      this.$bus.$off('swap-answer-confirmed');
+    }
   }
 </script>
 

@@ -42,6 +42,10 @@ class GameDataService {
       return http.post("/games/getWinner", data);
     }
 
+    swapAnswer(data) {
+      return http.post("/games/swapAnswer", data);
+    }
+
 }
 
 export default new GameDataService();

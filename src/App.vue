@@ -63,13 +63,17 @@
         this.confirmModalPayload = confirmModalPayload;
         this.confirmModal = true;
       });
+      this.$bus.$on('confirm-swap-answer', (confirmModalPayload) => {
+        this.confirmModalPayload = confirmModalPayload;
+        this.confirmModal = true;
+      });
       this.$bus.$on('set-component', (component) => {
         this.componentName = component;
       });
     },
     methods: {
-      confirm() {
-        this.$bus.$emit('skip-question-confirmed');
+      confirm(eventBusName) {
+        this.$bus.$emit(eventBusName);
         this.confirmModal = false;
         this.confirmModalPayload = {};
       },
@@ -80,6 +84,7 @@
     },
     destroyed () {
       this.$bus.$off('confirm-skip-question');
+      this.$bus.$off('confirm-swap-answer');
       this.$bus.$off('set-component');
     }
   }

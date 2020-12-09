@@ -30,7 +30,6 @@
 </script>
 
 <style lang="scss">
-
   .header {
     box-shadow: 0 0 0 1px $border-light;
     display: flex;
@@ -61,26 +60,4 @@
       }
     }
   }
-/*
-  @include breakpoint(768) {
-    .header {
-      display: flex;
-      padding: 12px;
-      .header3 {
-        flex-grow: 1;
-        margin-bottom: 0;
-      }
-      .nav {
-
-        flex: initial;
-        margin-top: auto;
-        &__list {
-
-          display: flex;
-          width: 100%;
-        }
-      }
-    }
-  }
-*/
 </style>

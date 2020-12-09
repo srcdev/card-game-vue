@@ -115,6 +115,7 @@ export const mutations = {
       state.gameCreated = true;
       state.dealerData = payload.dealerData;
       state.playerData = payload.playerData;
+      state.canSwapAnswer = payload.playerData.canSwapAnswer
       state.playerHand = shuffleObjectContent(payload.playerData.hand);
       if (payload.dealerData !== null) {
         state.playerIsDealer = (payload.dealerData.playerId === state.playerId);
@@ -151,19 +152,23 @@ export const mutations = {
       }
     }
   },
+  LOCK_QUESTION(state) {
+    state.skipQuestionDisabled = true;
+  },
   UPDATE_ROUND_IN_PLAY(state, payload) {
     state.playersObj = payload.playersObj;
     state.reviewingAnswers = payload.reviewingAnswers;
     state.roundInPlay = payload.roundInPlay;
     state.skipQuestionDisabled = payload.skipQuestionDisabled;
+    state.playerData.canSwapAnswer = true;
     if (typeof payload.roundInPlay !== 'undefined') {
       state.roundInPlay = payload.roundInPlay;
       state.roundPlayed = typeof payload.roundInPlay[state.playerId] === 'object';
-      //state.skipQuestionDisabled = true;
+      state.skipQuestionDisabled = true;
     } else {
       state.roundInPlay = {};
       state.roundPlayed = false;
-      //state.skipQuestionDisabled = false;
+      state.skipQuestionDisabled = false;
     }
   },
   DISPLAY_WINNER(state, payload) {

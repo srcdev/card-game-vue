@@ -11,7 +11,8 @@ let playerObj = {
   playerIsDealer: false,
   roundPlayed: false,
   winCount: 0,
-  userCreatedGame: false
+  userCreatedGame: false,
+  canSwapAnswer: true
 };
 
 export const actions = {
@@ -101,7 +102,7 @@ export const actions = {
         });
     });
   },
-  SKIP_QUESTION({state}) {
+  SKIP_QUESTION({commit, state}) {
     const gameId = state.gameId;
     const data = {
       gameId: state.gameId
@@ -109,6 +110,7 @@ export const actions = {
     return new Promise((resolve, reject) => {
       GameDataService.skipQuestion(data)
         .then(() => {
+          commit('LOCK_QUESTION');
           this._vm.$socket.emit("BROADCAST_SOCKET_GET_CURRENT_QUESTION", gameId);
           resolve();
         })
@@ -197,6 +199,25 @@ export const actions = {
           reject(err);
         });
     });
+  },
+  SWAP_ANSWER({state},answerId) {
+    const data = {
+      gameId: state.gameId,
+      playerId: state.playerId,
+      answerId: answerId
+    };
+    if (data.playerId !== null) {
+      return new Promise((resolve, reject) => {
+        GameDataService.swapAnswer(data)
+          .then(() => {
+            this._vm.$socket.emit("BROADCAST_SOCKET_UPDATE_GAME_DATA", state.gameId);
+            resolve();
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
+    }
   }
 };
 export default actions;
