@@ -31,7 +31,7 @@
       />
     </div>
     <a
-      v-if="cardType === 'A' && canSwapAnswer"
+      v-if="displaySwapCard"
       @click.stop="swapAnswer()"
       aria-role="button"
       class="icon icon__refresh"
@@ -58,6 +58,9 @@
       setRole() {
         return this.cardType === 'A' ? 'button' : false;
       },
+      displaySwapCard() {
+        return this.cardType === 'A' && this.canSwapAnswer;
+      }
     },
     data() {
       return {
@@ -254,7 +257,7 @@
         }
         &.question {
           max-width: 240px;
-          min-height: 340px;
+          min-height: 280px;
         }
       }
 

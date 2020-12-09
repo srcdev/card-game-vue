@@ -1,5 +1,5 @@
 <template>
-  <section class="wrapper game-support">
+  <section class="game-deck game-deck__support">
     <h2 class="header3">Support the game</h2>
     <nav class="game-support__nav">
       <ul class="list inline">
@@ -74,7 +74,7 @@
 
 <style lang="scss">
 
-  .game-support {
+  .game-deck__support {
     .header3 {
       margin-bottom: 0;
     }

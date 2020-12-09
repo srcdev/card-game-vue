@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="game-deck">
     <h3 class="header-3">Scores</h3>
 
     <ul class="player-list">

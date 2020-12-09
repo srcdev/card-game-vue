@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="game-deck game-deck-playing">
     <div class="game-deck-question aside">
       <transition name="fade" mode="out-in">
         <game-deck-card

@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="game-deck">
     <h2 class="header1">Previous rounds</h2>
     <div
       v-if="hasRounds"
@@ -68,6 +68,10 @@
 
 <style lang="scss" scoped>
   .game-deck {
+
+    &__rounds {
+
+    }
 
     &__header {
       margin: 12px auto;

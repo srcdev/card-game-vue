@@ -1,5 +1,5 @@
 <template>
-  <div v-if="hrefBuilt" class="body__section__inner share wrapper">
+  <div v-if="hrefBuilt" class="game-deck share wrapper">
     <h3 class="header-3">Scan QR or share link</h3>
     <p class="share-text"><a :href="whatsAppHref" class="icon-whatsapp" data-action="share/whatsapp/share">Share via Whatsapp</a></p>
     <p class="share-text share-text__link">{{ gameHref }}</p>

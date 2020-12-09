@@ -1,5 +1,5 @@
 <template>
-  <section class="wrapper game-about">
+  <section class="game-deck">
     <h2 class="header3">About the game</h2>
     <p>This game was born from the CoVid-19 lockdown, we wanted to play the famous card version of this game but there was no online equivalent, so I made this.</p>
     <h3 class="header3">The technology used</h3>
@@ -15,7 +15,7 @@
 </script>
 
 <style lang="scss">
-  .game-about {
+  .game-deck {
     .header3 {
       margin-bottom: 0;
     }
