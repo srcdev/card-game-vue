@@ -11,7 +11,7 @@
       <game-deck-start-choose-dealer />
     </section>
     <section v-if="showTab('tab2')">
-      <game-deck-share />
+      <game-deck-share isSubComponent="true" />
     </section>
   </div>
 </template>

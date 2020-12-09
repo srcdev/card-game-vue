@@ -1,5 +1,11 @@
 <template>
-  <div v-if="hrefBuilt" class="game-deck share wrapper">
+  <div
+    v-if="hrefBuilt"
+    class="share wrapper"
+    :class="[
+      {'game-deck' : isMainDeck},
+    ]"
+    >
     <h3 class="header-3">Scan QR or share link</h3>
     <p class="share-text"><a :href="whatsAppHref" class="icon-whatsapp" data-action="share/whatsapp/share">Share via Whatsapp</a></p>
     <p class="share-text share-text__link">{{ gameHref }}</p>
@@ -22,6 +28,14 @@
       return {
         hrefBuilt: false,
         whatsAppHref: null,
+      }
+    },
+    props: {
+      isSubComponent: Boolean
+    },
+    computed: {
+      isMainDeck() {
+        return !this.isSubComponent;
       }
     },
     created() {

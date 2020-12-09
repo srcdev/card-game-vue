@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper winner">
+  <div class="game-deck winner">
     <h2 class="header1">Last round won by: {{ this.winnerData.playerName }}</h2>
     <game-deck-card
       :qa-data="{

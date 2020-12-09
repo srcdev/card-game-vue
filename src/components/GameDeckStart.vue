@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="game-deck">
     <game-deck-start-create v-if="!gameCreated" />
     <game-deck-start-join v-else-if="gameCreated && playerState === 0" />
     <game-deck-start-waiting v-else-if="gameCreated && playerState === 1" />
