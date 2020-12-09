@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <h1 class="header3" data-test="h1-text">Fill in the blanks game</h1>
+    <h1 class="header3" data-test="h1-text"><span class="header3__restrict">Fill in the blanks game</span></h1>
     <nav class="nav" v-if="gameRunning">
       <ul class="nav__list">
         <li class="nav__item"><button class="icon icon__home" @click.prevent="setComponent('game-deck')"><span class="sr-only">Game deck</span><icons icon-name="home" /></button></li>
@@ -33,12 +33,19 @@
 
   .header {
     box-shadow: 0 0 0 1px $border-light;
-    padding: 12px;
+    display: flex;
+    padding: 8px;
     @media (prefers-color-scheme: dark) {
       box-shadow: 0 0 0 1px $border-dark;
     }
     .header3 {
-      margin-bottom: 8px;
+      flex-grow: 1;
+      margin: 0;
+
+      &__restrict {
+        display: inline-block;
+        max-width: 120px;
+      }
     }
     .nav {
       flex: initial;
@@ -47,13 +54,14 @@
         align-content: flex-end;
         display: flex;
         list-style-type: none;
+        margin-right: 8px;
       }
       &__item {
         margin-left: 18px;
       }
     }
   }
-
+/*
   @include breakpoint(768) {
     .header {
       display: flex;
@@ -74,5 +82,5 @@
       }
     }
   }
-
+*/
 </style>
