@@ -67,7 +67,8 @@ input, select {
     }
   }
 
-  &.cancel {
+  &.cancel,
+  &.eject {
     background-color: transparent;
     border-radius: 50%;
     box-shadow: none;

@@ -21,14 +21,14 @@
         </span>
       </span>
       <button
-        v-if="playerIsAdmin"
+        v-if="showEjectButton"
         @click.prevent="ejectPlayer(player.playerId)"
         class="player-list-item-btn btn cancel"
         >
         <span
-          class="icon icon__cancel"
+          class="icon icon__eject"
           >
-          <icons icon-name="cancel" />
+          <icons icon-name="eject" />
           <span class="sr-only">Remove {{ player.playerName }} from game</span>
         </span>
       </button>
@@ -40,12 +40,20 @@
   import { mapState } from 'vuex';
   export default {
     name: "PlayerList",
+    data() {
+      return {
+        showEjectPlayer: false
+      }
+    },
     computed: {
       ...mapState('game', [
         'playersObj',
         'playerIsAdmin',
         'roundInPlay',
-      ])
+      ]),
+      showEjectButton() {
+        return this.showEjectPlayer && this.playerIsAdmin;
+      }
     },
     methods: {
       ejectPlayer(playerId) {
