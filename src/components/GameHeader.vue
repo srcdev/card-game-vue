@@ -56,7 +56,27 @@
         margin-right: 8px;
       }
       &__item {
-        margin-left: 18px;
+        margin-left: 8px;
+
+        .icon {
+          padding: 8px;
+
+          &__home,
+          &__cards,
+          &__share {
+            height: 38px;
+            width: 38px;
+          }
+          &__scores {
+            height: 38px;
+            width: 41px;
+
+            svg {
+              left: -2px;
+              top: -32px;
+            }
+          }
+        }
       }
     }
   }
