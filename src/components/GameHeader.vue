@@ -31,10 +31,12 @@
 
 <style lang="scss">
   .header {
+    background-color: $color-grey-1;
     box-shadow: 0 0 0 1px $border-light;
     display: flex;
     padding: 8px;
     @media (prefers-color-scheme: dark) {
+      background-color: $black;
       box-shadow: 0 0 0 1px $border-dark;
     }
     .header3 {
@@ -48,7 +50,7 @@
     }
     .nav {
       flex: initial;
-      margin-top: auto;
+      margin-top: 10px;
       &__list {
         align-content: flex-end;
         display: flex;
