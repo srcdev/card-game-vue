@@ -1,4 +1,5 @@
 export const state = {
+  answersInGame: 0,
   dealerData: null,
   gameRatings: [
     {
@@ -40,6 +41,7 @@ export const state = {
   playerHand: null,
   playerCount: 0,
   canSwapAnswer: true,
+  questionsInGame: 0,
   skipQuestionDisabled: false,
   reviewingAnswers: false,
   roundPlayed: false,

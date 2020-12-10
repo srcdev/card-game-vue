@@ -71,6 +71,8 @@ export const mutations = {
     }
   },
   UPDATE_GAME_DATA: (state, payload) => {
+    state.answersInGame = payload.answersInGame;
+    state.questionsInGame = payload.questionsInGame;
     state.gameRunning = true;
     state.gameState = payload.gameState;
     state.gameName = payload.gameName;
