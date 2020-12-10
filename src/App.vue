@@ -63,6 +63,10 @@
         this.confirmModalPayload = confirmModalPayload;
         this.confirmModal = true;
       });
+      this.$bus.$on('confirm-set-winner', (confirmModalPayload) => {
+        this.confirmModalPayload = confirmModalPayload;
+        this.confirmModal = true;
+      });
       this.$bus.$on('confirm-swap-answer', (confirmModalPayload) => {
         this.confirmModalPayload = confirmModalPayload;
         this.confirmModal = true;
@@ -84,6 +88,7 @@
     },
     destroyed () {
       this.$bus.$off('confirm-skip-question');
+      this.$bus.$off('confirm-set-winner');
       this.$bus.$off('confirm-swap-answer');
       this.$bus.$off('set-component');
     }

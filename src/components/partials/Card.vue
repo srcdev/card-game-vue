@@ -98,6 +98,11 @@
           this.SWAP_ANSWER(this.answerId);
         }
       });
+      this.$bus.$on('set-winner-confirmed', () => {
+        if (typeof this.qaData === 'object') {
+          this.SET_WINNER(this.qaData.data.playerId)
+        }
+      });
     },
     mounted() {
       if (this.cardType === 'A') {
@@ -152,7 +157,15 @@
       },
       selectCard() {
         if (this.reviewingAnswers && this.playerIsDealer) {
-          this.SET_WINNER(this.qaData.data.playerId)
+
+          const payload = {
+            message: 'Confirm set winner',
+            callback: 'set-winner-confirmed',
+            cancelText: 'Cancel',
+            confirmText: 'Confirm'
+          }
+          this.$bus.$emit('confirm-set-winner', payload);
+
         } else if (!this.reviewingAnswers && !this.playerIsDealer) {
           if (this.cardType === 'A') {
             this.selectAnswer()
