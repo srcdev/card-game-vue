@@ -230,7 +230,7 @@
 
       }
       &.medium {
-        min-height: 170px;
+        min-height: 206px;
         max-width: 120px;
 
         @include breakpoint(1025) {
