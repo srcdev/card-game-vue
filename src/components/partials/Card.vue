@@ -25,7 +25,7 @@
         v-if="cardType === 'A'"
         class="card-text"
       >Answer:</p>
-      <p
+      <pre
         class="card-text"
         v-html="textToDisplay"
       />
@@ -288,6 +288,7 @@
 
     &-text {
       font-size: 14px;
+      white-space: pre-line;
       .question {
         display: inline-block;
         border-bottom: 1px solid $card-question-text-light;
@@ -305,6 +306,10 @@
       @include breakpoint(1025) {
         font-size: 16px;
       }
+    }
+
+    &.question {
+      min-width: 164px;
     }
   }
 

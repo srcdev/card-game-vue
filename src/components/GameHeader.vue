@@ -31,7 +31,7 @@
 
 <style lang="scss">
   .header {
-    background-color: $color-grey-1;
+    background-color: $white;
     box-shadow: 0 0 0 1px $border-light;
     display: flex;
     padding: 8px;
