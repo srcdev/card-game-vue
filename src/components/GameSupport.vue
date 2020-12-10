@@ -87,13 +87,12 @@
       display: flex;
       margin-top: 12px;
       justify-content: center;
+
+      canvas {
+        background-color: $white;
+        padding: 2px;
+      }
     }
   }
-
-  // @include breakpoint(768) {
-  //   .footer {
-
-  //   }
-  // }
 
 </style>

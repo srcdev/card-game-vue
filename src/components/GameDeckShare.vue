@@ -78,7 +78,7 @@
     }
     .sharepanel {
       display: flex;
-      margin: 0px;
+      margin: 8px;
       .shareQr {
         background-color: $white;
         display: inline-block;
