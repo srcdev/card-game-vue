@@ -71,12 +71,7 @@
           }
           &__scores {
             height: 38px;
-            width: 41px;
-
-            svg {
-              left: -2px;
-              top: -32px;
-            }
+            width: 48px;
           }
         }
       }
