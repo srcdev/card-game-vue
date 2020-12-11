@@ -51,8 +51,11 @@ body {
 
   &-playing {
     display: flex;
-    max-height: 300px;
+    //max-height: 300px;
     padding: 0 0 24px 0;
+    // @include breakpoint(1366) {
+    //   max-height: 500px;
+    // }
   }
 
   &-question {
