@@ -7,8 +7,13 @@
     ]"
     >
     <h3 class="header-3">Scan QR or share link</h3>
-    <p class="share-text"><a :href="whatsAppHref" class="icon-whatsapp" data-action="share/whatsapp/share">Share via Whatsapp</a></p>
-    <p class="share-text share-text__link">{{ gameHref }}</p>
+    <p class="share-text">
+      <a :href="whatsAppHref" class="icon-whatsapp" data-action="share/whatsapp/share">Share via Whatsapp</a>
+    </p>
+    <p class="share-text">
+      <input type="text" :value="gameHref" class="game-link" />
+      <a @click.prevent="copyLink()" :href="gameHref"><span class="icon icon__copy"><icons icon-name="copy" /></span>Copy to clipboard</a>
+    </p>
     <div
       class="sharepanel"
       >
@@ -31,7 +36,7 @@
       }
     },
     props: {
-      isSubComponent: Boolean
+      isSubComponent: [Boolean, String]
     },
     computed: {
       isMainDeck() {
@@ -46,6 +51,20 @@
         this.gameHref = `${document.location.href}`;
         this.whatsAppHref = `whatsapp://send?text=Share this game link ${this.gameHref}`
         this.hrefBuilt = true;
+      },
+      copyLink() {
+        var copyText = document.querySelector(".game-link");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        document.execCommand("copy");
+
+        const payload = {
+          message: 'Game link copied to clipboard',
+          callback: null,
+          cancelText: null,
+          confirmText: 'OK'
+        }
+        this.$bus.$emit('confirm-copy', payload);
       }
     }
   };
@@ -57,6 +76,7 @@
     &-text {
       color: $black;
       line-height: 18px;
+      margin-bottom: 8px;
       padding: 0 10px;
       @media (prefers-color-scheme: dark) {
           color: $white;
@@ -66,6 +86,16 @@
         font-size: 10px;
         font-weight: normal;
         line-height: 12px;
+      }
+      .game-link {
+        position: absolute;
+        left: -9999px;
+        z-index: -1;
+      }
+      .icon__copy {
+        margin: 0 8px;
+        position: relative;
+        top: 6px;
       }
     }
 

@@ -3,10 +3,16 @@
     <div class="modal-window">
       <p>{{ this.payload.message }}</p>
       <ul class="game-actions__list">
-        <li class="game-actions__item">
+        <li
+          v-if="this.payload.cancelText !== null"
+          class="game-actions__item"
+        >
           <button class="btn secondary warning" @click="onCancel">{{ this.payload.cancelText }}</button>
         </li>
-        <li class="game-actions__item">
+        <li
+          v-if="this.payload.confirmText !== null"
+          class="game-actions__item"
+        >
           <button class="btn secondary proceed" @click="onConfirm">{{ this.payload.confirmText }}</button>
         </li>
       </ul>
