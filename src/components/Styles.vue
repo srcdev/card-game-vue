@@ -40,6 +40,12 @@
       <dd><span class="icon icon__scores"><icons icon-name="scores" /></span></dd>
       <dt>Eject</dt>
       <dd><span class="icon icon__eject"><icons icon-name="eject" /></span></dd>
+      <dt>Clipboard</dt>
+      <dd><span class="icon icon__clipboard"><icons icon-name="clipboard" /></span></dd>
+      <dt>Copy</dt>
+      <dd><span class="icon icon__copy"><icons icon-name="copy" /></span></dd>
+      <dt>Paste</dt>
+      <dd><span class="icon icon__paste"><icons icon-name="paste" /></span></dd>
     </dl>
   </div>
 </template>
