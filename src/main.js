@@ -32,7 +32,7 @@ const router = new VueRouter({
 });
 
 Vue.use(new VueSocketIO({
-  debug: true,
+  debug: process.env.VUE_APP_WEBSOCKETS_DEBUG,
   connection: `http://${process.env.VUE_APP_WEBSOCKETS_IP}:${process.env.VUE_APP_WEBSOCKETS_PORT}`,
   vuex: {
     store,
