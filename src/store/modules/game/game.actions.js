@@ -158,16 +158,19 @@ export const actions = {
       gameId: state.gameId,
     };
 
-    return new Promise((resolve, reject) => {
-      GameDataService.setWinner(data)
-        .then(() => {
-          this._vm.$socket.emit("BROADCAST_SOCKET_GET_ROUND_WINNER", state.gameId);
-          resolve();
-        })
-        .catch((err) => {
-          reject(err);
-        });
-    });
+    if (state.reviewingAnswers) {
+      return new Promise((resolve, reject) => {
+        GameDataService.setWinner(data)
+          .then(() => {
+            this._vm.$socket.emit("BROADCAST_SOCKET_GET_ROUND_WINNER", state.gameId);
+            resolve();
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
+    }
+
   },
   DISPLAY_WINNER({commit, state}) {
     const data = {

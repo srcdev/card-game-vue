@@ -4,9 +4,6 @@
     @click.prevent="selectCard()"
     :role="setRole"
     class="card"
-    :class="[
-      {'question' : cardType === 'Q'},
-    ]"
     :disabled="cardPlayed"
     >
     <div
@@ -60,7 +57,7 @@
       },
       displaySwapCard() {
         return this.cardType === 'A' && this.canSwapAnswer;
-      }
+      },
     },
     data() {
       return {
@@ -212,11 +209,13 @@
     background-color: transparent;
     border: 0;
     border-radius: 3px;
-    display: block;
     margin: 0 auto;
     position: relative;
     text-align: left;
     transition: opacity linear 200ms;
+    width: 100%;
+
+
     &:disabled {
       opacity: 0.8;
 
@@ -233,51 +232,15 @@
       top: 14px;
       z-index: 9;
     }
+
     &-inner {
       border-radius: 4px;
-      margin: 8px;
+      height: 100%;
       padding: 8px;
-      width: 95%;
-
-      &.small {
-
-      }
-      &.medium {
-        min-height: 206px;
-        max-width: 120px;
-
-        @include breakpoint(1025) {
-          min-height: 200px;
-          max-width: 150px;
-        }
-      }
-      &.large {
-        min-height: 250px;
-        max-width: 150px;
-
-        @include breakpoint(1025) {
-          max-width: 180px;
-          min-height: 280px;
-        }
-
-      }
-      &.xlarge {
-        min-height: 300px;
-        max-width: 230px;
-
-        @include breakpoint(1025) {
-          height: 400px;
-        }
-        &.question {
-          max-width: 240px;
-          min-height: 280px;
-        }
-      }
 
       &.answer {
         background-color: $card-answer-bg-light;
         box-shadow: 0 0 1px 1px $card-answer-border-light;
-        width: 200px;
         #{ $card }-text {
           color: $card-answer-text-light;
           font-size: 12px;
@@ -287,6 +250,31 @@
             line-height: 20px;
           }
         }
+        height: 205px;
+        &.small {
+
+          @include breakpoint(1025) {
+
+          }
+        }
+        &.medium {
+
+          @include breakpoint(1025) {
+
+          }
+        }
+        &.large {
+          @include breakpoint(1025) {
+
+          }
+        }
+        &.xlarge {
+
+          @include breakpoint(768) {
+            max-width: 300px;
+          }
+        }
+
       }
 
       &.question {
@@ -296,7 +284,36 @@
         #{ $card }-text {
           color: $card-question-text-light;
         }
+
+        max-width: 200px;
+
+        &.small {
+
+          @include breakpoint(1025) {
+
+          }
+        }
+        &.medium {
+          height: 255px;
+          @include breakpoint(1025) {
+
+          }
+        }
+        &.large {
+          height: 320px;
+          @include breakpoint(1025) {
+
+          }
+        }
+        &.xlarge {
+          height: 255px;
+          @include breakpoint(768) {
+            max-width: 300px;
+          }
+        }
+
       }
+
     }
 
     &-text {
@@ -319,10 +336,6 @@
       @include breakpoint(1025) {
         font-size: 16px;
       }
-    }
-
-    &.question {
-      min-width: 164px;
     }
   }
 

@@ -73,10 +73,13 @@ body {
   &start {
     display: flex;
     flex-flow: row wrap;
+    height: min-content;
+    margin-top: auto;
     order: 3;
     padding: 10px 10px 0;
     @include breakpoint(800) {
       flex: 3 0px;
+      margin-top: 0;
       order: 2;
     }
   }

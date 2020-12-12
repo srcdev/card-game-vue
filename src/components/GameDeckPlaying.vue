@@ -85,6 +85,11 @@
     created () {
       this.setQuestionData();
     },
+    watch: {
+      playerIsDealer() {
+        this.setQuestionData();
+      }
+    },
     methods: {
       setDelay() {
         if (this.delay < 10) {
@@ -93,7 +98,7 @@
         return this.delay * this.timeout;
       },
       setQuestionData() {
-        this.questionCardSize = this.playerIsDealer ? 'XL' : 'L';
+        this.questionCardSize = this.playerIsDealer ? 'L' : 'M';
       },
     },
   }
@@ -108,8 +113,13 @@
       position: relative;
       .inner {
         overflow-y: scroll;
-        padding: 0 24px 8px 24px;
+        padding: 0 24px;
         -webkit-overflow-scrolling: touch;
+
+        @include breakpoint(768) {
+          padding-top: 24px;
+        }
+
       }
 
       .shim {
@@ -133,21 +143,39 @@
     }
 
     &-cards {
+      $cards: &;
       overflow-y: scroll;
       padding-bottom: 8px;
       -webkit-overflow-scrolling: touch;
       &-list {
+
         display: flex;
+        height: 210px;
         margin-bottom: 4px;
         padding: 2px 12px;
         width: max-content;
+
+        &.review__answers {
+          height: 365px;
+          #{ $cards }-item {
+            height: 365px;
+            width: 216px;
+          }
+        }
       }
       &-item {
         display: flex;
         list-style-type: none;
         margin-left: 8px;
+
         &:first-child {
           margin-left: 0;
+        }
+
+        height: 206px;
+        width: 125px;
+        @include breakpoint(1025) {
+
         }
       }
     }
@@ -166,7 +194,7 @@
         }
       }
       &__actions {
-        margin: auto 0 10px;
+        margin-top: auto;
         width: 100%;
       }
     }

@@ -6,7 +6,7 @@
       <div class="shim shim__left"></div>
       <div class="inner">
 
-        <ul class="game-deck-cards-list">
+        <ul class="game-deck-cards-list review__answers">
           <li
             v-for="(qa, index) in roundInPlay"
             :key="index"
