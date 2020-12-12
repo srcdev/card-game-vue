@@ -1,6 +1,6 @@
 <template>
   <div class="game-deck game-deck-playing">
-    <div class="game-deck-question aside">
+    <div class="game-deck-question">
       <transition name="fade" mode="out-in">
         <game-deck-card
           :card-size="questionCardSize"
@@ -33,7 +33,7 @@
       </div>
       <div class="shim shim__right"></div>
     </div>
-    <div class="game-deck-status aside">
+    <div class="game-deck-status">
       <div class="game-deck-status__players">
         <game-deck-playing-dealer v-if="playerIsDealer" />
         <game-deck-playing-player v-else />
@@ -155,11 +155,8 @@
     &-status {
       align-items: flex-start;
       display: flex;
-      //flex-grow: 1;
       flex-direction: column;
       &__players {
-        // align-self: flex-start;
-        // flex-grow: 1;
         width: 100%;
 
         .header4 {
@@ -169,25 +166,11 @@
         }
       }
       &__actions {
-        // align-self: flex-end;
-        // flex-grow: 1;
-        margin-top: auto;
+        margin: auto 0 10px;
         width: 100%;
       }
     }
   }
-
-  // @include breakpoint(1025) {
-  //   .game-deck-answers {
-  //     overflow-y: auto;
-  //     padding-bottom: 0;
-  //     -webkit-overflow-scrolling: none;
-
-  //     &-list {
-  //       width: inherit;
-  //     }
-  //   }
-  // }
 
   @media (prefers-color-scheme: dark) {
     .game-deck {

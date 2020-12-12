@@ -51,22 +51,21 @@ body {
 
   &-playing {
     display: flex;
-    //max-height: 300px;
     padding: 0 0 24px 0;
-    // @include breakpoint(1366) {
-    //   max-height: 500px;
-    // }
   }
 
   &-question {
     display: flex;
     flex: 1 0 0;
     flex-flow: row wrap;
-    max-height: 500px;
+    max-height: 300px;
     order: 1;
     padding: 10px 10px 0;
     @include breakpoint(600) {
       flex: 1.25 0 0;
+    }
+    @include breakpoint(1366) {
+      max-height: 500px;
     }
   }
 
@@ -86,7 +85,7 @@ body {
     display: flex;
     flex: 1 0 0;
     flex-flow: row wrap;
-    max-height: 500px;
+    max-height: 300px;
     order: 2;
     padding: 10px 10px 0;
     @include breakpoint(600) {
@@ -94,6 +93,9 @@ body {
     }
     @include breakpoint(800) {
       order: 3;
+    }
+    @include breakpoint(1366) {
+      max-height: 500px;
     }
   }
 }
