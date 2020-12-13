@@ -49,6 +49,7 @@
         'canSwapAnswer',
         'currentCard',
         'currentQuestion',
+        'dealerData',
         'playerIsDealer',
         'reviewingAnswers',
       ]),
@@ -90,18 +91,7 @@
       },
     },
     created () {
-      this.$bus.$on('swap-answer-confirmed', () => {
-        if (this.answerId !== null) {
-          this.SWAP_ANSWER(this.answerId);
-        }
-      });
-      this.$bus.$on('set-winner-confirmed', () => {
-        if (typeof this.qaData === 'object') {
-          this.SET_WINNER(this.qaData.data.playerId)
-        }
-      });
-    },
-    mounted() {
+
       if (this.cardType === 'A') {
         this.textToDisplay = this.answerData.answerText;
         setTimeout(() => {
@@ -112,6 +102,26 @@
         this.renderQuestionAnswersText();
         this.renderCard = true;
       }
+
+      this.$bus.$on('swap-answer-confirmed', () => {
+        if (this.answerId !== null) {
+          this.SWAP_ANSWER(this.answerId);
+        }
+      });
+
+      this.$bus.$on('set-winner-confirmed', () => {
+
+        try {
+          if (typeof this.qaData === 'object' && this.qaData !== 'undefined' && this.playerIsDealer && this.qaData.data.playerId !== this.dealerData.playerId) {
+            this.SET_WINNER(this.qaData.data.playerId)
+          }
+        }
+        catch(error) {
+          // console.log(`catch() set-winner-confirmed`);
+          // console.log(error);
+        }
+
+      });
     },
     watch: {
       currentCard() {

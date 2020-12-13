@@ -57,6 +57,7 @@
         this.GET_ROUND_IN_PLAY();
       },
       RECEIVE_SOCKET_SHOW_WINNER(data) {
+        this.$bus.$off('set-winner-confirmed');
         this.DISPLAY_WINNER(data);
         setTimeout(() => {
           this.GET_LATEST_GAME_DATA();

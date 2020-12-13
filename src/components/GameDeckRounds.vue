@@ -96,8 +96,26 @@
       text-decoration: underline;
     }
 
+    &-answers {
+      margin-bottom: 20px;
+      .inner {
+        padding-top: 0;
+      }
+    }
+
+    &-cards-list {
+      height: 366px;
+    }
+
     &-cards-item {
       display: block;
+      height: 366px;
+      width: 250px;
+
+      .card-inner.question {
+        height: 320px;
+        width: 250px;
+      }
     }
   }
 </style>
