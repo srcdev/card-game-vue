@@ -124,6 +124,7 @@
 
       .shim {
         display: none;
+        background: -webkit-linear-gradient(to right, $page-bg-light-rgba, transparent);
         background: linear-gradient(to right, $page-bg-light, transparent);
         bottom: 0;
         position: absolute;
@@ -132,6 +133,7 @@
         z-index: 9;
 
         &__right {
+          background: -webkit-linear-gradient(to left, $page-bg-light-rgba, transparent);
           background: linear-gradient(to left, $page-bg-light, transparent);
           right: 0;
         }
@@ -204,9 +206,11 @@
     .game-deck {
       &-answers {
         .shim {
+          background: -webkit-linear-gradient(to right, $page-bg-dark-rgba, transparent);
           background: linear-gradient(to right, $page-bg-dark, transparent);
 
           &__right {
+            background: -webkit-linear-gradient(to left, $page-bg-dark-rgba, transparent);
             background: linear-gradient(to left, $page-bg-dark, transparent);
             right: 0;
           }
