@@ -112,7 +112,7 @@
       this.$bus.$on('set-winner-confirmed', () => {
 
         try {
-          if (typeof this.qaData === 'object' && this.qaData !== 'undefined' && this.playerIsDealer && this.qaData.data.playerId !== this.dealerData.playerId) {
+          if (this.cardType === 'QA' && typeof this.qaData === 'object' && this.qaData !== 'undefined' && this.playerIsDealer && this.qaData.data.playerId !== this.dealerData.playerId) {
             this.SET_WINNER(this.qaData.data.playerId)
           }
         }
