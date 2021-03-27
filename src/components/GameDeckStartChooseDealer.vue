@@ -1,7 +1,7 @@
 <template>
   <div class="choose-dealer">
     <h3 v-if="playerIsAdmin">Choose a player to start game as the dealer</h3>
-    <h3 v-else>Waiting for {{ gameCreatedByName }} to pick a dealer</h3>
+    <h3 v-else>Waiting for <span class="highlighted">{{ gameCreatedByName }}</span> to pick a dealer</h3>
     <ul class="player-list">
       <li class="player-list-item" v-for="(player, index) in playersObj" :key="index">
         <span class="player-list-item-name">{{ player.playerName }}</span>
@@ -37,6 +37,9 @@
 <style lang="scss" scoped>
 
   .choose-dealer {
+    .highlighted {
+      font-weight: 900;
+    }
     .player {
       &-list {
         margin-top: 12px;

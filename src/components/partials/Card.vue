@@ -66,6 +66,7 @@
         cardPlayed: false,
         renderCard: false,
         textToDisplay: '',
+        setThisCardAsWinner: false
       }
     },
     props: {
@@ -88,7 +89,7 @@
       },
       winnerData: {
         type: Object,
-      },
+      }
     },
     created () {
 
@@ -106,6 +107,7 @@
       this.$bus.$on('swap-answer-confirmed', () => {
         if (this.answerId !== null) {
           this.SWAP_ANSWER(this.answerId);
+          this.$bus.$off('swap-answer-confirmed');
         }
       });
 
@@ -113,7 +115,9 @@
 
         try {
           if (this.cardType === 'QA' && typeof this.qaData === 'object' && this.qaData !== 'undefined' && this.playerIsDealer && this.qaData.data.playerId !== this.dealerData.playerId) {
-            this.SET_WINNER(this.qaData.data.playerId)
+            if (this.setThisCardAsWinner) {
+              this.SET_WINNER(this.qaData.data.playerId);
+            }
           }
         }
         catch(error) {
@@ -164,7 +168,7 @@
       },
       selectCard() {
         if (this.reviewingAnswers && this.playerIsDealer) {
-
+          this.setThisCardAsWinner = true;
           const payload = {
             message: 'Confirm set winner',
             callback: 'set-winner-confirmed',
@@ -207,7 +211,7 @@
       }
     },
     destroyed () {
-      this.$bus.$off('swap-answer-confirmed');
+      //this.$bus.$off('swap-answer-confirmed');
     }
   }
 </script>
