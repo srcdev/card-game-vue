@@ -23,7 +23,7 @@
       <button
         v-if="showEjectButton"
         @click.prevent="ejectPlayer(player.playerId)"
-        class="player-list-item-btn btn cancel"
+        class="player-list-item-btn btn eject"
         >
         <span
           class="icon icon__eject"
@@ -37,12 +37,13 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex';
+  import { mapActions, mapState } from 'vuex';
   export default {
     name: "PlayerList",
     data() {
       return {
-        showEjectPlayer: false
+        showEjectPlayer: true,
+        ejectPlayerId: null
       }
     },
     computed: {
@@ -55,9 +56,27 @@
         return this.showEjectPlayer && this.playerIsAdmin;
       }
     },
+    created () {
+      this.$bus.$on('eject-player-confirmed', () => {
+        this.ejectPlayerAction();
+      });
+    },
     methods: {
+      ...mapActions('game', [
+        'EJECT_PLAYER',
+      ]),
       ejectPlayer(playerId) {
-        console.log(`ejectPlayer(${playerId})`);
+        this.ejectPlayerId = playerId;
+        const payload = {
+          message: 'CAUTION... You are about to eject player from the game?',
+          callback: 'eject-player-confirmed',
+          cancelText: 'I\'ve changed my mind',
+          confirmText: 'Yes, eject player'
+        }
+        this.$bus.$emit('confirm-eject-player', payload);
+      },
+      ejectPlayerAction() {
+        this.EJECT_PLAYER(this.ejectPlayerId);
       },
       roundPlayed(playerId) {
         let played = false;
@@ -65,7 +84,7 @@
           played = this.roundInPlay !== null && typeof this.roundInPlay[playerId] === 'object';
         }
         return played;
-      },
+      }
     }
   }
 </script>
@@ -104,12 +123,14 @@
           }
         }
 
-        .icon__cancel {
+        .icon__eject {
           display: inline-block;
           height: 22px;
           margin-top: 2px;
           width: 22px;
-
+          &:hover {
+            cursor: pointer;
+          }
           svg path {
             fill: $input-label-error-light;
           }

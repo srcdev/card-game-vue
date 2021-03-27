@@ -63,6 +63,10 @@
         this.confirmModalPayload = confirmModalPayload;
         this.confirmModal = true;
       });
+      this.$bus.$on('confirm-eject-player', (confirmModalPayload) => {
+        this.confirmModalPayload = confirmModalPayload;
+        this.confirmModal = true;
+      });
       this.$bus.$on('confirm-skip-question', (confirmModalPayload) => {
         this.confirmModalPayload = confirmModalPayload;
         this.confirmModal = true;

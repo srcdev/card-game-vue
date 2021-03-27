@@ -10,6 +10,10 @@ class GameDataService {
         return http.post("/games/joinCurrentGame", data);
     }
 
+    leaveCurrentGame(data) {
+        return http.post("/games/leaveCurrentGame", data);
+    }
+
     getLatestGameData(data) {
         return http.post("/games/getLatestGameData", data);
     }

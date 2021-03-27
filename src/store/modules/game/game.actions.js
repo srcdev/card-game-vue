@@ -62,6 +62,24 @@ export const actions = {
     });
 
   },
+  EJECT_PLAYER({state}, playerId) {
+    const gameId = state.gameId;
+    const data = {
+      gameId: gameId,
+      playerId: playerId
+    };
+
+    return new Promise((resolve, reject) => {
+      GameDataService.leaveCurrentGame(data)
+        .then(() => {
+          this._vm.$socket.emit("BROADCAST_SOCKET_UPDATE_GAME_DATA", gameId);
+          resolve;
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  },
   GET_LATEST_GAME_DATA({commit, state}) {
     const data = {
       gameId: state.gameId,
