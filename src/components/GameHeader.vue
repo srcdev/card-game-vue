@@ -62,7 +62,9 @@
 
         .icon {
           padding: 8px;
-
+          &:hover {
+            cursor: pointer;
+          }
           &__home,
           &__cards,
           &__share {
