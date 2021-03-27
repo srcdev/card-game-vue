@@ -59,6 +59,10 @@
       }
     },
     created () {
+      this.$bus.$on('confirm-adult-game', (confirmModalPayload) => {
+        this.confirmModalPayload = confirmModalPayload;
+        this.confirmModal = true;
+      });
       this.$bus.$on('confirm-skip-question', (confirmModalPayload) => {
         this.confirmModalPayload = confirmModalPayload;
         this.confirmModal = true;

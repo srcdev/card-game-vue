@@ -75,16 +75,16 @@
         'gameRatings',
       ]),
     },
+    created () {
+      this.$bus.$on('adult-game-confirmed', () => {
+        this.startGame();
+      });
+    },
     methods: {
       ...mapActions('game', [
         'START_GAME',
       ]),
-      formSubmit() {
-
-        if (this.$_formHasErrors(this.formId)) {
-          return
-        }
-
+      startGame() {
         this.START_GAME(this.formValues)
           .then((response) => {
             const gameQuery = {gameId: response};
@@ -93,7 +93,26 @@
           .catch((err) => {
             console.log(err);
           });
+      },
+      formSubmit() {
+        if (this.$_formHasErrors(this.formId)) {
+          return
+        }
+        if (parseInt(this.formValues.gameRating) === 3) {
+          const payload = {
+            message: 'CAUTION... This version of the game contains questions and responses that can easily offend! Are you sure you want to continue?',
+            callback: 'adult-game-confirmed',
+            cancelText: 'No',
+            confirmText: 'I\'m fine with this'
+          }
+          this.$bus.$emit('confirm-adult-game', payload);
+        } else {
+          this.startGame();
+        }
       }
+    },
+    destroyed () {
+      this.$bus.$off('adult-game-confirmed');
     }
   }
 </script>
