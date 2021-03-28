@@ -68,17 +68,22 @@ export const actions = {
       gameId: gameId,
       playerId: playerId
     };
-
     return new Promise((resolve, reject) => {
       GameDataService.leaveCurrentGame(data)
         .then(() => {
-          this._vm.$socket.emit("BROADCAST_SOCKET_UPDATE_GAME_DATA", gameId);
+          this._vm.$socket.emit("BROADCAST_EJECT_PLAYER", data);
           resolve;
         })
         .catch((err) => {
           reject(err);
         });
     });
+  },
+  GET_PLAYER_EJECTED({commit, state}, payload) {
+    if (state.playerId === payload.playerId) {
+      commit('EJECT_PLAYER')
+    }
+    this._vm.$socket.emit("BROADCAST_SOCKET_UPDATE_GAME_DATA", payload.gameId);
   },
   GET_LATEST_GAME_DATA({commit, state}) {
     const data = {

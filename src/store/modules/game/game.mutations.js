@@ -52,6 +52,14 @@ export const mutations = {
     state.gameState = 1;
     state.gameCreated = true;
   },
+  EJECT_PLAYER: (state) => {
+    state.playerId = null;
+    state.playerState = 0;
+    state.gameState = 1;
+    state.playerData = null;
+    state.playerHand = null;
+    state.playerInGame = false;
+  },
   SET_DEALER: (state) => {
     state.gameRunning = true;
     state.playerState = 2;

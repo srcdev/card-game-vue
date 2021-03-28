@@ -16,6 +16,7 @@
       <thead class="scores-table__th">
         <td class="scores-table__td">Player name</td>
         <td class="scores-table__td">Score</td>
+        <td class="scores-table__td">Eject</td>
       </thead>
       <tr
         v-for="(player, index) in scoresObj"
@@ -24,6 +25,19 @@
       >
         <td class="scores-table__td">{{ player.playerName }}: </td>
         <td class="scores-table__td">{{ player.winCount }}</td>
+        <td class="scores-table__td">
+          <button
+            @click.stop="ejectPlayer(player)"
+            class="player-list-item-btn btn eject"
+            >
+            <span
+              class="icon icon__eject"
+              >
+              <icons icon-name="eject" />
+              <span class="sr-only">Remove {{ player.playerName }} from game</span>
+            </span>
+          </button>
+        </td>
       </tr>
     </table>
 
@@ -31,9 +45,14 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex';
+  import { mapState, mapActions } from 'vuex';
   export default {
     name: "GameDeckScores",
+    data() {
+      return {
+        ejectPlayerId: null
+      }
+    },
     computed: {
       ...mapState('game', [
         'answersInGame',
@@ -41,6 +60,31 @@
         'scoresObj',
       ])
     },
+    created () {
+      this.$bus.$on('eject-player-confirmed', () => {
+        if (this.ejectPlayerId !== null) {
+          this.ejectPlayerAction();
+        }
+      });
+    },
+    methods: {
+      ...mapActions('game', [
+        'EJECT_PLAYER',
+      ]),
+      ejectPlayer(player) {
+        this.ejectPlayerId = player.playerId;
+        const payload = {
+          message: `CAUTION... You are about to eject ${player.playerName} from the game?`,
+          callback: 'eject-player-confirmed',
+          cancelText: 'I\'ve changed my mind',
+          confirmText: 'Yes, eject player'
+        }
+        this.$bus.$emit('confirm-eject-player', payload);
+      },
+      ejectPlayerAction() {
+        this.EJECT_PLAYER(this.ejectPlayerId);
+      },
+    }
   };
 </script>
 
@@ -84,9 +128,25 @@
           padding: 4px 0;
 
           &:first-child {
-            flex-basis: calc(100% - 50px);
             flex-grow: 1;
             padding: 4px 0;
+          }
+
+          .icon__eject {
+            display: inline-block;
+            height: 22px;
+            margin-top: 2px;
+            width: 22px;
+            &:hover {
+              cursor: pointer;
+            }
+            svg path {
+              fill: $input-label-error-light;
+
+              @media (prefers-color-scheme: dark) {
+                fill: $input-label-error-dark;
+              }
+            }
           }
         }
       }

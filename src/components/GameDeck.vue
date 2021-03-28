@@ -47,6 +47,9 @@
       RECEIVE_SOCKET_RECONNECT() {
         this.GET_LATEST_GAME_DATA();
       },
+      RECEIVE_EJECT_PLAYER(data) {
+        this.GET_PLAYER_EJECTED(data);
+      },
       RECEIVE_SOCKET_GET_LATEST_GAME_DATA() {
         this.GET_LATEST_GAME_DATA();
       },
@@ -101,6 +104,7 @@
     },
     methods: {
       ...mapActions('game', [
+        'GET_PLAYER_EJECTED',
         'DISPLAY_WINNER',
         'GET_LATEST_GAME_DATA',
         'GET_CURRENT_QUESTION',

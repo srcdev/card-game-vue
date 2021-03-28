@@ -20,64 +20,52 @@
           <span class="sr-only">{{ player.playerName }} has played their round</span>
         </span>
       </span>
-      <button
-        v-if="showEjectButton"
-        @click.prevent="ejectPlayer(player.playerId)"
-        class="player-list-item-btn btn eject"
-        >
-        <span
-          class="icon icon__eject"
-          >
-          <icons icon-name="eject" />
-          <span class="sr-only">Remove {{ player.playerName }} from game</span>
-        </span>
-      </button>
     </li>
   </ul>
 </template>
 
 <script>
-  import { mapActions, mapState } from 'vuex';
+  import { mapState } from 'vuex';
   export default {
     name: "PlayerList",
-    data() {
-      return {
-        showEjectPlayer: true,
-        ejectPlayerId: null
-      }
-    },
+    // data() {
+    //   return {
+    //     showEjectPlayer: true,
+    //     ejectPlayerId: null
+    //   }
+    // },
     computed: {
       ...mapState('game', [
         'playersObj',
         'playerIsAdmin',
         'roundInPlay',
       ]),
-      showEjectButton() {
-        return this.showEjectPlayer && this.playerIsAdmin;
-      }
+      // showEjectButton() {
+      //   return this.showEjectPlayer && this.playerIsAdmin;
+      // }
     },
-    created () {
-      this.$bus.$on('eject-player-confirmed', () => {
-        this.ejectPlayerAction();
-      });
-    },
+    // created () {
+    //   this.$bus.$on('eject-player-confirmed', () => {
+    //     this.ejectPlayerAction();
+    //   });
+    // },
     methods: {
-      ...mapActions('game', [
-        'EJECT_PLAYER',
-      ]),
-      ejectPlayer(playerId) {
-        this.ejectPlayerId = playerId;
-        const payload = {
-          message: 'CAUTION... You are about to eject player from the game?',
-          callback: 'eject-player-confirmed',
-          cancelText: 'I\'ve changed my mind',
-          confirmText: 'Yes, eject player'
-        }
-        this.$bus.$emit('confirm-eject-player', payload);
-      },
-      ejectPlayerAction() {
-        this.EJECT_PLAYER(this.ejectPlayerId);
-      },
+      // ...mapActions('game', [
+      //   'EJECT_PLAYER',
+      // ]),
+      // ejectPlayer(playerId) {
+      //   this.ejectPlayerId = playerId;
+      //   const payload = {
+      //     message: 'CAUTION... You are about to eject player from the game?',
+      //     callback: 'eject-player-confirmed',
+      //     cancelText: 'I\'ve changed my mind',
+      //     confirmText: 'Yes, eject player'
+      //   }
+      //   this.$bus.$emit('confirm-eject-player', payload);
+      // },
+      // ejectPlayerAction() {
+      //   this.EJECT_PLAYER(this.ejectPlayerId);
+      // },
       roundPlayed(playerId) {
         let played = false;
         if (this.roundInPlay !== 'undefined') {
