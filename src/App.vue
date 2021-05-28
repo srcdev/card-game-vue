@@ -22,7 +22,7 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex';
+  import { mapActions, mapState } from 'vuex';
   import GameDeck from "@/components/GameDeck";
   import GameDeckScores from "@/components/GameDeckScores";
   import GameDeckShare from "@/components/GameDeckShare";
@@ -48,6 +48,7 @@
     },
     computed: {
       ...mapState('game', [
+        'gameId',
         'gameRunning',
       ]),
     },
@@ -59,6 +60,7 @@
       }
     },
     created () {
+      this.checkGameExists();
       this.$bus.$on('confirm-adult-game', (confirmModalPayload) => {
         this.confirmModalPayload = confirmModalPayload;
         this.confirmModal = true;
@@ -88,6 +90,9 @@
       });
     },
     methods: {
+      ...mapActions('game', [
+        'RESET_GAME',
+      ]),
       confirm(eventBusName) {
         if (eventBusName !== null) {
           this.$bus.$emit(eventBusName);
@@ -98,7 +103,17 @@
       cancel() {
         this.confirmModal = false;
         this.confirmModalPayload = {};
-      }
+      },
+      checkGameExists() {
+        const newGameId = this.$route.query.gameId !== undefined ? this.$route.query.gameId : null;
+        const sessionGameId = this.gameId !== null ? this.gameId : null;
+
+        if (newGameId === null) {
+          this.RESET_GAME();
+        } else if (newGameId !== sessionGameId) {
+          this.RESET_GAME();
+        }
+      },
     },
     destroyed () {
       this.$bus.$off('confirm-skip-question');

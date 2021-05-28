@@ -1,3 +1,5 @@
+import { baseState } from "@/store/modules/game/data/baseState";
+
 function returnAnswerCount(text) {
   let answerCount = 1;
   if (text.indexOf('{1}') > -1) {
@@ -41,6 +43,10 @@ function buildCurrentCard(state) {
 }
 
 export const mutations = {
+  RESET_GAME: (state) => {
+    // Merge rather than replace so we don't lose observers
+    Object.assign(state, baseState)
+  },
   INIT_PLAYER: (state, payload) => {
     state.playerId = payload;
     if (state.gameCreated && state.playerData === null) {

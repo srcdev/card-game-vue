@@ -16,6 +16,9 @@ let playerObj = {
 };
 
 export const actions = {
+  RESET_GAME({commit}) {
+    commit('RESET_GAME');
+  },
   START_GAME({commit}, payload) {
     const gameId = uniqueID();
     playerObj.playerId = uniqueID();
