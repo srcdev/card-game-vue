@@ -5,7 +5,7 @@
       <ul class="nav__list">
         <li class="nav__item"><button class="icon icon__home" @click.prevent="setComponent('game-deck')"><span class="sr-only">Game deck</span><icons icon-name="home" /></button></li>
         <li class="nav__item"><button class="icon icon__cards" @click.prevent="setComponent('game-deck-rounds')"><span class="sr-only">Previous rounds</span><icons icon-name="cards" /></button></li>
-        <li class="nav__item"><button class="icon icon__scores" @click.prevent="setComponent('game-deck-scores')"><span class="sr-only">Score board</span><icons icon-name="scores" /></button></li>
+        <li class="nav__item"><button class="icon icon__cup" @click.prevent="setComponent('game-deck-scores')"><span class="sr-only">Score board</span><icons icon-name="cup" /></button></li>
         <li class="nav__item"><button class="icon icon__share" @click.prevent="setComponent('game-deck-share')"><span class="sr-only">Share game</span><icons icon-name="share" /></button></li>
       </ul>
     </nav>
@@ -67,7 +67,8 @@
           }
           &__home,
           &__cards,
-          &__share {
+          &__share,
+          &__cup {
             height: 38px;
             width: 38px;
           }

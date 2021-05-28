@@ -46,6 +46,8 @@
       <dd><span class="icon icon__copy"><icons icon-name="copy" /></span></dd>
       <dt>Paste</dt>
       <dd><span class="icon icon__paste"><icons icon-name="paste" /></span></dd>
+      <dt>Cup</dt>
+      <dd><span class="icon icon__cup"><icons icon-name="cup" /></span></dd>
     </dl>
   </div>
 </template>
