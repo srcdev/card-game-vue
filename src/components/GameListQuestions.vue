@@ -23,7 +23,7 @@
           @click.prevent="getQuestions(3)"
           class="btn btn-primary"
           :class="{'proceed': this.gameRating === 3}"
-        >Brutal</button>
+        >A bit non-pc</button>
       </li>
     </ul>
 
@@ -32,7 +32,7 @@
         v-for="(card, index) in this.questions"
         :key="index"
       >
-        <h3><strong class="rating">Rating {{ card.rating }}: </strong>{{ card.question }}</h3>
+        <strong class="rating">Rating {{ card.rating }}: </strong>{{ card.question }}
       </li>
     </ul>
 
@@ -74,28 +74,35 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
   .game-deck__support {
     .header3 {
       margin-bottom: 12px;
     }
 
-    .rating {
-      font-weight: bold;
-    }
+    ul {
+      &.alldata {
+        background-color: #fff;
+        color: #313131 !important;
+        
+        margin-top: 12px;
+        li {
+          background-color: #efefef;
+          color: #313131 !important;
+          font-size: 12px;
+          list-style-type: none;
+          padding: 4px 0 0 4px;
 
-    .alldata {
-      margin-top: 12px;
-      li {
-        background-color: #efefef;
-        font-size: 12px;
-        padding: 4px 0 0 20px;
+          &:nth-of-type(2n) {
+            background-color: transparent; 
+          }
 
-        &:nth-of-type(2n) {
-          background-color: transparent; 
+          .rating {
+            font-weight: bold !important;
+            margin-right: 8px;
+          }
         }
-
       }
     }
   }
