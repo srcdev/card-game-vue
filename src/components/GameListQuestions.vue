@@ -32,7 +32,7 @@
         v-for="(card, index) in this.questions"
         :key="index"
       >
-        <h3>{{ card }}</h3>
+        <h3><strong class="rating">Rating {{ card.rating }}: </strong>{{ card.question }}</h3>
       </li>
     </ul>
 
@@ -79,6 +79,10 @@
   .game-deck__support {
     .header3 {
       margin-bottom: 12px;
+    }
+
+    .rating {
+      font-weight: bold;
     }
 
     .alldata {
