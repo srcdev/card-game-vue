@@ -32,6 +32,8 @@
   import GameFooter from "@/components/GameFooter";
   import GameRules from "@/components/GameRules";
   import GameSupport from "@/components/GameSupport";
+  import GameAnswers from "@/components/GameListAnswers";
+  import GameQuestions from "@/components/GameListQuestions";
   import Styles from "@/components/Styles";
   export default {
     components: {
@@ -44,6 +46,8 @@
       'game-footer': GameFooter,
       'game-rules': GameRules,
       'game-support': GameSupport,
+      'game-answers': GameAnswers,
+      'game-questions': GameQuestions,
       'styles': Styles
     },
     computed: {

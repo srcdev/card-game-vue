@@ -8,6 +8,10 @@
         <li class="list-item"><a href="/about" @click.prevent="setComponent('game-about')"  class="list-link">About</a></li>
         <li class="list-item"><a href="/support" @click.prevent="setComponent('game-support')"  class="list-link">Support</a></li>
       </ul>
+      <ul class="list inline centered">
+        <li class="list-item"><a href="/list-answers" @click.prevent="setComponent('game-answers')"  class="list-link">View Answers</a></li>
+        <li class="list-item"><a href="/list-questions" @click.prevent="setComponent('game-questions')"  class="list-link">View Questions</a></li>
+      </ul>
     </nav>
   </footer>
 </template>

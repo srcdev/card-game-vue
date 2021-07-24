@@ -112,7 +112,7 @@
       overflow: hidden;
       position: relative;
       .inner {
-        overflow-y: scroll;
+        overflow: auto;
         padding: 0 24px;
         -webkit-overflow-scrolling: touch;
 

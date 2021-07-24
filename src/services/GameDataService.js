@@ -50,6 +50,14 @@ class GameDataService {
       return http.post("/games/swapAnswer", data);
     }
 
+    getAllAnswers(data) {
+      return http.post("/games/getAllAnswers", data);
+    }
+
+    getAllQuestions(data) {
+      return http.post("/games/getAllQuestions", data);
+    }
+
 }
 
 export default new GameDataService();
