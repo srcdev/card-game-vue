@@ -1,35 +1,28 @@
 <template>
   <section class="game-deck game-deck__support">
     <h2 class="header3">View Answers</h2>
-    <p>All card including and below your e=selected rating are displayed here.</p>
-    <p>Currently they are shuffled but I'll correct this shortly</p>
+    <p>Viewing answers for rating <strong>{{ this.selectedGameRating }}</strong>.</p>
+
+
     <ul class="list inline">
-      <li class="list-item">
+      <li
+        v-for="(item, index) in gameRatings"
+        :key="index"       
+        class="list-item"
+       >
         <button 
-          @click.prevent="getAnswers(1)"
+          @click.prevent="getData(item.value)"
           class="btn btn-primary"
-          :class="{'proceed': this.gameRating === 1}"
-        >Child friendly</button>
-      </li>
-      <li class="list-item">
-        <button 
-          @click.prevent="getAnswers(2)"
-          class="btn btn-primary"
-          :class="{'proceed': this.gameRating === 2}"
-        >Office friendly</button>
-      </li>
-      <li class="list-item">
-        <button 
-          @click.prevent="getAnswers(3)"
-          class="btn btn-primary"
-          :class="{'proceed': this.gameRating === 3}"
-        >A bit non-pc</button>
+          :class="{'proceed': selectedGameRating == item.value}"
+        >{{ item.text }}</button>
+
       </li>
     </ul>
 
+
     <ul class="alldata">
       <li
-        v-for="(card, index) in this.answers"
+        v-for="(card, index) in this.cards"
         :key="index"
       >
         <strong class="rating">Rating {{ card.rating }}: </strong>{{ card.answertext }}
@@ -42,32 +35,37 @@
 <script>
 
   import GameDataService from "@/services/GameDataService";
+  import { mapState } from 'vuex';
 
   export default {
-    name: "Answers",
     data() {
       return {
-        gameRating: 1,
-        answers: {}
+        selectedGameRating: 1,
+        cards: {}
       }
     },
     created() {
-      this.getAnswers();
+      this.getData();
+    },
+    computed: {
+      ...mapState('game', [
+        'gameRatings',
+      ]),
     },
     methods: {
 
-      getAnswers(rating) {
+      getData(rating) {
         if (typeof rating !== 'undefined') {
-          this.gameRating = rating;
+          this.selectedGameRating = rating;
         }
         const postData = {};
-        postData.gameRating = this.gameRating;
+        postData.gameRating = this.selectedGameRating;
         GameDataService.getAllAnswers(postData)
           .then((response) => {
-            this.answers = response.data;
+            this.cards = response.data;
           })
           .catch((err) => {
-            console.log(`Error fetching questions --> ${err}`);
+            console.log(`Error fetching answers --> ${err}`);
           });
       }
     }
@@ -82,6 +80,9 @@
     }
 
     ul {
+      &.list {
+        margin: 12px 0;
+      }
       &.alldata {
         background-color: #fff;
         color: #313131 !important;
