@@ -7,10 +7,10 @@
     <ul class="list inline">
       <li
         v-for="(item, index) in gameRatings"
-        :key="index"       
+        :key="index"
         class="list-item"
        >
-        <button 
+        <button
           @click.prevent="getData(item.value)"
           class="btn btn-primary"
           :class="{'proceed': selectedGameRating == item.value}"
@@ -86,8 +86,8 @@
       &.alldata {
         background-color: #fff;
         color: #313131 !important;
-        
-        margin-top: 12px;
+        margin: 12px 0 36px 0;
+
         li {
           background-color: #efefef;
           color: #313131 !important;
@@ -96,7 +96,7 @@
           padding: 4px 0 0 4px;
 
           &:nth-of-type(2n) {
-            background-color: transparent; 
+            background-color: transparent;
           }
 
           .rating {
