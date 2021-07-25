@@ -29,6 +29,7 @@
           <button
             @click.stop="ejectPlayer(player)"
             class="player-list-item-btn btn eject"
+            :disabled="playerIsDealer(player)"
             >
             <span
               class="icon icon__eject"
@@ -56,6 +57,7 @@
     computed: {
       ...mapState('game', [
         'answersInGame',
+        'dealerData',
         'questionsInGame',
         'scoresObj',
       ])
@@ -82,8 +84,13 @@
         this.$bus.$emit('confirm-eject-player', payload);
       },
       ejectPlayerAction() {
+        console.log(`this.EJECT_PLAYER(${this.ejectPlayerId})`);
         this.EJECT_PLAYER(this.ejectPlayerId);
       },
+      playerIsDealer(player) {
+        console.log(`player.playerId(${player.playerId}) === this.dealerData.playerId(${this.dealerData.playerId})`);
+        return player.playerId === this.dealerData.playerId;
+      }
     }
   };
 </script>

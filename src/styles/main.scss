@@ -44,14 +44,14 @@ body {
   bottom: 25px;
   flex-flow: row wrap;
   overflow-y: auto;
-  padding: 12px 12px 24px 12px;
+  padding: 12px 12px 50px 12px;
   position: fixed;
   top: 75px;
   width: 100%;
 
   &-playing {
     display: flex;
-    padding: 0 0 24px 0;
+    padding: 0 0 50px 0;
   }
 
   &-question {

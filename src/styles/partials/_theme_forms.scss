@@ -93,6 +93,10 @@ input, select {
 
   &:disabled {
     opacity: 0.25;
+
+    &:hover {
+      cursor: default;
+    }
   }
 
 }
