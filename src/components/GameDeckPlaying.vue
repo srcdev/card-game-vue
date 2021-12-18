@@ -189,6 +189,8 @@
       flex-direction: column;
       &__players {
         width: 100%;
+        height: 235px;
+        overflow: scroll;
 
         .header4 {
           font-style: italic;

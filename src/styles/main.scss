@@ -75,6 +75,7 @@ body {
     flex-flow: row wrap;
     height: min-content;
     margin-top: auto;
+    margin-bottom: 4px;
     order: 3;
     padding: 10px 10px 0;
     @include breakpoint(800) {
@@ -88,7 +89,7 @@ body {
     display: flex;
     flex: 1 0 0;
     flex-flow: row wrap;
-    max-height: 300px;
+    max-height: 285px;
     order: 2;
     padding: 10px 10px 0;
     @include breakpoint(600) {

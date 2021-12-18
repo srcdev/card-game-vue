@@ -24,12 +24,15 @@ Object.defineProperties(Vue.prototype, {
 
 Vue.use(Vuex);
 
-Vue.use(VueRouter);
-
+const routes = [];
 const router = new VueRouter({
   mode: 'history',
-  routes: [],
+  base: __dirname,
+  routes: routes,
 });
+
+Vue.use(VueRouter);
+
 
 Vue.use(new VueSocketIO({
   debug: process.env.VUE_APP_WEBSOCKETS_DEBUG,
